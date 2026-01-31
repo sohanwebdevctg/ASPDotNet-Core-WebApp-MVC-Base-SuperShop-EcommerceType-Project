@@ -1,18 +1,105 @@
-html {
-  font-size: 14px;
+/* common css start */
+* {
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    box-sizing: border-box;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+.myContainer {
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
+
+:root {
+    --button-color: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);
+    --navbar-background: #F3F5F4;
+    --body-color: #FFFFFF;
+    --footer-background: #353333;
+    --header-text-color: #F8F9FA;
+    --body-text-color: #2D2D2D;
+    --footer-text-color: #F8F9FA;
+    --icon-color: #ED4264
+}
+
+/* common css end */
+
+/* mobile css start */
+/* mobile css end */
+
+
+
+/* media query start */
+
+
+
+@media screen and (min-width: 576px) {
+}
+
+@media screen and (min-width: 768px) {
+
+}
+
+@media screen and (min-width: 992px) {
+
+    header {
+        background-color: var(--navbar-background);
+        padding: 20px 0;
+    }
+
+    header nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header nav .logo img{
+        width: 110px;
+        height: 30px;
+    }
+
+        header nav ul {
+            display: flex; 
+            list-style: none;
+            gap: 40px;
+            margin: 0;
+            padding: 0;
+        }
+
+            header nav ul li a {
+                text-decoration: none;
+                color: var(--body-text-color) !important;
+                font-weight: 600;
+                font-size: 18px;
+            }
+
+        header nav button {
+            background: var(--button-color);
+            border: none;
+            font-size: 16px;
+            padding: 6px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+            header nav button a {
+                text-decoration: none;
+                color: var(--body-text-color) !important;
+            }
+
+}
+
+@media screen and (min-width: 1200px) {
+    
+}
+
+/* media query end*/
