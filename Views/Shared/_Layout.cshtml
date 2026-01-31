@@ -13,7 +13,22 @@
     <link rel="stylesheet" href="~/SuperShop.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+
+    <!-- mobile-header -->
+    <header class="mobile-header">
+        <nav>
+            <div class="logo">
+                <a href="#"><img src="@Url.Content("~/images/logo/SuperShopLogo.png")" /></a>
+            </div>
+            <div>
+                <button><i class="fa-solid fa-bars openIcon"></i></button>
+                <button><i class="fa-solid fa-xmark closeIcon"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- desktop-header -->
+    <header class="desktop-header">
         <div class="myContainer">
             <nav>
                 <div class="logo">
@@ -30,13 +45,18 @@
                 </div>
                 <div>
                     <button><a href="#">Login</a></button>
+                    @*<a href="#"><i class="fa-solid fa-cart-shopping cartIcon"></i></a>
+                    <a href="#"><i class="fa-solid fa-user-tie userIcon"></i></a>
+                    <button><a href="#">logout</a></button>*@
                 </div>
             </nav>
         </div>
     </header>
+    
 
     <div class="container">
         <main>
+           
             @RenderBody()
         </main>
     </div>
