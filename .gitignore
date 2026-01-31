@@ -1,0 +1,43 @@
+﻿## Unnecessary files of Visual Studio
+bin/
+obj/
+*.suo
+*.cache
+.vs/
+[Bb]in/
+[Ob]j/
+*.user
+*.userosscache
+*.sln.docstates
+
+
+## Node modules
+node_modules/
+
+## Image folder (so that it doesn't get uploaded to Git)
+wwwroot/images/
+
+
+## Database and other temporary files
+*.db
+*.ldf
+*.mdf
+*.temp
+.DS_Store
+
+## Runtime settings for DotNet Core
+appsettings.Development.json
+
+## Publish folder (when creating for project hosting)
+[Pp]ublish/
+
+## Visual Studio's cache and log files
+*.log
+.pfx
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Environment
+.env
