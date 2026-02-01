@@ -1,4 +1,6 @@
-/* common css start */
+﻿/* =============================================================
+                        common css start
+================================================================= */
 * {
     padding: 0;
     margin: 0;
@@ -30,9 +32,16 @@ body {
     --icon-color: #ED4264
 }
 
-/* common css end */
 
-/* mobile css start */
+/* =============================================================
+                        common css end
+================================================================= */
+
+/* ============================================================
+                        mobile css start 
+================================================================ */
+
+/* header start */
 
 header {
     position: -webkit-sticky;
@@ -143,7 +152,73 @@ header nav {
         text-decoration: none;
     }
 
-/* mobile css end */
+/* header end */
+
+/* footer start */
+
+.site-footer {
+    background-color: #333; 
+    padding: 40px 6px;
+}
+
+
+.footer-top-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding-bottom: 20px;
+}
+
+.footer-col h3 {
+    color: whitesmoke;
+    font-size: 14px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+    .footer-col ul li {
+        margin-bottom: 5px;
+    }
+
+        .footer-col ul li a {
+            color: #B2B2B2;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+
+.copyright p {
+    color: #B2B2B2;
+    font-size: 13px;
+}
+
+.payment-methods img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+
+/* footer end */
+
+/* ========================================================
+                        mobile css end
+=========================================================== */
 
 
 
@@ -216,6 +291,67 @@ header nav {
                 color: var(--icon-color) !important;
                 font-size: 13px;
             }
+
+    /* footer start */
+
+    .site-footer {
+        background-color: #333;
+        padding: 40px 10px;
+    }
+
+
+    .footer-top-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        padding-bottom: 15px;
+    }
+
+    .footer-col h3 {
+        color: whitesmoke;
+        font-size: 16px;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    .footer-col ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        .footer-col ul li {
+            margin-bottom: 5px;
+        }
+
+            .footer-col ul li a {
+                color: #B2B2B2;
+                text-decoration: none;
+                font-size: 14px;
+            }
+
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .copyright p {
+        color: #B2B2B2;
+        font-size: 14px;
+    }
+
+    .payment-methods img {
+        width: 30px;
+        height: 25px;
+        margin-right: 2px;
+    }
+
+
+    /* footer end */
             
 
 }
@@ -288,6 +424,67 @@ header nav {
                 font-size: 14px;
             }
 
+    /* footer start */
+
+    .site-footer {
+        background-color: #333;
+        padding: 40px 12px;
+    }
+
+
+    .footer-top-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        padding-bottom: 15px;
+    }
+
+    .footer-col h3 {
+        color: whitesmoke;
+        font-size: 15px;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    .footer-col ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        .footer-col ul li {
+            margin-bottom: 5px;
+        }
+
+            .footer-col ul li a {
+                color: #B2B2B2;
+                text-decoration: none;
+                font-size: 13px;
+            }
+
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .copyright p {
+        color: #B2B2B2;
+        font-size: 13px;
+    }
+
+    .payment-methods img {
+        width: 28px;
+        height: 22px;
+        margin-right: 2px;
+    }
+
+
+    /* footer end */
+
 
 }
 
@@ -359,6 +556,67 @@ header nav {
             font-size: 20px;
         }
 
+    /* footer start */
+
+    .site-footer {
+        background-color: #333;
+        padding: 40px 15px;
+    }
+
+
+    .footer-top-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        padding-bottom: 15px;
+    }
+
+    .footer-col h3 {
+        color: whitesmoke;
+        font-size: 18px;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    .footer-col ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        .footer-col ul li {
+            margin-bottom: 5px;
+        }
+
+            .footer-col ul li a {
+                color: #B2B2B2;
+                text-decoration: none;
+                font-size: 14px;
+            }
+
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .copyright p {
+        color: #B2B2B2;
+        font-size: 14px;
+    }
+
+    .payment-methods img {
+        width: 34px;
+        height: 24px;
+        margin-right: 2px;
+    }
+
+
+    /* footer end */
+
 }
 
 @media screen and (min-width: 1200px) {
@@ -428,6 +686,65 @@ header nav {
                 color: var(--icon-color) !important;
                 font-size: 23px;
             }
+    /* footer start */
+
+    .site-footer {
+        background-color: #333;
+        padding: 40px 20px;
+    }
+
+
+    .footer-top-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+        padding-bottom: 15px;
+    }
+
+    .footer-col h3 {
+        color: whitesmoke;
+        font-size: 20px;
+        margin-bottom: 22px;
+        font-weight: 600;
+    }
+
+    .footer-col ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+            .footer-col ul li a {
+                color: #B2B2B2;
+                text-decoration: none;
+                font-size: 15px;
+            }
+
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .copyright p {
+        color: #B2B2B2;
+        font-size: 15px;
+    }
+
+    .payment-methods img {
+        width: 36px;
+        height: 26px;
+        margin-right: 4px;
+    }
+
+    /* footer end */
     
 }
 
