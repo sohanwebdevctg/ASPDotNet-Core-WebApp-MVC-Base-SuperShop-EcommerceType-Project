@@ -8,5 +8,11 @@ namespace SuperShop.Controllers
         {
             return View();
         }
+
+        // blog
+        public IActionResult Blog()
+        {
+            return View();
+        }
     }
 }
