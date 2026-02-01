@@ -43,14 +43,13 @@ header {
     transition: all 0.3s ease;
 }
 
-
 .mobile-header {
     display: block;
     background-color: var(--navbar-background);
     padding: 15px 24px;
 }
 
-.desktop-header{
+.desktop-header {
     display: none;
 }
 
@@ -77,6 +76,71 @@ header nav {
     header nav .closeIcon {
         color: var(--icon-color) !important;
         font-size: 20px;
+    }
+
+#sideBar {
+    position: fixed;
+    top: 54px;
+    right: -100%;
+    width: 100%;
+    height: calc(100vh - 54px);
+    background: rgba(243, 245, 244, 0.85);
+    backdrop-filter: blur(10px);
+    opacity: 0.90;
+    -webkit-backdrop-filter: blur(15px);
+    transition: 0.5s ease-in-out;
+    z-index: 999;
+    overflow-y: auto;
+    border-top: 1px solid rgba(0,0,0,0.20);
+}
+
+.sidebar-active {
+    right: 0 !important;
+}
+
+#sideBar ul {
+    list-style: none;
+    padding: 12px;
+    margin: 0;
+}
+
+    #sideBar ul li {
+        padding: 12px 0;
+        text-align: center;
+    }
+
+        #sideBar ul li a {
+            text-decoration: none;
+            color: var(--body-text-color);
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+.user-actions-container {
+    padding: 15px 20px;
+    text-align: center;
+}
+
+    .user-actions-container i {
+        color: var(--icon-color) !important;
+        font-size: 13px;
+        margin: 0 15px;
+        display: inline-block;
+    }
+
+#sideBar button {
+    background: var(--button-color) !important;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 5px;
+    margin: 5px auto;
+    cursor: pointer;
+    display: block;
+}
+
+    #sideBar button a {
+        color: #fff !important;
+        text-decoration: none;
     }
 
 /* mobile css end */
@@ -272,7 +336,7 @@ header nav {
                 text-decoration: none;
                 color: var(--body-text-color) !important;
                 font-weight: 600;
-                font-size: 18px;
+                font-size: 16px;
             }
 
         header nav button {
@@ -341,8 +405,8 @@ header nav {
                 header nav ul li a {
                     text-decoration: none;
                     color: var(--body-text-color) !important;
-                    font-weight: 700;
-                    font-size: 20px;
+                    font-weight: 600;
+                    font-size: 18px;
                 }
 
             header nav button {

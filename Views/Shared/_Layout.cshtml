@@ -16,15 +16,36 @@
 
     <!-- mobile-header -->
     <header class="mobile-header">
-        <nav>
+        <nav class="mobile-nav">
             <div class="logo">
                 <a href="#"><img src="@Url.Content("~/images/logo/SuperShopLogo.png")" /></a>
             </div>
-            <div>
-                <button><i class="fa-solid fa-bars openIcon"></i></button>
-                <button><i class="fa-solid fa-xmark closeIcon"></i></button>
+            <div class="nav-controls">
+                <button id="openBtn"><i class="fa-solid fa-bars openIcon"></i></button>
+                <button id="closeBtn" style="display: none;"><i class="fa-solid fa-xmark closeIcon"></i></button>
             </div>
         </nav>
+        <div id="sideBar" class="sidebar-hidden">
+            <div class="sidebar-content">
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Product</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+                <div class="sidebar-footer">
+                    <ul class="user-actions">
+                        <li>
+                            <a href="#"><i class="fa-solid fa-cart-shopping cartIcon"></i></a>
+                            <a href="#"><i class="fa-solid fa-user-tie userIcon"></i></a>
+                        </li>
+                        <li><button class="auth-btn"><a href="#">Logout</a></button></li>
+                        <li><button class="auth-btn"><a href="#">Login</a></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </header>
 
     <!-- desktop-header -->
