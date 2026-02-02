@@ -549,6 +549,75 @@ header nav {
 
 /* offer end */
 
+/* contact start */
+
+.contact-section {
+    margin: 30px 5px;
+}
+
+.contact-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.contact-form-container {
+    background-color: var(--navbar-background);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+
+.input-box {
+    margin-bottom: 15px;
+}
+
+    .input-box input,
+    .input-box textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 5px;
+        border: 1px solid rgba(255,255,255,0.2);
+        outline: none;
+        font-size: 14px;
+    }
+
+    .input-box textarea {
+        height: 120px;
+        resize: none;
+    }
+
+
+.contact-submit {
+    width: 100%;
+    background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%) !important;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+
+.contact-map {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    line-height: 0;
+}
+
+    .contact-map iframe {
+        width: 100% !important;
+        height: 300px !important;
+    }
+
+/* contact end */
+
 /* blog start */
 
 .blog-section {
@@ -1068,6 +1137,76 @@ header nav {
 
     /* offer end */
 
+    /* contact start */
+
+    .contact-section {
+        margin: 30px 5px;
+    }
+
+    .contact-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+
+    .contact-form-container {
+        background-color: var(--navbar-background);
+        padding: 18px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        width: 100%;
+    }
+
+
+    .input-box {
+        margin-bottom: 15px;
+    }
+
+        .input-box input,
+        .input-box textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(255,255,255,0.2);
+            outline: none;
+            font-size: 12px;
+        }
+
+        .input-box textarea {
+            height: 100px;
+            resize: none;
+        }
+
+
+    .contact-submit {
+        width: 100%;
+        background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%) !important;
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: 10px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+
+
+    .contact-map {
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        line-height: 0;
+    }
+
+        .contact-map iframe {
+            width: 100% !important;
+            height: 300px !important;
+        }
+
+    /* contact end */
+
     /* blog start */
 
     .blog-section {
@@ -1495,6 +1634,78 @@ header nav {
     }
 
     /* category & product end */
+
+    /* contact start */
+
+    .contact-section {
+        display: flex;
+        align-items: center;
+        min-height: 90vh;
+    }
+
+    .contact-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+    }
+
+
+    .contact-form-container {
+        background-color: var(--navbar-background);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        width: 100%;
+    }
+
+
+    .input-box {
+        margin-bottom: 15px;
+    }
+
+        .input-box input,
+        .input-box textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid rgba(255,255,255,0.2);
+            outline: none;
+            font-size: 13px;
+        }
+
+        .input-box textarea {
+            height: 100px;
+            resize: none;
+        }
+
+
+    .contact-submit {
+        width: 100%;
+        background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%) !important;
+        color: white;
+        border: none;
+        padding: 11px;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+
+
+    .contact-map {
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        line-height: 0;
+    }
+
+        .contact-map iframe {
+            width: 100% !important;
+            height: 320px !important;
+        }
+
+    /* contact end */
 
     /* offer start */
 
@@ -2009,6 +2220,78 @@ header nav {
 
     /* category & product end */
 
+    /* contact start */
+
+    .contact-section {
+        display: flex;
+        align-items: center;
+        min-height: 90vh;
+    }
+
+    .contact-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+    }
+
+
+    .contact-form-container {
+        background-color: var(--navbar-background);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        width: 100%;
+    }
+
+
+    .input-box {
+        margin-bottom: 15px;
+    }
+
+        .input-box input,
+        .input-box textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid rgba(255,255,255,0.2);
+            outline: none;
+            font-size: 13px;
+        }
+
+        .input-box textarea {
+            height: 100px;
+            resize: none;
+        }
+
+
+    .contact-submit {
+        width: 100%;
+        background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%) !important;
+        color: white;
+        border: none;
+        padding: 11px;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+
+
+    .contact-map {
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        line-height: 0;
+    }
+
+        .contact-map iframe {
+            width: 100% !important;
+            height: 320px !important;
+        }
+
+    /* contact end */
+
     /* offer start */
 
     .offer-grid {
@@ -2518,6 +2801,78 @@ header nav {
     }
 
     /* category & product end */
+
+    /* contact start */
+
+    .contact-section {
+        display: flex;
+        align-items: center;
+        min-height: 90vh;
+    }
+
+    .contact-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+    }
+
+
+    .contact-form-container {
+        background-color: var(--navbar-background);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        width: 100%;
+    }
+
+
+    .input-box {
+        margin-bottom: 15px;
+    }
+
+        .input-box input,
+        .input-box textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 5px;
+            border: 1px solid rgba(255,255,255,0.2);
+            outline: none;
+            font-size: 15px;
+        }
+
+        .input-box textarea {
+            height: 100px;
+            resize: none;
+        }
+
+
+    .contact-submit {
+        width: 100%;
+        background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%) !important;
+        color: white;
+        border: none;
+        padding: 12px;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+
+
+    .contact-map {
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        line-height: 0;
+    }
+
+        .contact-map iframe {
+            width: 100% !important;
+            height: 350px !important;
+        }
+
+    /* contact end */
 
     /* offer start */
 
