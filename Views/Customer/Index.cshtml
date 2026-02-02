@@ -36,6 +36,116 @@
 </div>
 
 <!-- banner section end -->
+<!-- category & product section start -->
+
+<div class="myContainer my-5">
+    <div class="category-scroll-wrapper">
+        <button class="cat-filter active" data-id="0">All</button>
+        @*@foreach (var cat in Model.Categories)
+        {
+            <button class="cat-filter" data-id="@cat.CategoryId">
+                @cat.CategoryName
+            </button>
+        }*@
+        <button class="cat-filter" data-id="">Car</button>
+        <button class="cat-filter" data-id="">Bus</button>
+        <button class="cat-filter" data-id="">Pen</button>
+        <button class="cat-filter" data-id="">Box</button>
+        <button class="cat-filter" data-id="">Toys</button>
+    </div>
+
+    <div class="product-grid" id="product-container">
+        @*@foreach (var data in Model.Products)
+        {
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="@Url.Content("~/product_image/"+data.ProductImage)" alt="Product">
+                </div>
+
+                <div class="product-body">
+                    <h5 class="product-title">@data.ProductName</h5>
+                    <p class="product-price">Price: @data.ProductPrice</p>
+                    <p class="product-desc">@data.ProductDescription</p>
+
+                    <div class="card-footer">
+                        <button class="cart-btn" onclick="location.href='@Url.Action("ProductDetails", "Customer", new{id=data.ProductId})'">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }*@
+        <div class="product-card">
+            <div class="product-img-container">
+                <img src="~/images/offer_img/offerimg3.png" alt="Product">
+            </div>
+
+            <div class="product-body">
+                <h5 class="product-title">Product Name</h5>
+                <p class="product-price">Price: ProductPrice</p>
+                <p class="product-desc">ProductDescription</p>
+                <a href="@Url.Action()" class="cart-btn">View Details</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img-container">
+                <img src="~/images/offer_img/offerimg3.png" alt="Product">
+            </div>
+
+            <div class="product-body">
+                <h5 class="product-title">Product Name</h5>
+                <p class="product-price">Price: ProductPrice</p>
+                <p class="product-desc">ProductDescription</p>
+                <a href="@Url.Action()" class="cart-btn">View Details</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img-container">
+                <img src="~/images/offer_img/offerimg3.png" alt="Product">
+            </div>
+
+            <div class="product-body">
+                <h5 class="product-title">Product Name</h5>
+                <p class="product-price">Price: ProductPrice</p>
+                <p class="product-desc">ProductDescription</p>
+                <a href="@Url.Action()" class="cart-btn">View Details</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img-container">
+                <img src="~/images/offer_img/offerimg3.png" alt="Product">
+            </div>
+
+            <div class="product-body">
+                <h5 class="product-title">Product Name</h5>
+                <p class="product-price">Price: ProductPrice</p>
+                <p class="product-desc">ProductDescription</p>
+                <a href="@Url.Action()" class="cart-btn">View Details</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img-container">
+                <img src="~/images/offer_img/offerimg3.png" alt="Product">
+            </div>
+
+            <div class="product-body">
+                <h5 class="product-title">Product Name</h5>
+                <p class="product-price">Price: ProductPrice</p>
+                <p class="product-desc">ProductDescription</p>
+                <a href="@Url.Action()" class="cart-btn">View Details</a>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+</div>
+
+<!-- category & product section end -->
 
 <!-- offer section start -->
 <div class="myContainer">

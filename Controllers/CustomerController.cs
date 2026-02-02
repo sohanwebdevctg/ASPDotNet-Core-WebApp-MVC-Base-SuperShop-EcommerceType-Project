@@ -9,6 +9,12 @@ namespace SuperShop.Controllers
             return View();
         }
 
+        //all products
+        public IActionResult AllProducts()
+        {
+            return View();
+        }
+
         // blog
         public IActionResult Blog()
         {

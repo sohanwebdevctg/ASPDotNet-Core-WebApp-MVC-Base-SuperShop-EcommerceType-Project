@@ -18,7 +18,7 @@
     <header class="mobile-header">
         <nav class="mobile-nav">
             <div class="logo">
-                <a href="#"><img src="@Url.Content("~/images/logo/SuperShopLogo.png")" /></a>
+                <a href="@Url.Action("Index","Customer")"><img src="@Url.Content("~/images/logo/SuperShopLogo.png")" /></a>
             </div>
             <div class="nav-controls">
                 <button id="openBtn"><i class="fa-solid fa-bars openIcon"></i></button>
@@ -28,7 +28,7 @@
         <div id="sideBar" class="sidebar-hidden">
             <div class="sidebar-content">
                 <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="@Url.Action("Index","Customer")">Home</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Product</a></li>
                     <li><a href="#">Contact</a></li>
@@ -53,11 +53,11 @@
         <div class="myContainer">
             <nav>
                 <div class="logo">
-                    <a href="#"><img src="@Url.Content("~/images/logo/SuperShopLogo.png")"/></a>
+                    <a href="@Url.Action("Index","Customer")"><img src="@Url.Content("~/images/logo/SuperShopLogo.png")" /></a>
                 </div>
                 <div>
                     <ul>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="@Url.Action("Index","Customer")">Home</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Product</a></li>
                         <li><a href="#">Contact</a></li>
