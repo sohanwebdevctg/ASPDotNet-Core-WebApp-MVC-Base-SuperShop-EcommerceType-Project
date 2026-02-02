@@ -6,3 +6,112 @@
 
 
 
+
+<!--  allProducts section start -->
+
+<div class="myContainer my-5">
+
+    <!-- search section start -->
+    <div class="search-section">
+            <form class="search-form">
+                <div class="input-group">
+                    <input type="text" placeholder="Search Your Category" class="search-input" />
+                </div>
+                <div class="input-group">
+                    <input type="text" placeholder="Search Your Product" class="search-input" />
+                </div>
+            </form>
+    </div>
+
+    <!-- search section start -->
+
+    <!-- product start -->
+
+    <div class="product-grid" id="product-container">
+        @*@foreach (var data in Model.Products)
+        {
+        <div class="product-card">
+        <div class="product-img-container">
+        <img src="@Url.Content("~/product_image/"+data.ProductImage)" alt="Product">
+        </div>
+
+        <div class="product-body">
+        <h5 class="product-title">@data.ProductName</h5>
+        <p class="product-price">Price: @data.ProductPrice</p>
+        <p class="product-desc">@data.ProductDescription</p>
+
+        <div class="card-footer">
+        <button class="cart-btn" onclick="location.href='@Url.Action("ProductDetails", "Customer", new{id=data.ProductId})'">
+        View Details
+        </button>
+        </div>
+        </div>
+        </div>
+        }*@
+        <div class="product-card">
+            <div class="product-img-container">
+                <img src="~/images/offer_img/offerimg1.png" alt="Product">
+            </div>
+
+            <div class="product-body">
+                <h5 class="product-title">Product Name</h5>
+                <p class="product-price">Price: ProductPrice</p>
+                <p class="product-desc">ProductDescription</p>
+                <a href="@Url.Action()" class="cart-btn">View Details</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img-container">
+                <img src="~/images/offer_img/offerimg3.png" alt="Product">
+            </div>
+
+            <div class="product-body">
+                <h5 class="product-title">Product Name</h5>
+                <p class="product-price">Price: ProductPrice</p>
+                <p class="product-desc">ProductDescription</p>
+                <a href="@Url.Action()" class="cart-btn">View Details</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img-container">
+                <img src="~/images/offer_img/offerimg3.png" alt="Product">
+            </div>
+
+            <div class="product-body">
+                <h5 class="product-title">Product Name</h5>
+                <p class="product-price">Price: ProductPrice</p>
+                <p class="product-desc">ProductDescription</p>
+                <a href="@Url.Action()" class="cart-btn">View Details</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img-container">
+                <img src="~/images/offer_img/offerimg3.png" alt="Product">
+            </div>
+
+            <div class="product-body">
+                <h5 class="product-title">Product Name</h5>
+                <p class="product-price">Price: ProductPrice</p>
+                <p class="product-desc">ProductDescription</p>
+                <a href="@Url.Action()" class="cart-btn">View Details</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img-container">
+                <img src="~/images/offer_img/offerimg3.png" alt="Product">
+            </div>
+
+            <div class="product-body">
+                <h5 class="product-title">Product Name</h5>
+                <p class="product-price">Price: ProductPrice</p>
+                <p class="product-desc">ProductDescription</p>
+                <a href="@Url.Action()" class="cart-btn">View Details</a>
+            </div>
+        </div>
+    </div>
+    <!-- product start -->
+</div>
+
+<!-- allProducts section end -->
+
+

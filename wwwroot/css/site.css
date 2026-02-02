@@ -324,6 +324,44 @@ header nav {
 
 /* banner end */
 
+/* search section start */
+.search-section {
+    background-color: var(--navbar-background);
+    padding: 20px 0;
+    margin: 20px 0;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 15px;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #333;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+    .search-input:focus {
+        border-color: #ED4264;
+        box-shadow: 0 0 8px rgba(237, 66, 100, 0.2);
+    }
+
+/* search section start */
+
 /* category & product start */
 
 .category-scroll-wrapper {
@@ -801,6 +839,44 @@ header nav {
 
     /* banner end */
 
+    /* search section start */
+    .search-section {
+        background-color: var(--navbar-background);
+        padding: 20px 0;
+        margin: 20px 0;
+    }
+
+    .search-form {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        padding: 0 15px;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background-color: #ffffff;
+        color: #333;
+        font-size: 13px;
+        outline: none;
+        transition: 0.3s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+        .search-input:focus {
+            border-color: #ED4264;
+            box-shadow: 0 0 8px rgba(237, 66, 100, 0.2);
+        }
+
+    /* search section start */
+
     /* category & product start */
 
     .category-scroll-wrapper {
@@ -1275,6 +1351,44 @@ header nav {
 
 
     /* banner end */
+
+    /* search section start */
+    .search-section {
+        background-color: var(--navbar-background);
+        padding: 20px 0;
+        margin: 20px 0;
+    }
+
+    .search-form {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        padding: 0 15px;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background-color: #ffffff;
+        color: #333;
+        font-size: 14px;
+        outline: none;
+        transition: 0.3s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+        .search-input:focus {
+            border-color: #ED4264;
+            box-shadow: 0 0 8px rgba(237, 66, 100, 0.2);
+        }
+
+    /* search section start */
 
     /* category & product start */
 
@@ -1751,6 +1865,44 @@ header nav {
 
     /* banner end */
 
+    /* search section start */
+    .search-section {
+        background-color: var(--navbar-background);
+        padding: 20px 0;
+        margin: 20px 0;
+    }
+
+    .search-form {
+        display: flex;
+        flex-direction: row;
+        gap: 22px;
+        padding: 0 15px;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 13px 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background-color: #ffffff;
+        color: #333;
+        font-size: 14px;
+        outline: none;
+        transition: 0.3s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+        .search-input:focus {
+            border-color: #ED4264;
+            box-shadow: 0 0 8px rgba(237, 66, 100, 0.2);
+        }
+
+    /* search section start */
+
     /* category & product start */
 
     .category-scroll-wrapper {
@@ -2222,6 +2374,44 @@ header nav {
 
 
     /* banner end */
+
+    /* search section start */
+    .search-section {
+        background-color: var(--navbar-background);
+        padding: 20px 0;
+        margin: 20px 0;
+    }
+
+    .search-form {
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+        padding: 0 15px;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 14px 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background-color: #ffffff;
+        color: #333;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+        .search-input:focus {
+            border-color: #ED4264;
+            box-shadow: 0 0 8px rgba(237, 66, 100, 0.2);
+        }
+
+    /* search section start */
 
     /* category & product start */
 
