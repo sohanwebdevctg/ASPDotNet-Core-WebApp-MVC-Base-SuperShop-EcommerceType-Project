@@ -470,16 +470,17 @@ header nav {
 
 /* about start */
 
-.about-grid {
+.about-grid, .user-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
     padding: 0 10px;
+    margin: 20px 5px;
 }
 
 .feature-card {
     background: #ffffff;
-    padding: 30px;
+    padding: 20px;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.05);
     border: 1px solid #f0f0f0;
@@ -492,35 +493,26 @@ header nav {
 }
 
 .feature-card h3 {
-    font-size: 18px;
+    font-size: 15px;
     margin-bottom: 10px;
     color: #1a1a1a;
 }
 
 .feature-card p {
-    font-size: 14px;
+    font-size: 12px;
     color: #666;
     line-height: 1.6;
 }
 
-.user-section {
-    background-color: var(--navbar-background);
-}
-
-.user-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 25px;
-    padding: 0 15px;
-}
-
 .user-card {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--navbar-background);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 12px;
     display: flex;
     align-items: center;
+    flex-direction: column;
+    text-align: center;
     gap: 15px;
 }
 
@@ -539,8 +531,8 @@ header nav {
     }
 
 .user-info h4 {
-    color: #ffffff;
-    font-size: 17px;
+    color: #1a1a1a;
+    font-size: 15px;
     margin: 0;
 }
 
@@ -1137,6 +1129,83 @@ header nav {
 
     /* category & product end */
 
+    /* about start */
+
+    .about-grid, .user-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 0 10px;
+        margin: 20px 5px;
+    }
+
+    .feature-card {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        border: 1px solid #f0f0f0;
+        transition: 0.3s;
+    }
+
+    .icon-box {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+        font-size: 15px;
+        margin-bottom: 10px;
+        color: #1a1a1a;
+    }
+
+    .feature-card p {
+        font-size: 12px;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .user-card {
+        background-color: var(--navbar-background);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .user-img-box {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #ED4264;
+    }
+
+        .user-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .user-info h4 {
+        color: #1a1a1a;
+        font-size: 15px;
+        margin: 0;
+    }
+
+    .user-info p {
+        color: #cccccc;
+        font-size: 13px;
+        margin: 0;
+    }
+
+
+    /* about end */
+
 
     /* offer start */
 
@@ -1719,6 +1788,83 @@ header nav {
     }
 
     /* category & product end */
+
+    /* about start */
+
+    .about-grid, .user-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        padding: 0 10px;
+        margin: 20px 5px;
+    }
+
+    .feature-card {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        border: 1px solid #f0f0f0;
+        transition: 0.3s;
+    }
+
+    .icon-box {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+        font-size: 15px;
+        margin-bottom: 10px;
+        color: #1a1a1a;
+    }
+
+    .feature-card p {
+        font-size: 12px;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .user-card {
+        background-color: var(--navbar-background);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .user-img-box {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #ED4264;
+    }
+
+        .user-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .user-info h4 {
+        color: #1a1a1a;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .user-info p {
+        color: #cccccc;
+        font-size: 14px;
+        margin: 0;
+    }
+
+
+    /* about end */
 
     /* contact start */
 
@@ -2305,6 +2451,83 @@ header nav {
 
     /* category & product end */
 
+    /* about start */
+
+    .about-grid, .user-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        padding: 0 10px;
+        margin: 20px 5px;
+    }
+
+    .feature-card {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        border: 1px solid #f0f0f0;
+        transition: 0.3s;
+    }
+
+    .icon-box {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+        font-size: 15px;
+        margin-bottom: 10px;
+        color: #1a1a1a;
+    }
+
+    .feature-card p {
+        font-size: 12px;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .user-card {
+        background-color: var(--navbar-background);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .user-img-box {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #ED4264;
+    }
+
+        .user-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .user-info h4 {
+        color: #1a1a1a;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .user-info p {
+        color: #cccccc;
+        font-size: 14px;
+        margin: 0;
+    }
+
+
+    /* about end */
+
     /* contact start */
 
     .contact-section {
@@ -2886,6 +3109,83 @@ header nav {
     }
 
     /* category & product end */
+
+    /* about start */
+
+    .about-grid, .user-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        padding: 0 10px;
+        margin: 20px 5px;
+    }
+
+    .feature-card {
+        background: #ffffff;
+        padding: 24px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        border: 1px solid #f0f0f0;
+        transition: 0.3s;
+    }
+
+    .icon-box {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #1a1a1a;
+    }
+
+    .feature-card p {
+        font-size: 15px;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .user-card {
+        background-color: var(--navbar-background);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .user-img-box {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #ED4264;
+    }
+
+        .user-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .user-info h4 {
+        color: #1a1a1a;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .user-info p {
+        color: #cccccc;
+        font-size: 14px;
+        margin: 0;
+    }
+
+
+    /* about end */
 
     /* contact start */
 
