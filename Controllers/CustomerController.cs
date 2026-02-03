@@ -15,6 +15,12 @@ namespace SuperShop.Controllers
             return View();
         }
 
+        //productdetails
+        public IActionResult ProductDetails()
+        {
+            return View();
+        }
+
         //about
         public IActionResult About()
         {
