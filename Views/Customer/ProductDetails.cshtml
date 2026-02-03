@@ -4,5 +4,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>ProductDetails</h1>
 
+<!-- product details start -->
+<div class="myContainer">
+    <div class="product-details-section">
+        <div class="details-wrapper">
+            <div class="details-img">
+                <img src="~/images/offer_img/offerimg1.png" alt="Product Name">
+            </div>
+
+            <div class="details-content">
+                <h4 class="details-title">Product Details</h4>
+                <h3 class="product-name">Premium Wireless Headphone</h3>
+                <div class="details-price">Price: $299.00</div>
+                <p class="details-desc">
+                    This is a high-quality premium product designed for the best user experience.
+                    It features modern technology, sleek design, and durable materials that ensure
+                    long-lasting performance and satisfaction.
+                </p>
+
+                <div class="details-actions">
+                    <a class="buttons">Buy Now</a>
+                    <a class="buttons" href="@Url.Action("AllProducts", "Customer")">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- product details end -->
