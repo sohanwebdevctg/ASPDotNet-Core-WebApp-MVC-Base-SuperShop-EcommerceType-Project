@@ -44,5 +44,11 @@ namespace SuperShop.Controllers
         {
             return View();
         }
+
+        // cart
+        public IActionResult Cart()
+        {
+            return View();
+        }
     }
 }
