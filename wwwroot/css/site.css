@@ -541,7 +541,7 @@ header nav {
     gap: 15px;
 }
 
-details-actions, .buttons {
+.details-actions .buttons {
     cursor: pointer;
      display: inline-block;
     text-align: center;
@@ -1382,7 +1382,7 @@ details-actions, .buttons {
         gap: 10px;
     }
 
-    details-actions, .buttons {
+    .details-actions .buttons {
         cursor: pointer;
         display: inline-block;
         text-align: center;
@@ -2222,7 +2222,7 @@ details-actions, .buttons {
         gap: 10px;
     }
 
-    details-actions, .buttons {
+    .details-actions .buttons {
         cursor: pointer;
         display: inline-block;
         text-align: center;
@@ -3064,7 +3064,7 @@ details-actions, .buttons {
         gap: 10px;
     }
 
-    details-actions, .buttons {
+    .details-actions .buttons {
         cursor: pointer;
         display: inline-block;
         text-align: center;
@@ -3903,7 +3903,7 @@ details-actions, .buttons {
         gap: 10px;
     }
 
-    details-actions, .buttons {
+    .details-actions .buttons {
         cursor: pointer;
         display: inline-block;
         text-align: center;
@@ -4200,6 +4200,96 @@ details-actions, .buttons {
         }
 
     /* blog end */
+
+    /* user profile start */
+
+    .userprofile-section {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .userprofile-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+        background-color: var(--navbar-background);
+    }
+
+    .userprofile-img {
+        flex: 1;
+        width: 100%;
+        min-height: 380px !important;
+        text-align: center;
+    }
+
+    .userprofile-img img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+    }
+
+
+    .userprofile-content {
+        flex: 1;
+        width: 100%;
+        color: #ffffff;
+        padding: 12px;
+    }
+
+    .userprofile-title {
+        color: #ED4264;
+        font-size: 20px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .userprofiel-name {
+        font-size: 21px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .userprofile-role {
+        font-size: 20px;
+        color: #ED4264;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .userprofile-des {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #666;
+        margin-bottom: 14px;
+    }
+
+
+    .userprofile-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .userprofile-actions .buttons {
+        cursor: pointer;
+        display: inline-block;
+        text-align: center;
+        padding: 10px 6px;
+        width: 100%;
+        background: var(--button-color);
+        color: #fff !important;
+        font-size: 15px;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 8px;
+        border: none;
+    }
+
+
+    /* user profile end */
     
 }
 
