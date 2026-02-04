@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- user profile start -->
+<div class="myContainer">
+    <div class="userprofile-section">
+        <div class="userprofile-wrapper">
+            <div class="userprofile-img">
+                <img src="~/images/offer_img/offerimg1.png" alt="user Name">
+            </div>
+
+            <div class="userprofile-content">
+                <h4 class="userprofile-title">User Profile</h4>
+                <h3 class="userprofiel-name">John Randy</h3>
+                <div class="userprofile-role">Role: User</div>
+                <p class="userprofile-desc">Email: johnrandy@gmail.com</p>
+                <div class="userprofile-actions">
+                    <a class="buttons">Edit</a>
+                    <a class="buttons" href="@Url.Action("Index", "Customer")">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- user profile end -->
+

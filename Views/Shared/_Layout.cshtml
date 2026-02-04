@@ -37,8 +37,8 @@
                 <div class="sidebar-footer">
                     <ul class="user-actions">
                         <li>
-                            <a href="#"><i class="fa-solid fa-cart-shopping cartIcon"></i></a>
-                            <a href="#"><i class="fa-solid fa-user-tie userIcon"></i></a>
+                            <a href="@Url.Action("","Customer")"><i class="fa-solid fa-cart-shopping cartIcon"></i></a>
+                            <a href="@Url.Action("UserProfile","Customer")"><i class="fa-solid fa-user-tie userIcon"></i></a>
                         </li>
                         <li><button class="auth-btn"><a href="#">Logout</a></button></li>
                         <li><button class="auth-btn"><a href="#">Login</a></button></li>
@@ -66,9 +66,9 @@
                 </div>
                 <div>
                     <button><a href="#">Login</a></button>
-                    @*<a href="#"><i class="fa-solid fa-cart-shopping cartIcon"></i></a>
-                    <a href="#"><i class="fa-solid fa-user-tie userIcon"></i></a>
-                    <button><a href="#">logout</a></button>*@
+                    <a href="#"><i class="fa-solid fa-cart-shopping carticon"></i></a>
+                    <a href="@Url.Action("UserProfile","Customer")"><i class="fa-solid fa-user-tie usericon"></i></a>
+                    <button><a href="#">logout</a></button>
                 </div>
             </nav>
         </div>
