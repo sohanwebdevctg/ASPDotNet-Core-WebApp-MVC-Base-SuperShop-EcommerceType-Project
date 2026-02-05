@@ -1,0 +1,147 @@
+﻿/* =============================================================
+                        common css start
+================================================================= */
+* {
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+.myContainer {
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+:root {
+    --button-color: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);
+    --navbar-background: #F3F5F4;
+    --body-color: #FFFFFF;
+    --footer-background: #353333;
+    --header-text-color: #F8F9FA;
+    --body-text-color: #2D2D2D;
+    --footer-text-color: #F8F9FA;
+    --icon-color: #ED4264
+}
+
+/* =============================================================
+                        common css end
+================================================================= */
+
+/* desktop header start */
+
+header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.desktop-header {
+    display: block;
+    background-color: var(--navbar-background);
+    padding: 15px 24px;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    header nav .logo img {
+        width: 84px;
+        height: 14px;
+    }
+
+    header nav button {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        outline: none;
+    }
+
+    header nav .openIcon,
+    header nav .closeIcon {
+        color: var(--icon-color) !important;
+        font-size: 20px;
+    }
+
+#sideBar {
+    position: fixed;
+    top: 54px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 54px);
+    background: rgba(243, 245, 244, 0.85);
+    backdrop-filter: blur(10px);
+    opacity: 0.95;
+    -webkit-backdrop-filter: blur(15px);
+    transition: 0.5s ease-in-out;
+    z-index: 999;
+    overflow-y: auto;
+    border-top: 1px solid rgba(0,0,0,0.20);
+}
+
+.sidebar-active {
+    left: 0 !important;
+}
+
+#sideBar ul {
+    list-style: none;
+    padding: 12px;
+    margin: 0;
+}
+
+    #sideBar ul li {
+        padding: 12px 0;
+        text-align: center;
+    }
+
+        #sideBar ul li a {
+            text-decoration: none;
+            color: var(--body-text-color);
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+
+#sideBar .sidebar-footer .amin-actions {
+    padding: 15px 20px;
+    text-align: center;
+}
+
+#sideBar i {
+    background: var(--button-color) !important;
+    font-size: 50px;
+    margin: 0 15px;
+    display: inline-block;
+}
+
+#sideBar button {
+    background: var(--button-color) !important;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 5px;
+    margin: 5px auto;
+    cursor: pointer;
+    display: block;
+}
+
+    #sideBar button a {
+        color: #fff !important;
+        text-decoration: none;
+    }
+
+/* desktop header end */
