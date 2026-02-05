@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SuperShop.styles.css" asp-append-version="true" />
+</head>
+<body class="login-body">
+
+    <!-- login start -->
+        <div class="myContainer">
+    <div class="login-wrapper">
+            <div class="login-container">
+                <h3>Login</h3>
+                <form asp-controller="" asp-action="" method="">
+                    <div class="input-group-custom">
+                        <input type="email" placeholder="Email Address" required />
+                    </div>
+                    <div class="input-group-custom">
+                        <input type="password" placeholder="Password" required />
+                    </div>
+                    <button type="submit">LOGIN</button>
+                </form>
+                <div class="divider">OR</div>
+
+                <a href="/Login/GoogleLogin" class="google-btn">
+                    <img src="~/images/logo//googlelogo.png">
+                    <p>Continue with Google</p>
+                </a>
+                <p class="register-link">
+                    Don't have an account? <a href="/Login/Register">Register</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- login end -->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/all.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
