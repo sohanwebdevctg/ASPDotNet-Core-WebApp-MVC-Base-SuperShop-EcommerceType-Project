@@ -18,10 +18,10 @@
 </head>
 <body class="login-body">
 
-    <!-- login start -->
+    <!-- registation start -->
     <div class="myContainer">
-        <div class="login-wrapper">
-            <div class="login-container">
+        <div class="registation-wrapper">
+            <div class="registation-container">
                 <h3>Registation</h3>
                 <form asp-controller="" asp-action="" method="">
                     <div class="input-group-custom">
@@ -41,13 +41,13 @@
                     <img src="~/images/logo//googlelogo.png">
                     <p>Continue with Google</p>
                 </a>
-                <p class="register-link">
-                    If You have an account? <a href="/Login/Register">Login</a>
+                <p class="login-link">
+                    If You have an account? <a href="@Url.Action("Index","Login")">Login</a>
                 </p>
             </div>
         </div>
     </div>
-    <!-- login end -->
+    <!-- registation end -->
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

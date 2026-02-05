@@ -983,18 +983,17 @@ header nav {
 
 /* cart end */
 
-/* login form start */
+/* login & registation form start */
 
-.login-wrapper {
+.login-wrapper, .registation-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px 5px;
-
 }
 
-.login-container {
+.login-container, .registation-container {
     background-color: var(--navbar-background);
     padding: 40px 30px;
     border-radius: 15px;
@@ -1003,18 +1002,18 @@ header nav {
     text-align: center;
 }
 
-    .login-container h3 {
+    .login-container h3, .registation-container h3 {
         margin-bottom: 20px;
         font-size: 28px;
         font-weight: bold;
         color: #ED4264;
     }
 
-    .login-container .input-group-custom {
-        margin-bottom: 20px;
+    .login-container .input-group-custom, .registation-container .input-group-custom {
+        margin-bottom: 15px;
     }
 
-        .login-container .input-group-custom input {
+        .login-container .input-group-custom input, .registation-container .input-group-custom input {
             width: 100%;
             padding: 12px 15px;
             border-radius: 8px;
@@ -1024,21 +1023,21 @@ header nav {
             box-sizing: border-box;
         }
 
-            .login-container .input-group-custom input::placeholder {
+            .login-container .input-group-custom input::placeholder, .registation-container .input-group-custom input::placeholder {
                 color: #ccc;
             }
 
-        .login-container button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            background: var(--button-color);
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
-        }
+    .login-container button, .registation-container button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        background: var(--button-color);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 16px;
+    }
 
 
 .divider {
@@ -1071,12 +1070,12 @@ header nav {
         margin: 0;
     }
 
-.register-link {
+.register-link, .login-link {
     margin-top: 25px;
     font-size: 14px;
 }
 
-    .register-link a {
+    .register-link a, .login-link a {
         color: #ED4264;
         text-decoration: none;
         font-weight: bold;
