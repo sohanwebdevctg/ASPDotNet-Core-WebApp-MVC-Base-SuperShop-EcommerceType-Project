@@ -4,18 +4,13 @@ namespace SuperShop.Controllers
 {
     public class LoginController : Controller
     {
+        // login form
         public IActionResult Index()
         {
             return View();
         }
 
-        //login
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        //registation
+        //registation form
         public IActionResult Registation()
         {
             return View();
