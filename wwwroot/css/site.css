@@ -1081,7 +1081,7 @@ header nav {
         font-weight: bold;
     }
 
-/* login form end */
+/* login & registation form end */
 
 
 /* ========================================================
@@ -1987,10 +1987,10 @@ header nav {
 
     /* cart end */
 
-    /* login form start */
+    /* login & registation form start */
 
 
-    .login-wrapper {
+    .login-wrapper, .registation-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -2000,29 +2000,29 @@ header nav {
         box-sizing: border-box;
     }
 
-    .login-container {
+    .login-container, .registation-container {
         background-color: var(--navbar-background);
         padding: 25px 20px;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        width: 100%;
-        max-width: 350px;
-        max-height: 440px;
+        width: 80%;
+        max-width: 400px;
+        max-height: 480px;
         text-align: center;
     }
 
-        .login-container h3 {
+        .login-container h3, .registation-container h3 {
             margin-bottom: 15px;
             font-size: 24px;
             font-weight: bold;
             color: #ED4264;
         }
 
-        .login-container .input-group-custom {
-            margin-bottom: 20px;
+        .login-container .input-group-custom, .registation-container .input-group-custom {
+            margin-bottom: 15px;
         }
 
-            .login-container .input-group-custom input {
+            .login-container .input-group-custom input, .registation-container .input-group-custom input {
                 width: 100%;
                 padding: 10px 10px;
                 border-radius: 8px;
@@ -2032,11 +2032,11 @@ header nav {
                 box-sizing: border-box;
             }
 
-                .login-container .input-group-custom input::placeholder {
+                .login-container .input-group-custom input::placeholder, .registation-container .input-group-custom input::placeholder {
                     color: #ccc;
                 }
 
-        .login-container button {
+        .login-container button, .registation-container button {
             width: 100%;
             padding: 14px;
             border: none;
@@ -2079,18 +2079,18 @@ header nav {
             margin: 0;
         }
 
-    .register-link {
+    .register-link, .login-link {
         margin-top: 25px;
         font-size: 14px;
     }
 
-        .register-link a {
+        .register-link a, .login-link a {
             color: #ED4264;
             text-decoration: none;
             font-weight: bold;
         }
 
-    /* login form end */
+    /* login & registation form end */
             
 
 }
@@ -2993,10 +2993,9 @@ header nav {
 
     /* cart end */
 
-    /* login form start */
+    /* login & registaion form start */
 
-
-    .login-wrapper {
+    .login-wrapper, .registation-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -3006,29 +3005,29 @@ header nav {
         box-sizing: border-box;
     }
 
-    .login-container {
+    .login-container, .registation-container {
         background-color: var(--navbar-background);
         padding: 25px 20px;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        width: 100%;
-        max-width: 380px;
-        max-height: 440px;
+        width: 90%;
+        max-width: 420px;
+        max-height: 500px;
         text-align: center;
     }
 
-        .login-container h3 {
+        .login-container h3, .registation-container h3 {
             margin-bottom: 16px;
             font-size: 26px;
             font-weight: bold;
             color: #ED4264;
         }
 
-        .login-container .input-group-custom {
+        .login-container .input-group-custom, .registation-container .input-group-custom {
             margin-bottom: 20px;
         }
 
-            .login-container .input-group-custom input {
+            .login-container .input-group-custom input, .registation-container .input-group-custom input {
                 width: 100%;
                 padding: 12px 12px;
                 border-radius: 8px;
@@ -3038,11 +3037,11 @@ header nav {
                 box-sizing: border-box;
             }
 
-                .login-container .input-group-custom input::placeholder {
+                .login-container .input-group-custom input::placeholder, .registation-container .input-group-custom input::placeholder {
                     color: #ccc;
                 }
 
-        .login-container button {
+        .login-container button, .registation-container button {
             width: 100%;
             padding: 14px;
             border: none;
@@ -3085,18 +3084,18 @@ header nav {
             margin: 0;
         }
 
-    .register-link {
+    .register-link, .login-link {
         margin-top: 25px;
         font-size: 15px;
     }
 
-        .register-link a {
+        .register-link a, .login-link a {
             color: #ED4264;
             text-decoration: none;
             font-weight: bold;
         }
 
-    /* login form end */
+    /* login & registaion form end */
 
 
 }
@@ -3998,9 +3997,9 @@ header nav {
 
     /* cart end */
 
-    /* login form start */
+    /* login & registation form start */
 
-    .login-wrapper {
+    .login-wrapper, .registation-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -4010,29 +4009,29 @@ header nav {
         box-sizing: border-box;
     }
 
-    .login-container {
+    .login-container, .registation-container {
         background-color: var(--navbar-background);
         padding: 25px 20px;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        width: 100%;
+        width: 90%;
         max-width: 380px;
-        max-height: 440px;
+        max-height: 500px;
         text-align: center;
     }
 
-        .login-container h3 {
+        .login-container h3, .registation-container h3 {
             margin-bottom: 16px;
             font-size: 26px;
             font-weight: bold;
             color: #ED4264;
         }
 
-        .login-container .input-group-custom {
-            margin-bottom: 20px;
+        .login-container .input-group-custom, .registation-container .input-group-custom {
+            margin-bottom: 15px;
         }
 
-            .login-container .input-group-custom input {
+            .login-container .input-group-custom input, .registation-container .input-group-custom input {
                 width: 100%;
                 padding: 12px 12px;
                 border-radius: 8px;
@@ -4042,11 +4041,11 @@ header nav {
                 box-sizing: border-box;
             }
 
-                .login-container .input-group-custom input::placeholder {
+                .login-container .input-group-custom input::placeholder, .registation-container .input-group-custom input::placeholder {
                     color: #ccc;
                 }
 
-        .login-container button {
+        .login-container button, .registation-container button {
             width: 100%;
             padding: 14px;
             border: none;
@@ -4089,18 +4088,18 @@ header nav {
             margin: 0;
         }
 
-    .register-link {
+    .register-link, .login-link {
         margin-top: 25px;
         font-size: 16px;
     }
 
-        .register-link a {
+        .register-link a, .login-link a {
             color: #ED4264;
             text-decoration: none;
             font-weight: bold;
         }
 
-    /* login form end */
+    /* login & registaion form end */
 
     
 }
@@ -5000,9 +4999,9 @@ header nav {
 
     /* cart end */
 
-    /* login form start */
+    /* login & registaion form start */
 
-    .login-wrapper {
+    .login-wrapper, .registation-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -5012,29 +5011,29 @@ header nav {
         box-sizing: border-box;
     }
 
-    .login-container {
+    .login-container, .registation-container {
         background-color: var(--navbar-background);
         padding: 25px 20px;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        width: 100%;
+        width: 90%;
         max-width: 380px;
-        max-height: 440px;
+        max-height: 500px;
         text-align: center;
     }
 
-        .login-container h3 {
+        .login-container h3, .registation-container h3 {
             margin-bottom: 16px;
             font-size: 26px;
             font-weight: bold;
             color: #ED4264;
         }
 
-        .login-container .input-group-custom {
-            margin-bottom: 20px;
+        .login-container .input-group-custom, .registation-container .input-group-custom {
+            margin-bottom: 15px;
         }
 
-            .login-container .input-group-custom input {
+            .login-container .input-group-custom input, .registation-container .input-group-custom input {
                 width: 100%;
                 padding: 12px 12px;
                 border-radius: 8px;
@@ -5044,11 +5043,11 @@ header nav {
                 box-sizing: border-box;
             }
 
-                .login-container .input-group-custom input::placeholder {
+                .login-container .input-group-custom input::placeholder, .registation-container .input-group-custom input::placeholder {
                     color: #ccc;
                 }
 
-        .login-container button {
+        .login-container button, .registation-container button {
             width: 100%;
             padding: 14px;
             border: none;
@@ -5091,18 +5090,18 @@ header nav {
             margin: 0;
         }
 
-    .register-link {
+    .register-link, .login-link {
         margin-top: 25px;
         font-size: 16px;
     }
 
-        .register-link a {
+        .register-link a, .login-link a {
             color: #ED4264;
             text-decoration: none;
             font-weight: bold;
         }
 
-    /* login form end */
+    /* login & registaion form end */
     
 }
 
