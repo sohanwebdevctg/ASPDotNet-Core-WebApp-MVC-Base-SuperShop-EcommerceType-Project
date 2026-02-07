@@ -728,6 +728,79 @@ header nav {
 
     /* desktop header end */
 
+    /* table start */
+
+    .table-content-area {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 80vh;
+        width: 100%;
+        padding: 20px 15px;
+    }
+
+    .table-title {
+        font-size: 22px;
+    }
+
+    .table-content-area:has(tbody tr:nth-child(5)) {
+        justify-content: flex-start;
+    }
+
+    .table-wrapper {
+        width: 100%;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        overflow-x: auto;
+    }
+
+    .table-content {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+
+        .table-content thead {
+            background: var(--footer-background);
+            color: white;
+        }
+
+        .table-content th,
+        .table-content td {
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+    .table-img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .btn-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .table-btn {
+        display: inline-block;
+        padding: 6px 12px;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: bold;
+        transition: 0.3s;
+        border: none;
+    }
+
+    /* table end */
+
 
 }
 
