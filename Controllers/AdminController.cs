@@ -15,5 +15,11 @@ namespace SuperShop.Controllers
         {
             return View();
         }
+
+        // details
+        public IActionResult UserProfile()
+        {
+            return View();
+        }
     }
 }
