@@ -215,7 +215,7 @@ header nav {
     display: inline-block;
     padding: 6px 10px;
     background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);
-    color: white;
+    color: white !important;
     text-decoration: none;
     border-radius: 4px;
     font-size: 10px;
@@ -226,16 +226,17 @@ header nav {
 
 /* table end */
 
-/* admin profile start */
+/* admin & user profile start */
 
-.adminprofile-section {
+.adminprofile-section, .userprofile-section {
     min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px 10px;
 }
 
-.adminprofile-wrapper {
+.adminprofile-wrapper, .userprofile-wrapper {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -243,28 +244,28 @@ header nav {
     background-color: var(--navbar-background);
 }
 
-.adminprofile-img {
+.adminprofile-img, .userprofile-img {
     flex: 1;
     width: 100%;
     height: 280px !important;
     text-align: center;
 }
 
-    .adminprofile-img img {
+    .adminprofile-img img, .userprofile-img img {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover;
     }
 
 
-.adminprofile-content {
+.adminprofile-content, .userprofile-content {
     flex: 1;
     width: 100%;
     color: #ffffff;
     padding: 15px;
 }
 
-.adminprofile-title {
+.adminprofile-title, .userprofile-title {
     color: #ED4264;
     font-size: 14px;
     margin-bottom: 10px;
@@ -272,21 +273,21 @@ header nav {
     margin-bottom: 5px;
 }
 
-.adminprofiel-name {
+.adminprofiel-name, .userprofiel-name {
     font-size: 14px;
     font-weight: bold;
     color: #333;
     margin-bottom: 8px;
 }
 
-.adminprofile-role {
+.adminprofile-role, .userprofile-role {
     font-size: 15px;
     color: #ED4264;
     font-weight: bold;
     margin-bottom: 8px;
 }
 
-.adminprofile-desc {
+.adminprofile-desc, .userprofile-desc {
     font-size: 12px;
     line-height: 1.7;
     color: #666;
@@ -294,12 +295,12 @@ header nav {
 }
 
 
-.adminprofile-actions {
+.adminprofile-actions, .userprofile-actions {
     display: flex;
     gap: 15px;
 }
 
-    .adminprofile-actions .buttons {
+    .adminprofile-actions .buttons, .userprofile-actions .buttons {
         cursor: pointer;
         display: inline-block;
         text-align: center;
@@ -313,7 +314,7 @@ header nav {
         color: #fff !important;
     }
 
-/* admin profile start */
+/* admin & user profile start */
 
 /* ============================================================
                         mobile css end 
@@ -499,7 +500,7 @@ header nav {
         display: inline-block;
         padding: 6px 12px;
         background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);
-        color: white;
+        color: white !important;
         text-decoration: none;
         border-radius: 4px;
         font-size: 11px;
@@ -510,17 +511,17 @@ header nav {
 
     /* table end */
 
-    /* user profile start */
+    /* admin & user profile start */
 
-    .adminprofile-section {
+    .adminprofile-section, .userprofile-section {
         height: 80vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0 15px;
+        padding: 20px 15px;
     }
 
-    .adminprofile-wrapper {
+    .adminprofile-wrapper, .userprofile-wrapper {
         display: flex;
         flex-direction: row;
         gap: 10px;
@@ -528,28 +529,28 @@ header nav {
         background-color: var(--navbar-background);
     }
 
-    .adminprofile-img {
+    .adminprofile-img, .userprofile-img {
         flex: 1;
         width: 100%;
         min-height: 230px !important;
         text-align: center;
     }
 
-        .adminprofile-img img {
+        .adminprofile-img img, .userprofile-img img {
             width: 100% !important;
             height: 100% !important;
             object-fit: cover;
         }
 
 
-    .adminprofile-content {
+    .adminprofile-content, .userprofile-content {
         flex: 1;
         width: 100%;
         color: #ffffff;
         padding: 12px;
     }
 
-    .adminprofile-title {
+    .adminprofile-title, .userprofile-title {
         color: #ED4264;
         font-size: 14px;
         margin-bottom: 10px;
@@ -557,21 +558,21 @@ header nav {
         margin-bottom: 5px;
     }
 
-    .adminprofiel-name {
+    .adminprofiel-name, .userprofiel-name {
         font-size: 13px;
         font-weight: bold;
         color: #333;
         margin-bottom: 8px;
     }
 
-    .adminprofile-role {
+    .adminprofile-role, .userprofile-role {
         font-size: 15px;
         color: #ED4264;
         font-weight: bold;
         margin-bottom: 8px;
     }
 
-    .adminprofile-desc {
+    .adminprofile-desc, .userprofile-desc {
         font-size: 12px;
         line-height: 1.7;
         color: #666;
@@ -579,12 +580,12 @@ header nav {
     }
 
 
-    .adminprofile-actions {
+    .adminprofile-actions, .userprofile-actions {
         display: flex;
         gap: 10px;
     }
 
-        .adminprofile-actions .buttons {
+        .adminprofile-actions .buttons, .adminprofile-actions .buttons {
             cursor: pointer;
             display: inline-block;
             text-align: center;
@@ -599,7 +600,7 @@ header nav {
         }
 
 
-    /* admin profile end */
+    /* admin & user profile end */
 
 }
 

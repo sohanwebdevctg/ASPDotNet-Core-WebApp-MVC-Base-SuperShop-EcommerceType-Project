@@ -4,5 +4,26 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h1>UserProfile</h1>
+<!-- user profile start -->
+<div class="myContainer">
+    <div class="userprofile-section">
+        <div class="userprofile-wrapper">
+            <div class="userprofile-img">
+                <img src="~/images/offer_img/offerimg1.png" alt="User Name">
+            </div>
+
+            <div class="userprofile-content">
+                <h4 class="userprofile-title">User Profile</h4>
+                <h3 class="userprofiel-name">John Randy</h3>
+                <div class="userprofile-role">Role: Admin</div>
+                <p class="userprofile-desc">Email: johnrandy@gmail.com</p>
+                <div class="userprofile-actions">
+                    <a href="@Url.Action("", "Admin")" class="buttons" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">Edit</a>
+                    <a href="@Url.Action("Index", "Admin")" class="buttons" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- user profile end -->
 
