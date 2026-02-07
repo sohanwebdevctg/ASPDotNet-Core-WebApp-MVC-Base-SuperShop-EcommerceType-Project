@@ -9,5 +9,11 @@ namespace SuperShop.Controllers
         {
             return View();
         }
+
+        // admin profile
+        public IActionResult AdminProfile()
+        {
+            return View();
+        }
     }
 }

@@ -17,7 +17,7 @@
     <header class="desktop-header">
         <nav class="desktop-nav">
             <div class="logo">
-                <a href="@Url.Action("Index","")"><img src="@Url.Content("~/images/logo/SuperShopLogo.png")" /></a>
+                <a href="@Url.Action("Index","Admin")"><img src="@Url.Content("~/images/logo/SuperShopLogo.png")" /></a>
             </div>
             <div class="nav-controls">
                 <button id="openBtn"><i class="fa-solid fa-bars openIcon"></i></button>
@@ -27,13 +27,13 @@
         <div id="sideBar" class="sidebar-hidden">
             <div class="sidebar-content">
                 <ul class="nav-links">
-                    <li><a href="@Url.Action("","")">Home</a></li>
+                    <li><a href="@Url.Action("Index","Admin")">Home</a></li>
                 </ul>
                 <div class="sidebar-footer">
                     <ul class="admin-actions">
                         <li>
                             <a href="@Url.Action("","")"><i class="fa-solid fa-cart-shopping cartIcon"></i></a>
-                            <a href="@Url.Action("","")"><i class="fa-solid fa-user-tie userIcon"></i></a>
+                            <a href="@Url.Action("AdminProfile","Admin")"><i class="fa-solid fa-user-tie userIcon"></i></a>
                         </li>
                         <li><button class="auth-btn"><a href="#">Logout</a></button></li>
                     </ul>
