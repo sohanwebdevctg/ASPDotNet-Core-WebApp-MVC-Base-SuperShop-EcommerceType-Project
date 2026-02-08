@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
+<!-- create gender start -->
 <div class="myContainer">
     <div class="common-form-wrapper">
         <form class="master-form">
@@ -15,9 +16,11 @@
             </div>
             <div class="form-group common-submit-wrapper">
                 <button type="submit" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">SUBMIT DATA</button>
-                <a href="#" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">ALL GENDER</a>
+                <a href="@Url.Action("AllGender", "Admin")" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">ALL GENDER</a>
             </div>
         </form>
     </div>
 </div>
+
+<!-- create gender end -->
 

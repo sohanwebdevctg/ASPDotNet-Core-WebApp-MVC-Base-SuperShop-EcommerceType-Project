@@ -27,5 +27,11 @@ namespace SuperShop.Controllers
         {
             return View();
         }
+
+        // all-gender-table
+        public IActionResult AllGender()
+        {
+            return View();
+        }
     }
 }
