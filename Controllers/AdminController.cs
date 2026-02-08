@@ -4,7 +4,7 @@ namespace SuperShop.Controllers
 {
     public class AdminController : Controller
     {
-        // userdata
+        // all users
         public IActionResult Index()
         {
             return View();
@@ -54,6 +54,18 @@ namespace SuperShop.Controllers
 
         // all-country-table
         public IActionResult AllCountry()
+        {
+            return View();
+        }
+
+        // create-role
+        public IActionResult CreateRole()
+        {
+            return View();
+        }
+
+        // all-role-table
+        public IActionResult AllRole()
         {
             return View();
         }
