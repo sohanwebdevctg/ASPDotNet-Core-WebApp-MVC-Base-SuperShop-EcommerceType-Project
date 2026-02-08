@@ -45,5 +45,17 @@ namespace SuperShop.Controllers
         {
             return View();
         }
+
+        // create-country
+        public IActionResult CreateCountry()
+        {
+            return View();
+        }
+
+        // all-country-table
+        public IActionResult AllCountry()
+        {
+            return View();
+        }
     }
 }
