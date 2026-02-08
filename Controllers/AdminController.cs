@@ -21,5 +21,11 @@ namespace SuperShop.Controllers
         {
             return View();
         }
+
+        // create-gender
+        public IActionResult CreateGender()
+        {
+            return View();
+        }
     }
 }
