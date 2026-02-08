@@ -33,5 +33,11 @@ namespace SuperShop.Controllers
         {
             return View();
         }
+
+        // create-city
+        public IActionResult CreateCity()
+        {
+            return View();
+        }
     }
 }
