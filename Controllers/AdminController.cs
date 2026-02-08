@@ -39,5 +39,11 @@ namespace SuperShop.Controllers
         {
             return View();
         }
+
+        // all-city-table
+        public IActionResult AllCity()
+        {
+            return View();
+        }
     }
 }
