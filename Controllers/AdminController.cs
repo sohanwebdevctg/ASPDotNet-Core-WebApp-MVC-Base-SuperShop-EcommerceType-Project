@@ -10,6 +10,12 @@ namespace SuperShop.Controllers
             return View();
         }
 
+        // faq-table
+        public IActionResult Faq()
+        {
+            return View();
+        }
+
         // admin profile
         public IActionResult AdminProfile()
         {
@@ -69,5 +75,30 @@ namespace SuperShop.Controllers
         {
             return View();
         }
+
+        // create-offer
+        public IActionResult CreateOffer()
+        {
+            return View();
+        }
+
+        // all-offer-table
+        public IActionResult AllOffer()
+        {
+            return View();
+        }
+
+        // create-category
+        public IActionResult CreateCategory()
+        {
+            return View();
+        }
+
+        // all-category-table
+        public IActionResult AllCategory()
+        {
+            return View();
+        }
+
     }
 }
