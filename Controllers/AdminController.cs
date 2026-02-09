@@ -100,5 +100,17 @@ namespace SuperShop.Controllers
             return View();
         }
 
+        // create-product
+        public IActionResult CreateProduct()
+        {
+            return View();
+        }
+
+        // all-product-table
+        public IActionResult AllProduct()
+        {
+            return View();
+        }
+
     }
 }
