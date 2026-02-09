@@ -11,14 +11,11 @@ Env.Load();
 builder.Services.AddControllersWithViews();
 
 // database connection
+var connectionString = $"server={Environment.GetEnvironmentVariable("DB_SERVER")};port={Environment.GetEnvironmentVariable("DB_PORT")};database={Environment.GetEnvironmentVariable("DB_NAME")};user={Environment.GetEnvironmentVariable("DB_USER")};password={Environment.GetEnvironmentVariable("DB_PASSWORD")};";
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseMySql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        ServerVersion.AutoDetect(
-            builder.Configuration.GetConnectionString("DefaultConnection")
-        )
-   );
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
 var app = builder.Build();

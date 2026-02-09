@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SuperShop.Models;
 
 namespace SuperShop.Data
 {
@@ -10,8 +11,8 @@ namespace SuperShop.Data
 
         }
 
-        // model table here
-
+        // models table here
+        public DbSet<Gender> Genders { get; set; }
 
     }
 }
