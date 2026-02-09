@@ -10,6 +10,12 @@ namespace SuperShop.Controllers
             return View();
         }
 
+        // update user
+        public IActionResult UpdateUser()
+        {
+            return View();
+        }
+
         // faq-table
         public IActionResult Faq()
         {

@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewData["Title"] = "UpdateUser";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<!-- update user start -->
+
+<div class="myContainer">
+    <div class="common-form-wrapper">
+        <form class="master-form">
+            <div>
+                <h2 class="form-title">Update User</h2>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Update Name" class="common-input" />
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Update Email" class="common-input" />
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Update Password" class="common-input" />
+            </div>
+
+            <div class="form-group">
+                <input type="number" min="18" max="90" placeholder="Update Age" class="common-input" />
+            </div>
+
+            <div class="form-group">
+                <select class="common-input">
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="a">Option A</option>
+                    <option value="b">Option B</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="common-input">
+                    <option value="" disabled selected>Select City</option>
+                    <option value="a">Option A</option>
+                    <option value="b">Option B</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="common-input">
+                    <option disabled selected>Select Country</option>
+                    <option value="a">Option A</option>
+                    <option value="b">Option B</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="common-input">
+                    <option disabled selected>Select Status</option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                    <option value="Blocked">Blocked</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="common-input">
+                    <option disabled selected>Select Role</option>
+                    <option value="a">Option A</option>
+                    <option value="b">Option B</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <div class="image-preview-container">
+                    <img src="~/images/placeholder.png" alt="Preview" class="form-img-preview" />
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="file" name="" placeholder="Update Age" class="common-input" style="background: white; width: 100%;" />
+            </div>
+
+            <div class="form-group">
+                <textarea placeholder="Enter Description" class="common-input text-area-input"></textarea>
+            </div>
+
+            <div class="form-group common-submit-wrapper">
+                <button type="submit" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">SUBMIT DATA</button>
+                <a href="@Url.Action("Index", "Admin")" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">BACK</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<!-- update user end -->
+

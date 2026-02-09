@@ -923,9 +923,9 @@ header nav {
 
 /* user profile start */
 
-/* cart start */
+/* order start */
 
-.user-cart-section {
+.user-order-section {
     margin: 30px 0px;
     min-height: 80vh;
 }
@@ -940,7 +940,7 @@ header nav {
         border: none !important;
     }
 
-.user-cart-section .cart-title{
+.user-order-section .order-title{
     font-size: 14px;
 }
 
@@ -962,7 +962,7 @@ header nav {
         border-bottom: 0 !important;
     }
 
-    .table-container table .cart-img {
+    .table-container table .order-img {
         width: 30px;
         height: 30px;
         object-fit: cover;
@@ -980,7 +980,7 @@ header nav {
         text-decoration: none;
     }
 
-/* cart end */
+/* order end */
 
 /* login & registation form start */
 
@@ -1088,8 +1088,10 @@ header nav {
 =========================================================== */
 
 
+/* ============================================================
+                        media query start
+================================================================ */
 
-/* media query start */
 
 @media screen and (min-width: 576px) {
 
@@ -1636,7 +1638,6 @@ header nav {
 
     /* about end */
 
-
     /* offer start */
 
     .offer-grid {
@@ -1928,9 +1929,9 @@ header nav {
 
     /* user profile end */
 
-    /* cart start */
+    /* order start */
 
-    .user-cart-section {
+    .user-order-section {
         margin: 30px 0px;
         min-height: 80vh;
     }
@@ -1944,7 +1945,7 @@ header nav {
             border: none !important;
         }
 
-    .user-cart-section .cart-title {
+    .user-order-section .order-title {
         font-size: 14px;
     }
 
@@ -1966,7 +1967,7 @@ header nav {
             border-bottom: 0 !important;
         }
 
-    .table-container table .cart-img {
+    .table-container table .order-img {
         width: 35px;
         height: 35px;
         object-fit: cover;
@@ -1984,10 +1985,9 @@ header nav {
         text-decoration: none;
     }
 
-    /* cart end */
+    /* order end */
 
     /* login & registation form start */
-
 
     .login-wrapper, .registation-wrapper {
         display: flex;
@@ -2091,7 +2091,6 @@ header nav {
 
     /* login & registation form end */
             
-
 }
 
 @media screen and (min-width: 768px) {
@@ -2933,9 +2932,9 @@ header nav {
 
     /* user profile end */
 
-    /* cart start */
+    /* order start */
 
-    .user-cart-section {
+    .user-order-section {
         margin: 30px 0px;
         min-height: 80vh;
     }
@@ -2950,7 +2949,7 @@ header nav {
             border: none !important;
         }
 
-    .user-cart-section .cart-title {
+    .user-order-section .order-title {
         font-size: 18px;
     }
 
@@ -2972,7 +2971,7 @@ header nav {
             border-bottom: 0 !important;
         }
 
-    .table-container table .cart-img {
+    .table-container table .order-img {
         width: 50px;
         height: 50px;
         object-fit: cover;
@@ -2990,7 +2989,7 @@ header nav {
         text-decoration: none;
     }
 
-    /* cart end */
+    /* order end */
 
     /* login & registaion form start */
 
@@ -3937,9 +3936,9 @@ header nav {
 
     /* user profile end */
 
-    /* cart start */
+    /* order start */
 
-    .user-cart-section {
+    .user-order-section {
         margin: 30px 0px;
         min-height: 80vh;
     }
@@ -3954,7 +3953,7 @@ header nav {
             border: none !important;
         }
 
-    .user-cart-section .cart-title {
+    .user-order-section .order-title {
         font-size: 18px;
     }
 
@@ -3976,7 +3975,7 @@ header nav {
             border-bottom: 0 !important;
         }
 
-    .table-container table .cart-img {
+    .table-container table .order-img {
         width: 50px;
         height: 50px;
         object-fit: cover;
@@ -3994,7 +3993,7 @@ header nav {
         text-decoration: none;
     }
 
-    /* cart end */
+    /* order end */
 
     /* login & registation form start */
 
@@ -4170,6 +4169,7 @@ header nav {
                 color: var(--icon-color) !important;
                 font-size: 23px;
             }
+
     /* footer start */
 
     .site-footer {
@@ -4939,9 +4939,9 @@ header nav {
 
     /* user profile end */
 
-    /* cart start */
+    /* order start */
 
-    .user-cart-section {
+    .user-order-section {
         margin: 30px 0px;
         min-height: 80vh;
     }
@@ -4956,7 +4956,7 @@ header nav {
             border: none !important;
         }
 
-    .user-cart-section .cart-title {
+    .user-order-section .order-title {
         font-size: 18px;
     }
 
@@ -4978,7 +4978,7 @@ header nav {
             border-bottom: 0 !important;
         }
 
-    .table-container table .cart-img {
+    .table-container table .order-img {
         width: 50px;
         height: 50px;
         object-fit: cover;
@@ -4996,7 +4996,7 @@ header nav {
         text-decoration: none;
     }
 
-    /* cart end */
+    /* order end */
 
     /* login & registaion form start */
 

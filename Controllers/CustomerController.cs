@@ -45,10 +45,10 @@ namespace SuperShop.Controllers
             return View();
         }
 
-        // cart
-        public IActionResult Cart()
+        // order-table
+        public IActionResult Order()
         {
-            return View();
+           return View();
         }
     }
 }
