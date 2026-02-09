@@ -14,5 +14,9 @@ namespace SuperShop.Data
         // models table here
         public DbSet<Gender> Genders { get; set; }
 
+        public DbSet<City> Cities { get; set; }
+
+        public DbSet<Country> Countries { get; set; }
+
     }
 }
