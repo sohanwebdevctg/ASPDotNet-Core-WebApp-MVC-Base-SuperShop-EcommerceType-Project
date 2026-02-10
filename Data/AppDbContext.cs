@@ -18,5 +18,7 @@ namespace SuperShop.Data
 
         public DbSet<Country> Countries { get; set; }
 
+        public DbSet<Role> Roles { get; set; }
+
     }
 }
