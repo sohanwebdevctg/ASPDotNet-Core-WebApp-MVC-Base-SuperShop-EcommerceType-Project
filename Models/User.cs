@@ -30,20 +30,19 @@ namespace SuperShop.Models
 
         public int? GenderId { get; set; }
 
-        public virtual Gender Gender { get; set; }
+        public virtual Gender? Gender { get; set; }
 
         public int? RoleId { get; set; } = 2;
 
-        public virtual Role Role { get; set; }
-
+        public virtual Role? Role { get; set; }
 
         public int? CityId { get; set; }
 
-        public virtual City City { get; set; }
+        public virtual City? City { get; set; }
 
         public int? CountryId { get; set; }
 
-        public virtual Country Country { get; set; }
+        public virtual Country? Country { get; set; }
 
     }
 }

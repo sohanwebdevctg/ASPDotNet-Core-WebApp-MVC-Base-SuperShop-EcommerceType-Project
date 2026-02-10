@@ -22,6 +22,7 @@ namespace SuperShop.Controllers
             return View();
         }
 
+
         // registation form
         public IActionResult Registation()
         {
