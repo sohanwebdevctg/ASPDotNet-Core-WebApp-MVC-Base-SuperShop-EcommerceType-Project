@@ -1,9 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SuperShop.Data;
 
 namespace SuperShop.Controllers
 {
     public class CustomerController : Controller
     {
+
+        private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment _env;
+
+        public CustomerController(AppDbContext context, IWebHostEnvironment env)
+        {
+            _context = context;
+            _env = env;
+        }
+
+
+
+
         public IActionResult Index()
         {
             return View();

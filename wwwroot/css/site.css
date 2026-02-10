@@ -1045,7 +1045,7 @@ header nav {
     color: #bbb;
 }
 
-.google-btn {
+.registation-container .google-btn, .login-container .google-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2054,7 +2054,7 @@ header nav {
         color: #bbb;
     }
 
-    .google-btn {
+    .registation-container .google-btn, .login-container .google-btn {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -3058,7 +3058,7 @@ header nav {
         color: #bbb;
     }
 
-    .google-btn {
+    .registation-container .google-btn, .login-container .google-btn {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -4062,7 +4062,7 @@ header nav {
         color: #bbb;
     }
 
-    .google-btn {
+    .registation-container .google-btn, .login-container .google-btn {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -5065,7 +5065,7 @@ header nav {
         color: #bbb;
     }
 
-    .google-btn {
+    .registation-container .google-btn, .login-container .google-btn {
         display: flex;
         align-items: center;
         justify-content: center;

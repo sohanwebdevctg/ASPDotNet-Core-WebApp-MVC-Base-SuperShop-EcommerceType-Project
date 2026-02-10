@@ -1,9 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SuperShop.Data;
 
 namespace SuperShop.Controllers
 {
     public class AdminController : Controller
     {
+
+        private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment _env;
+
+        public AdminController(AppDbContext context, IWebHostEnvironment env)
+        {
+            _context = context;
+            _env = env;
+        }
+
         // all users
         public IActionResult Index()
         {

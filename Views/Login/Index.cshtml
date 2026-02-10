@@ -34,10 +34,10 @@
                 </form>
                 <div class="divider">OR</div>
 
-                <a href="/Login/GoogleLogin" class="google-btn">
+                <button class="google-btn">
                     <img src="~/images/logo//googlelogo.png">
                     <p>Continue with Google</p>
-                </a>
+                </button>
                 <p class="register-link">
                     Don't have an account? <a href="@Url.Action("Registation","Login")">Register</a>
                 </p>
@@ -50,5 +50,10 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/all.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- validation -->
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 </body>
 </html>
