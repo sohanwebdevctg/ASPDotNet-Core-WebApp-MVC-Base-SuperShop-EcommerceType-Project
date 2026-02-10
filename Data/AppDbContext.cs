@@ -20,5 +20,7 @@ namespace SuperShop.Data
 
         public DbSet<Role> Roles { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
     }
 }

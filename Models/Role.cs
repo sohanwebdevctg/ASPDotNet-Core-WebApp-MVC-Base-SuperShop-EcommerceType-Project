@@ -8,5 +8,8 @@ namespace SuperShop.Models
         public int RoleId { get; set; }
 
         public string RoleName { get; set; }
+
+        // Natigation Properties(Relation)
+        public virtual ICollection<User> Users { get; set; }
     }
 }

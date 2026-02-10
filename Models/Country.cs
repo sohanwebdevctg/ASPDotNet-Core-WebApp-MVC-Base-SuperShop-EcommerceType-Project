@@ -8,5 +8,8 @@ namespace SuperShop.Models
         public int CountryId { get; set; }
 
         public string CountryName { get; set; }
+
+        // Natigation Properties(Relation)
+        public virtual ICollection<User> Users { get; set; }
     }
 }
