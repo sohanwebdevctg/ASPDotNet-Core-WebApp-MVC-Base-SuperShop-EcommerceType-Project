@@ -1,5 +1,4 @@
-﻿@model SuperShop.Models.User;
-
+﻿
 @{
     Layout = null;
 }
@@ -27,16 +26,13 @@
                 <h3>Registation</h3>
                 <form asp-controller="Login" asp-action="Registation" method="Post">
                     <div class="input-group-custom">
-                        <input asp-for="UserName" type="text" placeholder="Enter Your Name" />
-                        <span asp-validation-for="UserName" class="text-danger"></span>
+                        <input type="text" placeholder="Enter Your Name" />
                     </div>
                     <div class="input-group-custom">
-                        <input asp-for="UserEmail" type="email" placeholder="Enter Your Email" />
-                        <span asp-validation-for="UserEmail" class="text-danger"></span>
+                        <input type="email" placeholder="Enter Your Email" />
                     </div>
                     <div class="input-group-custom">
-                        <input asp-for="UserPassword" type="password" placeholder="Enter Your Password" />
-                        <span asp-validation-for="UserPassword" class="text-danger"></span>
+                        <input type="password" placeholder="Enter Your Password" />
                     </div>
                     <button type="submit">REGISTER</button>
                 </form>

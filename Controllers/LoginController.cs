@@ -22,7 +22,6 @@ namespace SuperShop.Controllers
             return View();
         }
 
-
         // registation form
         public IActionResult Registation()
         {
@@ -34,32 +33,7 @@ namespace SuperShop.Controllers
         public IActionResult Registation(User user)
         {
 
-            // model validation check
-            if (ModelState.IsValid)
-            {
-
-                // check existing user
-                var existingUser = _context.Users.FirstOrDefault(x => x.UserEmail == user.UserEmail);
-
-                // send error message
-                if(existingUser != null)
-                {
-                    ModelState.AddModelError("UserEmail","This User Already Exists");
-                    return View(user);
-                }
-
-                // save user data
-                _context.Users.Add(user);
-                _context.SaveChanges();
-
-                // redirect to login page
-                return RedirectToAction("Index", "Login");
-
-            }
-
-            return View(user);
-
-            
+            return View();
         }
 
     }
