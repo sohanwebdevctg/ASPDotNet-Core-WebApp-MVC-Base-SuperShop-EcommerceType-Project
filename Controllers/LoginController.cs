@@ -32,8 +32,30 @@ namespace SuperShop.Controllers
         [HttpPost]
         public IActionResult Registation(User user)
         {
+            // model validation check
+            if (ModelState.IsValid)
+            {
 
-            return View();
+                // check existing user
+                var existingUser = _context.Users.FirstOrDefault(x => x.UserEmail == user.UserEmail);
+
+                // send the error message user
+                if(existingUser != null)
+                {
+                    ModelState.AddModelError("UserEmail", "This user already exists");
+                    return View(user);
+                }
+
+                // save the new user data in database
+                _context.Users.Add(user);
+                _context.SaveChanges();
+
+                //redirect to login page
+                return RedirectToAction("Index", "Login");
+
+            }
+
+            return View(user);
         }
 
     }
