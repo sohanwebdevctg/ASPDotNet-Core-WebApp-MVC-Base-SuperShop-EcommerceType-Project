@@ -28,7 +28,7 @@ namespace SuperShop.Controllers
         {
 
             // check the user validation
-            var user = _context.Users.FirstOrDefault(x => x.UserEmail == UserEmail && x.UserPassword == UserPassword);
+            var user = _context.Users.FirstOrDefault(x => x.UserEmail == UserEmail && x.UserPassword == UserPassword && x.UserStatus == "active");
 
             if(user != null)
             {
@@ -51,7 +51,7 @@ namespace SuperShop.Controllers
             }
 
             // user not validate
-            ViewBag.ErrorMessage = "Please Enter Validate Data";
+            ViewBag.ErrorMessage = "Invalid Login Or Account Inactive";
             return View();
         }
 

@@ -75,11 +75,11 @@
                 </div>
                 <div>
                     @if(userId != null){
-                        <a class="text-white" href="@Url.Action("Cart","Customer")"><i class="fa-solid fa-cart-shopping carticon"></i></a>
-                        <a class="text-white" href="@Url.Action("UserProfile","Customer")"><i class="fa-solid fa-user-tie usericon"></i></a>
-                        <button><a class="text-white" href="@Url.Action("Index","Login")">logout</a></button>
+                        <a href="@Url.Action("Cart","Customer")"><i class="fa-solid fa-cart-shopping carticon"></i></a>
+                        <a href="@Url.Action("UserProfile","Customer")"><i class="fa-solid fa-user-tie usericon"></i></a>
+                        <a class="text-white" href="@Url.Action("Index","Login")"><button class="text-white">Logout</button></a>
                     }else{
-                    <button><a class="text-white" href="@Url.Action("Index","Login")">Login</a></button>
+                        <a href="@Url.Action("Index","Login")"><button class="text-white">Login</button></a>
                     }
                     
                 </div>
