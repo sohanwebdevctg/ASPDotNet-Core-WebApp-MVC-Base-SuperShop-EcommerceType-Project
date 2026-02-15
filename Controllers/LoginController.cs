@@ -16,19 +16,53 @@ namespace SuperShop.Controllers
             _env = env;
         }
 
-        // login form
+        // login form create
         public IActionResult Index()
         {
             return View();
         }
 
-        // registation form
+        // login form validation
+        [HttpPost]
+        public IActionResult Index(string UserEmail, string UserPassword)
+        {
+
+            // check the user validation
+            var user = _context.Users.FirstOrDefault(x => x.UserEmail == UserEmail && x.UserPassword == UserPassword);
+
+            if(user != null)
+            {
+                // set username and roleid in session
+                HttpContext.Session.SetString("UserName", user.UserName);
+                HttpContext.Session.SetInt32("UserRole", user.RoleId ?? 2);
+
+                // navigate the user check his roleid
+                if(user.RoleId == 1)
+                {
+                    // navigate the admin dashboard home page
+                    return RedirectToAction("Index", "Admin");
+                }
+                else
+                {
+                    // navigate the website home page
+                    return RedirectToAction("Index", "Customer");
+                }
+
+            }
+
+            // use not validate
+            ViewBag.EmailMessage = "Please Enter Validate Email";
+            ViewBag.PasswrodMessage = "Please Enter Validate Password";
+            return View(UserEmail, UserPassword);
+        }
+
+        // registation form create
         public IActionResult Registation()
         {
             return View();
         }
 
-        // registaion create
+        // registaion form validation
         [HttpPost]
         public IActionResult Registation(User user)
         {

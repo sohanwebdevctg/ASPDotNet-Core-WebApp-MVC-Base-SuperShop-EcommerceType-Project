@@ -10,6 +10,15 @@ Env.Load();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// use for create session and session time set
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromHours(1);
+});
+
+// use session in navbar header section
+builder.Services.AddHttpContextAccessor();
+
 // database connection
 var connectionString = $"server={Environment.GetEnvironmentVariable("DB_SERVER")};port={Environment.GetEnvironmentVariable("DB_PORT")};database={Environment.GetEnvironmentVariable("DB_NAME")};user={Environment.GetEnvironmentVariable("DB_USER")};password={Environment.GetEnvironmentVariable("DB_PASSWORD")};";
 
@@ -30,7 +39,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+// use seesion
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Customer}/{action=Index}/{id?}");
