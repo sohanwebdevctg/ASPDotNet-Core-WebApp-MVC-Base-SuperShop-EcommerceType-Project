@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+@{
+    <!-- Getting UserId from session -->
+    var userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -36,12 +42,15 @@
                 </ul>
                 <div class="sidebar-footer">
                     <ul class="user-actions">
-                        <li>
-                            <a href="@Url.Action("Cart","Customer")"><i class="fa-solid fa-cart-shopping cartIcon"></i></a>
-                            <a href="@Url.Action("UserProfile","Customer")"><i class="fa-solid fa-user-tie userIcon"></i></a>
-                        </li>
-                        <li><button class="auth-btn"><a href="#">Logout</a></button></li>
-                        <li><button class="auth-btn"><a href="@Url.Action("Index","Login")">Login</a></button></li>
+                        @if(userId != null){
+                            <li>
+                                <a href="@Url.Action("Cart","Customer")"><i class="fa-solid fa-cart-shopping cartIcon"></i></a>
+                                <a href="@Url.Action("UserProfile","Customer")"><i class="fa-solid fa-user-tie userIcon"></i></a>
+                            </li>
+                            <li><button class="auth-btn"><a class="text-white" href="@Url.Action("LogOut","Login")">Logout</a></button></li>
+                        }else{
+                            <li><button class="auth-btn"><a class="text-white" href="@Url.Action("Index","Login")">Login</a></button></li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -65,10 +74,14 @@
                     </ul>
                 </div>
                 <div>
-                    <button><a href="@Url.Action("Index","Login")">Login</a></button>
-                    <a href="@Url.Action("Cart","Customer")"><i class="fa-solid fa-cart-shopping carticon"></i></a>
-                    <a href="@Url.Action("UserProfile","Customer")"><i class="fa-solid fa-user-tie usericon"></i></a>
-                    <button><a href="#">logout</a></button>
+                    @if(userId != null){
+                        <a class="text-white" href="@Url.Action("Cart","Customer")"><i class="fa-solid fa-cart-shopping carticon"></i></a>
+                        <a class="text-white" href="@Url.Action("UserProfile","Customer")"><i class="fa-solid fa-user-tie usericon"></i></a>
+                        <button><a class="text-white" href="@Url.Action("Index","Login")">logout</a></button>
+                    }else{
+                    <button><a class="text-white" href="@Url.Action("Index","Login")">Login</a></button>
+                    }
+                    
                 </div>
             </nav>
         </div>
