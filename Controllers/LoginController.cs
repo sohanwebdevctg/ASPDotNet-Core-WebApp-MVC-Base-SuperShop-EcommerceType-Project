@@ -33,7 +33,7 @@ namespace SuperShop.Controllers
             if(user != null)
             {
                 // set username and roleid in session
-                HttpContext.Session.SetString("UserName", user.UserName);
+                HttpContext.Session.SetInt32("UserId", user.UserId);
                 HttpContext.Session.SetInt32("UserRole", user.RoleId ?? 2);
 
                 // navigate the user check his roleid
@@ -50,10 +50,9 @@ namespace SuperShop.Controllers
 
             }
 
-            // use not validate
-            ViewBag.EmailMessage = "Please Enter Validate Email";
-            ViewBag.PasswrodMessage = "Please Enter Validate Password";
-            return View(UserEmail, UserPassword);
+            // user not validate
+            ViewBag.ErrorMessage = "Please Enter Validate Data";
+            return View();
         }
 
         // registation form create
@@ -90,6 +89,17 @@ namespace SuperShop.Controllers
             }
 
             return View(user);
+        }
+
+        // logout-btn
+        public IActionResult LogOut()
+        {
+            // remove user session data
+            HttpContext.Session.Remove("UserId");
+            HttpContext.Session.Remove("UserRole");
+
+            // redirect the user home page
+            return RedirectToAction("Index", "Customer");
         }
 
     }
