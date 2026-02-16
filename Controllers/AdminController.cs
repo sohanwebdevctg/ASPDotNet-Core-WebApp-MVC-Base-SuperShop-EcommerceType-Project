@@ -211,6 +211,31 @@ namespace SuperShop.Controllers
         // create-role-form
         public IActionResult CreateRole()
         {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
             return View();
         }
 
@@ -218,13 +243,89 @@ namespace SuperShop.Controllers
         [HttpPost]
         public IActionResult CreateRole(Role role)
         {
-            return View();
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // role data check
+            var isExists = _context.Roles.Any(x => x.RoleName.ToLower() == role.RoleName.ToLower().Trim());
+
+            if (isExists)
+            {
+                ModelState.AddModelError("RoleName", "This Role Already Exists");
+                return View(role);
+            }
+
+            // insert data in database
+            if (ModelState.IsValid)
+            {
+                _context.Roles.Add(role);
+                _context.SaveChanges();
+                return RedirectToAction("AllRole", "Admin");
+            }
+
+            return View(role);
         }
 
         // all-role-table
+        [HttpGet]
         public IActionResult AllRole()
         {
-            return View();
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // get all role data
+            var allrole = _context.Roles.Include(x => x.Users).ToList();
+
+            // check role data
+            if (allrole.Count == 0)
+            {
+                ViewBag.message = "No Role Data Found!";
+            }
+
+            return View(allrole);
         }
 
         // create-offer
