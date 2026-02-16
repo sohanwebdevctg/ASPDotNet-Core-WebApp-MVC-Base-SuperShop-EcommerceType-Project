@@ -291,6 +291,30 @@ namespace SuperShop.Controllers
         // create-country-form
         public IActionResult CreateCountry()
         {
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
             return View();
         }
 
@@ -298,13 +322,88 @@ namespace SuperShop.Controllers
         [HttpPost]
         public IActionResult CreateCountry(Country country)
         {
-            return View();
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // country data check
+            var isExists = _context.Countries.Any(x => x.CountryName.ToLower() == country.CountryName.ToLower().Trim());
+
+            if (isExists)
+            {
+                ModelState.AddModelError("CountryName", "This Country Already Exists");
+                return View(country);
+            }
+
+            // insert data in database
+            if (ModelState.IsValid)
+            {
+                _context.Countries.Add(country);
+                _context.SaveChanges();
+                return RedirectToAction("AllCountry", "Admin");
+            }
+
+            return View(country);
         }
 
         // all-country-table
+        [HttpGet]
         public IActionResult AllCountry()
         {
-            return View();
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // get all country data
+            var allcountry = _context.Countries.Include(x => x.Users).ToList();
+
+            // check country data
+            if (allcountry.Count == 0)
+            {
+                ViewBag.message = "No Country Data Found!";
+            }
+
+            return View(allcountry);
         }
 
         // create-role-form
