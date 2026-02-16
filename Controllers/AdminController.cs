@@ -173,6 +173,30 @@ namespace SuperShop.Controllers
         // create-city-form
         public IActionResult CreateCity()
         {
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
             return View();
         }
 
@@ -180,13 +204,88 @@ namespace SuperShop.Controllers
         [HttpPost]
         public IActionResult CreateCity(City city)
         {
-            return View();
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // city data check
+            var isExists = _context.Cities.Any(x => x.CityName.ToLower() == city.CityName.ToLower().Trim());
+
+            if (isExists)
+            {
+                ModelState.AddModelError("CityName", "This City Already Exists");
+                return View(city);
+            }
+
+            // insert data in database
+            if (ModelState.IsValid)
+            {
+                _context.Cities.Add(city);
+                _context.SaveChanges();
+                return RedirectToAction("AllCity", "Admin");
+            }
+
+            return View(city);
         }
 
         // all-city-table
+        [HttpGet]
         public IActionResult AllCity()
         {
-            return View();
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // get all city data
+            var allcity = _context.Cities.Include(x => x.Users).ToList();
+
+            // check gender data
+            if (allcity.Count == 0)
+            {
+                ViewBag.message = "No City Data Found!";
+            }
+
+            return View(allcity);
         }
 
         // create-country-form
