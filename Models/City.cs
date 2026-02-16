@@ -10,7 +10,7 @@ namespace SuperShop.Models
         public string CityName { get; set; }
 
         // Natigation Properties(Relation)
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<User>? Users { get; set; }
 
     }
 }
