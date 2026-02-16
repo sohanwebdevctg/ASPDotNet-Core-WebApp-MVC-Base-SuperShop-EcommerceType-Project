@@ -170,8 +170,15 @@ namespace SuperShop.Controllers
             return View(allgender);
         }
 
-        // create-city
+        // create-city-form
         public IActionResult CreateCity()
+        {
+            return View();
+        }
+
+        // create-city-form
+        [HttpPost]
+        public IActionResult CreateCity(City city)
         {
             return View();
         }
@@ -182,8 +189,15 @@ namespace SuperShop.Controllers
             return View();
         }
 
-        // create-country
+        // create-country-form
         public IActionResult CreateCountry()
+        {
+            return View();
+        }
+
+        // create-country-form
+        [HttpPost]
+        public IActionResult CreateCountry(Country country)
         {
             return View();
         }
@@ -194,8 +208,15 @@ namespace SuperShop.Controllers
             return View();
         }
 
-        // create-role
+        // create-role-form
         public IActionResult CreateRole()
+        {
+            return View();
+        }
+
+        // create-role-form
+        [HttpPost]
+        public IActionResult CreateRole(Role role)
         {
             return View();
         }
