@@ -677,6 +677,56 @@ namespace SuperShop.Controllers
             return View(allrole);
         }
 
+        // delete-role
+        [HttpPost]
+        public IActionResult DeleteRole(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // user check if role use
+            var hasUsers = _context.Users.Any(x => x.RoleId == id);
+
+            if (hasUsers)
+            {
+                TempData["Error"] = "This role cannot be deleted!";
+                return RedirectToAction("AllRole", "Admin");
+            }
+
+            // delete the role
+            var data = _context.Roles.Find(id);
+            if (data != null)
+            {
+                _context.Roles.Remove(data);
+                _context.SaveChanges();
+                TempData["Success"] = "Role deleted successfully!";
+            }
+
+            return RedirectToAction("AllRole", "Admin");
+        }
+
         // create-offer
         public IActionResult CreateOffer()
         {
