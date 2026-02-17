@@ -7,6 +7,19 @@
 <!-- all city start -->
 <div class="table-content-area">
     <div class="myContainer">
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert" style="color: red; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Error"]
+            </div>
+        }
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert" style="color: green; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Success"]
+            </div>
+        }
         <h3 class="table-title">Total : @Model.Count()</h3>
         <div class="table-wrapper">
             <div class="table-container">
@@ -31,7 +44,10 @@
                                     <td>@(data.Users != null ? data.Users.Count() : 0)</td>
                                     <td class="btn-wrapper">
                                         <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Edit</a>
-                                        <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</a>
+                                        <form asp-controller="Admin" asp-action="DeleteCity" method="post">
+                                            <input type="hidden" name="id" value="@data.CityId" />
+                                            <button type="submit" href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             }

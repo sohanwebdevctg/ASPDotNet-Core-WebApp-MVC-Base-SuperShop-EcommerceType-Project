@@ -338,6 +338,56 @@ namespace SuperShop.Controllers
             return View(allcity);
         }
 
+        // delete-city
+        [HttpPost]
+        public IActionResult DeleteCity(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // user check if city use
+            var hasUsers = _context.Users.Any(x => x.CityId == id);
+
+            if (hasUsers)
+            {
+                TempData["Error"] = "This city cannot be deleted!";
+                return RedirectToAction("AllCity", "Admin");
+            }
+
+            // delete the city
+            var data = _context.Cities.Find(id);
+            if (data != null)
+            {
+                _context.Cities.Remove(data);
+                _context.SaveChanges();
+                TempData["Success"] = "City deleted successfully!";
+            }
+
+            return RedirectToAction("AllCity", "Admin");
+        }
+
         // create-country-form
         public IActionResult CreateCountry()
         {
