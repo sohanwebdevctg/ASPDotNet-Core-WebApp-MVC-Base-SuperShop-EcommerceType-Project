@@ -43,7 +43,7 @@
                                     <td>@data.GenderName</td>
                                     <td>@(data.Users != null ? data.Users.Count() : 0)</td>
                                     <td class="btn-wrapper">
-                                        <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Edit</a>
+                                        <a href="@Url.Action("EditGender", "Admin", new { id = data.GenderId})" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Edit</a>
                                         <form asp-controller="Admin" asp-action="DeleteGender" method="post">
                                             <input type="hidden" name="id" value="@data.GenderId">
                                             <button type="submit" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</button>

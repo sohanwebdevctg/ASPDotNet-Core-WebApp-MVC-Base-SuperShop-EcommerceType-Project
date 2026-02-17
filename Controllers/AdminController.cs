@@ -170,6 +170,13 @@ namespace SuperShop.Controllers
             return View(allgender);
         }
 
+        // edit-gender-form
+        [HttpGet]
+        public IActionResult EditGender()
+        {
+            return View();
+        }
+
         // delete-gender
         [HttpPost]
         public IActionResult DeleteGender(int id)
@@ -338,6 +345,13 @@ namespace SuperShop.Controllers
             return View(allcity);
         }
 
+        // edit-city-form
+        [HttpGet]
+        public IActionResult EditCity()
+        {
+            return View();
+        }
+
         // delete-city
         [HttpPost]
         public IActionResult DeleteCity(int id)
@@ -504,6 +518,13 @@ namespace SuperShop.Controllers
             }
 
             return View(allcountry);
+        }
+
+        // edit-country-form
+        [HttpGet]
+        public IActionResult EditCountry()
+        {
+            return View();
         }
 
         // delete-country
