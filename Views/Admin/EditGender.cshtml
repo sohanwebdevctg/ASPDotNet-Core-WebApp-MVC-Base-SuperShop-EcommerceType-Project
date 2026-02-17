@@ -1,8 +1,29 @@
-﻿
+﻿@model SuperShop.Models.Gender;
 @{
     ViewData["Title"] = "EditGender";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h1>EditGender</h1>
+<!-- edit gender start -->
+<div class="myContainer">
+    <div class="common-form-wrapper">
+        <form asp-controller="Admin" asp-action="UpdateGender" method="post" class="master-form">
+            <div>
+                <h2 class="form-title">Update Gender</h2>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="GenderId" />
+                <input asp-for="GenderName" type="text" placeholder="Update Your Gender Name" class="common-input" />
+                <span asp-validation-for="GenderName" class="text-danger" style="font-size: 15px;"></span>
+            </div>
+            <div class="form-group common-submit-wrapper">
+                <button type="submit" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">UPDATE DATA</button>
+                <a href="@Url.Action("AllGender", "Admin")" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">ALL GENDER</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- edit gender end -->
 
