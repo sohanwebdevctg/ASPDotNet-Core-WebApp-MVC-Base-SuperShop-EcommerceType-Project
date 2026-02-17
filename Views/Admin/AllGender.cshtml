@@ -20,6 +20,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (TempData["Error"] != null)
+                        {
+                            <div class="alert" style="color: red; font-weight: bold; margin-bottom: 10px;">
+                                @TempData["Error"]
+                            </div>
+                        }
+
+                        @if (TempData["Success"] != null)
+                        {
+                            <div class="alert" style="color: green; font-weight: bold; margin-bottom: 10px;">
+                                @TempData["Success"]
+                            </div>
+                        }
                         @if(Model.Count() > 0){
                             int serialNo = 1;
                             @foreach(var data in Model){
@@ -29,10 +42,14 @@
                                     <td>@(data.Users != null ? data.Users.Count() : 0)</td>
                                     <td class="btn-wrapper">
                                         <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Edit</a>
-                                        <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</a>
+                                        <form asp-controller="Admin" asp-action="DeleteGender" method="post">
+                                            <input type="hidden" name="id" value="@data.GenderId">
+                                            <button type="submit" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             }
+                            
                         }else{
                             <tr>
                                 <td colspan="4" class="text-danger text-center">@ViewBag.message</td>

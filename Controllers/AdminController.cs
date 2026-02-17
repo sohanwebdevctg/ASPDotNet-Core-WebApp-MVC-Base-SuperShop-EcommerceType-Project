@@ -170,6 +170,56 @@ namespace SuperShop.Controllers
             return View(allgender);
         }
 
+        // delete-gender
+        [HttpPost]
+        public IActionResult DeleteGender(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // user check if gender use
+            var hasUsers = _context.Users.Any(x => x.GenderId == id);
+
+            if (hasUsers)
+            {
+                TempData["Error"] = "This gender cannot be deleted!";
+                return RedirectToAction("AllGender", "Admin");
+            }
+
+            // delete the gender
+            var data = _context.Genders.Find(id);
+            if (data != null)
+            {
+                _context.Genders.Remove(data);
+                _context.SaveChanges();
+                TempData["Success"] = "Gender deleted successfully!";
+            }
+
+            return RedirectToAction("AllGender", "Admin");
+        }
+
         // create-city-form
         public IActionResult CreateCity()
         {
