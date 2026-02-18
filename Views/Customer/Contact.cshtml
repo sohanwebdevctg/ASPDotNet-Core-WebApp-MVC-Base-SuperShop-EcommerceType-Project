@@ -1,4 +1,4 @@
-﻿
+﻿@model SuperShop.Models.Contact;
 @{
     ViewData["Title"] = "Contact";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,20 +9,37 @@
     <div class="myContainer">
         <div class="contact-wrapper">
             <div class="contact-form-container">
-                <form class="contact-form">
+                @if (TempData["Error"] != null)
+                {
+                <div class="alert" style="color: red; font-weight: bold; margin-bottom: 5px;">
+                    @TempData["Error"]
+                </div>
+                }
+
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert" style="color: green; font-weight: bold; margin-bottom: 5px;">
+                        @TempData["Success"]
+                    </div>
+                }
+                <form asp-controller="Customer" asp-action="Contact" method="post" class="contact-form">
                     <div class="input-box">
-                        <input type="text" placeholder="Enter Your Name" />
+                        <input asp-for="UserName" value="@ViewBag.userName" type="text" placeholder="Enter Your Name" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
                     </div>
                     <div class="input-box">
-                        <input type="email" placeholder="Enter Your Email" />
+                        <input asp-for="UserEmail" value="@ViewBag.userEmail" type="email" placeholder="Enter Your Email" />
+                        <span asp-validation-for="UserEmail" class="text-danger"></span>
                     </div>
                     <div class="input-box">
-                        <textarea placeholder="Enter your Description"></textarea>
+                        <textarea asp-for="UserMessage" placeholder="Enter your Message"></textarea>
+                        <span asp-validation-for="UserMessage" class="text-danger"></span>
                     </div>
                     <div class="submit-box">
                         <input type="submit" value="Send Message" class="contact-submit" />
                     </div>
                 </form>
+                
             </div>
 
             <div class="contact-map">

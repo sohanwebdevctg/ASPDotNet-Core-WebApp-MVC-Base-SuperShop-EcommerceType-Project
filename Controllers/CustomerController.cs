@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SuperShop.Data;
+using SuperShop.Models;
 
 namespace SuperShop.Controllers
 {
@@ -45,10 +46,49 @@ namespace SuperShop.Controllers
             return View();
         }
 
-        // contact
+        // contact-form
         public IActionResult Contact()
         {
+            // user id check from session
+            var userId = HttpContext.Session.GetInt32("UserId");
+
+            // validation the user id
+            if (userId != null)
+            {
+                var user = _context.Users.FirstOrDefault(x => x.UserId == userId);
+
+                // take userName & userEmail
+                if(user != null)
+                {
+                    ViewBag.userName = user.UserName;
+                    ViewBag.userEmail = user.UserEmail;
+                }
+            }
+
             return View();
+        }
+
+        // contact-form-submit
+        [HttpPost]
+        public IActionResult Contact(Contact contact)
+        {
+            // model validation check
+            if (ModelState.IsValid)
+            {
+                _context.Contacts.Add(contact);
+                _context.SaveChanges();
+                TempData["Success"] = "Your Data Submit Successfully!";
+                return RedirectToAction("Contact", "Customer");
+            }
+
+            // error message send
+            TempData["Error"] = "Please Fill Up The Full Data";
+
+            // return the user data
+            ViewBag.userName = contact.UserName;
+            ViewBag.userEmail = contact.UserEmail;
+
+            return View(contact);
         }
 
         // blog
