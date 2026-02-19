@@ -48,7 +48,10 @@
                                     </td>
                                     <td>@data.CreatedAt</td>
                                     <td class="btn-wrapper">
-                                        <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</a>
+                                        <form asp-controller="Admin" asp-action="DeleteContact" method="post">
+                                            <input type="hidden" name="id" value="@data.ContactId">
+                                            <button type="submit" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             }
