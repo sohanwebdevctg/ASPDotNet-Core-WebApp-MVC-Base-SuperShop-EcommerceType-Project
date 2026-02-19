@@ -1,0 +1,69 @@
+﻿@model IEnumerable<SuperShop.Models.Contact>;
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<!-- contact start -->
+<div class="table-content-area">
+    <div class="myContainer">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert" style="color: green; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Success"]
+            </div>
+        }
+        <h3 class="table-title">Total : @Model.Count()</h3>
+        <div class="table-wrapper">
+            <div class="table-container">
+                <table class="table-content">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>UserName</th>
+                            <th>UserEmail</th>
+                            <th>UserMessage</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() > 0) {
+                            int serialNo = 1;
+                            @foreach (var data in Model)
+                            {
+                                <tr>
+                                    <td>@(serialNo++)</td>
+                                    <td>@data.UserName</td>
+                                    <td>@data.UserEmail</td>
+                                    <td>
+                                        @if (data.UserMessage != null && data.UserMessage.Length > 35)
+                                        {
+                                            <span>@data.UserMessage.Substring(0, 35)...</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@data.UserMessage</span>
+                                        }
+                                    </td>
+                                    <td>@data.CreatedAt</td>
+                                    <td class="btn-wrapper">
+                                        <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        }else{
+                            <tr>
+                                <td colspan="4" class="text-danger text-center">@ViewBag.message</td>
+                            </tr>
+                        }
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- contact end -->
+
