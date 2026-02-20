@@ -1,0 +1,38 @@
+﻿@model SuperShop.Models.Banner;
+@{
+    ViewData["Title"] = "CreateBanner";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="myContainer">
+    <div class="common-form-wrapper">
+        <form asp-controller="Admin" asp-action="CreateBanner" method="post" enctype="multipart/form-data" class="master-form">
+            <div>
+                <h2 class="form-title">Create Banner</h2>
+            </div>
+            <div class="form-group">
+                <input asp-for="BannerType" type="text" placeholder="Enter Banner Type" class="common-input" />
+                <span asp-validation-for="BannerType" class="text-danger" style="font-size: 12px;"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="BannerName" type="text" placeholder="Enter Banner Name" class="common-input" />
+                <span asp-validation-for="BannerName" class="text-danger" style="font-size: 12px;"></span>
+            </div>
+            <div class="form-group">
+                <input type="file" name="imageFile" class="common-input" style="width: 100%; background: white;" />
+            </div>
+
+            <div class="form-group common-submit-wrapper">
+                <button type="submit" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">CREATE DATA</button>
+                <a href="@Url.Action("AllBanner", "Admin")" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">ALL BANNER</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

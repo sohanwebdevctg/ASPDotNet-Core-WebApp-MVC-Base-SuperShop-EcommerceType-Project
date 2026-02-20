@@ -7,8 +7,10 @@ namespace SuperShop.Models
         [Key]
         public int BannerId { get; set; }
 
+        [StringLength(15, ErrorMessage = "Only 15 Character Support!")]
         public string? BannerType { get; set; }
 
+        [StringLength(15, ErrorMessage = "Only 15 Character Support!")]
         public string? BannerName { get; set; }
 
         public string? BannerImage { get; set; }

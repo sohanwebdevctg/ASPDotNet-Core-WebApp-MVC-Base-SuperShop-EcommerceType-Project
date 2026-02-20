@@ -29,6 +29,149 @@ namespace SuperShop.Controllers
             return View();
         }
 
+        // create-banner-form
+        public IActionResult CreateBanner()
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            return View();
+        }
+
+        // create-banner-form
+        [HttpPost]
+        public IActionResult CreateBanner(Banner banner, IFormFile? imageFile)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // banner validation
+            if (ModelState.IsValid)
+            {
+                // image validation check
+                if (imageFile != null)
+                {
+                    // create folder
+                    string folder = Path.Combine(_env.WebRootPath, "images", "banner_img");
+
+                    // check folder exists
+                    if (!Directory.Exists(folder)) {
+                        Directory.CreateDirectory(folder); 
+                    }
+
+                    // create file name
+                    string fileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+                    string filePath = Path.Combine(folder, fileName);
+
+                    using (var fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.CopyTo(fs);
+                    }
+
+                    // save the name in database
+                    banner.BannerImage = fileName;
+
+
+                }
+
+                // save all data
+                _context.Banners.Add(banner);
+                _context.SaveChanges();
+
+                TempData["Success"] = "Banner Created Successfully!";
+                return RedirectToAction("AllBanner", "Admin");
+
+            }
+
+            return View(banner);
+        }
+
+        // banner-table
+        [HttpGet]
+        public IActionResult AllBanner()
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // get all banner data
+            var allbanner = _context.Banners.ToList();
+
+            // check banner data
+            if (allbanner.Count == 0)
+            {
+                ViewBag.message = "No Banner Data Found!";
+            }
+
+            return View(allbanner);
+        }
+
+
         // contact-table
         public IActionResult Contact()
         {
