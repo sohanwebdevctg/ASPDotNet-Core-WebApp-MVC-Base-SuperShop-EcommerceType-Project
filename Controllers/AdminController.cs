@@ -551,6 +551,101 @@ namespace SuperShop.Controllers
                 return RedirectToAction("AllOffer", "Admin");
             }
 
+            // price validation
+            offer.OfferPrice = Math.Round(offer.OfferPrice, 2);
+
+            return View(offer);
+        }
+
+        // update-offer
+        [HttpPost]
+        public IActionResult UpdateOffer(Offer offer, IFormFile? imageFile)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // offer validation
+            if (ModelState.IsValid)
+            {
+                // without tracking offer
+                var existingOffer = _context.Offers.AsNoTracking().FirstOrDefault(x => x.OfferId == offer.OfferId);
+
+                if (existingOffer == null)
+                {
+                    TempData["Error"] = "Offer Not Found";
+                    return RedirectToAction("AllOffer", "Admin");
+                }
+
+                // validation image path
+                if (imageFile != null)
+                {
+                    // save the new image
+                    string folder = Path.Combine(_env.WebRootPath, "images", "offer_img");
+
+                    if (!Directory.Exists(folder))
+                    {
+                        Directory.CreateDirectory(folder);
+                    }
+
+                    // remove the previous image
+                    if (!string.IsNullOrEmpty(existingOffer.OfferImage))
+                    {
+                        string oldFilePath = Path.Combine(folder, existingOffer.OfferImage);
+                        if (System.IO.File.Exists(oldFilePath))
+                        {
+                            System.IO.File.Delete(oldFilePath);
+                        }
+                    }
+
+                    // save the new image
+                    string fileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+                    string filePath = Path.Combine(folder, fileName);
+
+                    using (var fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.CopyTo(fs);
+                    }
+                    // update the model image name
+                    offer.OfferImage = fileName;
+                }
+                else
+                {
+                    // if image not submit then submit the previous image
+                    offer.OfferImage = existingOffer.OfferImage;
+                }
+
+                // update the banner
+                _context.Offers.Update(offer);
+                _context.SaveChanges();
+
+                TempData["Success"] = "Offer Updated Successfully!";
+                return RedirectToAction("AllOffer", "Admin");
+
+
+            }
+
             return View(offer);
         }
 
