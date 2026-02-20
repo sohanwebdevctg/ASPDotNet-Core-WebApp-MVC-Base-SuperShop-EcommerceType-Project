@@ -171,6 +171,73 @@ namespace SuperShop.Controllers
             return View(allbanner);
         }
 
+        // delete banner
+        [HttpPost]
+        public IActionResult DeleteBanner(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // check banner length
+            var totalBanners = _context.Banners.Count();
+
+            // send error message
+            if (totalBanners <= 3)
+            {
+                TempData["Error"] = "At Least 3 Banner Must Be Used.";
+                return RedirectToAction("AllBanner", "Admin");
+            }
+
+            // banner validation
+            var bannerToDelete = _context.Banners.FirstOrDefault(b => b.BannerId == id);
+            if (bannerToDelete == null)
+            {
+                TempData["Error"] = "Can Not Find The Banner";
+                return RedirectToAction("AllBanner", "Admin");
+            }
+
+            // delete image
+            if (!string.IsNullOrEmpty(bannerToDelete.BannerImage))
+            {
+                string folder = Path.Combine(_env.WebRootPath, "images", "banner_img");
+                string filePath = Path.Combine(folder, bannerToDelete.BannerImage);
+
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+            }
+
+            // remove banner
+            _context.Banners.Remove(bannerToDelete);
+            _context.SaveChanges();
+
+            TempData["Success"] = "Delete Successfully";
+            return RedirectToAction("AllBanner", "Admin");
+        }
+
 
         // contact-table
         public IActionResult Contact()
