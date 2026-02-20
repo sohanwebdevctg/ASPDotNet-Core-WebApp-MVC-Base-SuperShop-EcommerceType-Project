@@ -171,6 +171,140 @@ namespace SuperShop.Controllers
             return View(allbanner);
         }
 
+        // edit-banner
+        [HttpGet]
+        public IActionResult EditBanner(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // banner id validation
+            var banner = _context.Banners.FirstOrDefault(b => b.BannerId == id);
+
+            // return error message
+            if (banner == null)
+            {
+                TempData["Error"] = "Banner Not Found";
+                return RedirectToAction("AllBanner", "Admin");
+            }
+
+            return View(banner);
+        }
+
+        // update-banner
+        [HttpPost]
+        public IActionResult UpdateBanner(Banner banner, IFormFile? imageFile)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // banner validation
+            if (ModelState.IsValid)
+            {
+                // without tracking banner
+                var existingBanner = _context.Banners.AsNoTracking().FirstOrDefault(x => x.BannerId == banner.BannerId);
+
+                if (existingBanner == null)
+                {
+                    TempData["Error"] = "Banner Not Found";
+                    return RedirectToAction("AllBanner", "Admin");
+                }
+
+                // validation image path
+                if (imageFile != null)
+                {
+                    // save the new image
+                    string folder = Path.Combine(_env.WebRootPath, "images", "banner_img");
+                    
+                    if (!Directory.Exists(folder))
+                    {
+                        Directory.CreateDirectory(folder);
+                    }
+
+                    // remove the previous image
+                    if (!string.IsNullOrEmpty(existingBanner.BannerImage))
+                    {
+                        string oldFilePath = Path.Combine(folder, existingBanner.BannerImage);
+                        if (System.IO.File.Exists(oldFilePath))
+                        {
+                            System.IO.File.Delete(oldFilePath);
+                        }
+                    }
+
+                    // save the new image
+                    string fileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+                    string filePath = Path.Combine(folder, fileName);
+
+                    using (var fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.CopyTo(fs);
+                    }
+                    // update the model image name
+                    banner.BannerImage = fileName;
+                }
+                else
+                {
+                    // if image not submit then submit the previous image
+                    banner.BannerImage = existingBanner.BannerImage;
+                }
+
+                // update the banner
+                _context.Banners.Update(banner);
+                _context.SaveChanges();
+
+                TempData["Success"] = "Banner Updated Successfully!";
+                return RedirectToAction("AllBanner", "Admin");
+
+
+            }
+
+            return View(banner);
+        }
+
         // delete banner
         [HttpPost]
         public IActionResult DeleteBanner(int id)

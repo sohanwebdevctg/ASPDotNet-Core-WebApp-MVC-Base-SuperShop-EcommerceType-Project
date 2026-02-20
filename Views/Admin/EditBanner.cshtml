@@ -1,0 +1,46 @@
+﻿@model SuperShop.Models.Banner;
+@{
+    ViewData["Title"] = "EditBanner";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="myContainer">
+    <div class="common-form-wrapper">
+        <form asp-controller="Admin" asp-action="UpdateBanner" method="post" enctype="multipart/form-data" class="master-form">
+            <input type="hidden" asp-for="BannerId" />
+            <input type="hidden" asp-for="BannerImage" />
+            <div>
+                <h2 class="form-title">Update Banner</h2>
+            </div>
+            <div class="form-group">
+                <input asp-for="BannerType" type="text" placeholder="Update Banner Type" class="common-input" />
+                <span asp-validation-for="BannerType" class="text-danger" style="font-size: 12px;"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="BannerName" type="text" placeholder="Update Banner Name" class="common-input" />
+                <span asp-validation-for="BannerName" class="text-danger" style="font-size: 12px;"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label">NewImage</label>
+                <input type="file" name="imageFile" class="common-input" style="width: 100%; background: white;" />
+            </div>
+            <div class="form-group">
+                <label class="form-label">PreviousImage</label>
+                <img style="width: 80px; height: 80px;" asp-append-version=true src="@Url.Content(Model.BannerImage != null ? "~/images/banner_img/"+Model.BannerImage : "~/images/banner_img/no_image.png")" />
+            </div>
+
+            <div class="form-group common-submit-wrapper">
+                <button type="submit" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">UPDATE DATA</button>
+                <a href="@Url.Action("AllBanner", "Admin")" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">ALL BANNER</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
