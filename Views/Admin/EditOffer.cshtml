@@ -1,16 +1,18 @@
 ﻿@model SuperShop.Models.Offer;
 @{
-    ViewData["Title"] = "CreateOffer";
+    ViewData["Title"] = "EditOffer";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<!-- create offer start -->
+<!-- update offer start -->
 
 <div class="myContainer">
     <div class="common-form-wrapper">
-        <form asp-controller="Admin" asp-action="CreateOffer" method="post" enctype="multipart/form-data" class="master-form">
+        <form asp-controller="Admin" asp-action="UpdateOffer" method="post" enctype="multipart/form-data" class="master-form">
+            <input type="hidden" asp-for="OfferId" />
+            <input type="hidden" asp-for="OfferImage" />
             <div>
-                <h2 class="form-title">Create Offer</h2>
+                <h2 class="form-title">Update Offer</h2>
             </div>
             <div class="form-group">
                 <input asp-for="OfferType" type="text" placeholder="Enter Offer Type" class="common-input" />
@@ -26,22 +28,27 @@
                 <span asp-validation-for="OfferPrice" class="text-danger" style="font-size: 12px;"></span>
             </div>
             <div class="form-group">
+                <label class="form-label">NewImage</label>
                 <input type="file" name="imageFile" class="common-input" style="width: 100%; background: white;" />
+            </div>
+            <div class="form-group">
+                <label class="form-label">PreviousImage</label>
+                <img style="width: 80px; height: 80px;" asp-append-version=true src="@Url.Content(Model.OfferImage != null ? "~/images/offer_img/"+Model.OfferImage : "~/images/offer_img/no_image.png")" />
             </div>
 
             <div class="form-group common-submit-wrapper">
-                <button type="submit" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">CREATE DATA</button>
+                <button type="submit" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">UPDATE DATA</button>
                 <a href="@Url.Action("AllOffer", "Admin")" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">ALL OFFER</a>
             </div>
         </form>
     </div>
 </div>
 
-<!-- create offer end -->
-
-
+<!-- update offer end -->
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+    }
+
+

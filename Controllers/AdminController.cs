@@ -512,6 +512,115 @@ namespace SuperShop.Controllers
             return View(alloffer);
         }
 
+        // edit-offer
+        [HttpGet]
+        public IActionResult EditOffer(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // offer id validation
+            var offer = _context.Offers.FirstOrDefault(b => b.OfferId == id);
+
+            // return error message
+            if (offer == null)
+            {
+                TempData["Error"] = "Offer Not Found";
+                return RedirectToAction("AllOffer", "Admin");
+            }
+
+            return View(offer);
+        }
+
+        // delete offer
+        [HttpPost]
+        public IActionResult DeleteOffer(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // check offer length
+            var totaloffer = _context.Offers.Count();
+
+            // send error message
+            if (totaloffer <= 3)
+            {
+                TempData["Error"] = "At Least 3 Offer Must Be Used.";
+                return RedirectToAction("AllOffer", "Admin");
+            }
+
+            // offer validation
+            var offerToDelete = _context.Offers.FirstOrDefault(b => b.OfferId == id);
+            if (offerToDelete == null)
+            {
+                TempData["Error"] = "Can Not Find The Offer";
+                return RedirectToAction("AllOffer", "Admin");
+            }
+
+            // delete image
+            if (!string.IsNullOrEmpty(offerToDelete.OfferImage))
+            {
+                string folder = Path.Combine(_env.WebRootPath, "images", "offer_img");
+                string filePath = Path.Combine(folder, offerToDelete.OfferImage);
+
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+            }
+
+            // remove offer
+            _context.Offers.Remove(offerToDelete);
+            _context.SaveChanges();
+
+            TempData["Success"] = "Delete Successfully";
+            return RedirectToAction("AllOffer", "Admin");
+        }
+
 
         // contact-table
         public IActionResult Contact()
