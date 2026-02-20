@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SuperShop.Data;
 using SuperShop.Models;
+using System.Reflection;
 
 namespace SuperShop.Controllers
 {
@@ -372,7 +373,7 @@ namespace SuperShop.Controllers
             return RedirectToAction("AllBanner", "Admin");
         }
 
-        // create-offer
+        // create-offer-form
         public IActionResult CreateOffer()
         {
             // get user data in session
@@ -402,10 +403,113 @@ namespace SuperShop.Controllers
             return View();
         }
 
+        // create-offer-form
+        [HttpPost]
+        public IActionResult CreateOffer(Offer offer, IFormFile? imageFile)
+        {
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // banner validation
+            if (ModelState.IsValid)
+            {
+                // image validation check
+                if (imageFile != null)
+                {
+                    // create folder
+                    string folder = Path.Combine(_env.WebRootPath, "images", "offer_img");
+
+                    // check folder exists
+                    if (!Directory.Exists(folder))
+                    {
+                        Directory.CreateDirectory(folder);
+                    }
+
+                    // create file name
+                    string fileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+                    string filePath = Path.Combine(folder, fileName);
+
+                    using (var fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.CopyTo(fs);
+                    }
+
+                    // save the name in database
+                    offer.OfferImage = fileName;
+
+
+                }
+
+                // save all data
+                _context.Offers.Add(offer);
+                _context.SaveChanges();
+
+                TempData["Success"] = "Offer Created Successfully!";
+                return RedirectToAction("AllOffer", "Admin");
+            }
+
+            return View(offer);
+        }
+
         // all-offer-table
+        [HttpGet]
         public IActionResult AllOffer()
         {
-            return View();
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // get all offer data
+            var alloffer = _context.Offers.ToList();
+
+            // check offer data
+            if (alloffer.Count == 0)
+            {
+                ViewBag.message = "No offer Data Found!";
+            }
+
+            return View(alloffer);
         }
 
 

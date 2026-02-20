@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<SuperShop.Models.Offer>;
 @{
     ViewData["Title"] = "AllOffer";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
@@ -7,44 +7,68 @@
 <!-- all offer start -->
 <div class="table-content-area">
     <div class="myContainer">
-        <h3 class="table-title">Total : 2</h3>
 
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert" style="color: green; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Success"]
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert" style="color: red; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Error"]
+            </div>
+        }
+        <h3 class="table-title">Total : @Model.Count()</h3>
         <div class="table-wrapper">
             <div class="table-container">
+
                 <table class="table-content">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>OfferImg</th>
+                            <th>OfferImage</th>
                             <th>OfferType</th>
-                            <th>OfferTitle</th>
+                            <th>OfferName</th>
                             <th>OfferPrice</th>
+                            <th>Date</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><img src="~/images/offer_img/offerimg1.png" class="table-img"></td>
-                            <td>Very Hot</td>
-                            <td>HeadPhone</td>
-                            <td>10</td>
-                            <td class="btn-wrapper">
-                                <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Edit</a>
-                                <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td><img src="~/images/offer_img/offerimg1.png" class="table-img"></td>
-                            <td>Very Hot</td>
-                            <td>HeadPhone</td>
-                            <td>10</td>
-                            <td class="btn-wrapper">
-                                <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Edit</a>
-                                <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</a>
-                            </td>
-                        </tr>
+
+                        @if (Model.Count() > 0)
+                        {
+                            int serialNo = 1;
+                            @foreach (var data in Model)
+                            {
+                                <tr>
+                                    <td>@(serialNo++)</td>
+                                    <td>
+                                        <img style="width: 50px; height: 50px;" asp-append-version=true src="@Url.Content(data.OfferImage != null ? "~/images/offer_img/"+data.OfferImage : "~/images/offer_img/no_image.png")" />
+                                    </td>
+                                    <td>@data.OfferType</td>
+                                    <td>@data.OfferName</td>
+                                    <td>@data.OfferPrice.ToString("F2")</td>
+                                    <td>@data.CreatedAt</td>
+                                    <td class="btn-wrapper">
+                                        <a href="@Url.Action("EditOffer", "Admin", new { id = data.OfferId})" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Edit</a>
+                                        <form asp-controller="Admin" asp-action="DeleteOffer" method="post">
+                                            <input type="hidden" name="id" value="@data.OfferId">
+                                            <button type="submit" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" class="text-danger text-center">@ViewBag.message</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
