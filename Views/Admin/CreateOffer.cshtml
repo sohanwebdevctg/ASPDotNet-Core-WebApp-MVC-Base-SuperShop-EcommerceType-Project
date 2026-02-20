@@ -1,4 +1,4 @@
-﻿
+﻿@model SuperShop.Models.Offer;
 @{
     ViewData["Title"] = "CreateOffer";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
@@ -8,22 +8,27 @@
 
 <div class="myContainer">
     <div class="common-form-wrapper">
-        <form class="master-form">
+        <form asp-controller="Admin" asp-action="CreateOffer" method="post" enctype="multipart/form-data" class="master-form">
             <div>
                 <h2 class="form-title">Create Offer</h2>
             </div>
             <div class="form-group">
-                <input type="text" placeholder="Enter Name" class="common-input" />
+                <input asp-for="OfferType" type="text" placeholder="Enter Offer Type" class="common-input" />
+                <span asp-validation-for="OfferType" class="text-danger" style="font-size: 12px;"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="OfferName" type="text" placeholder="Enter Offer Name" class="common-input" />
+                <span asp-validation-for="OfferName" class="text-danger" style="font-size: 12px;"></span>
             </div>
             <div class="form-group">
-                <input type="text" placeholder="Enter Name" class="common-input" />
+                <input asp-for="OfferPrice" type="number" step="0.01" placeholder="Enter Offer Price" class="common-input" />
+                <span asp-validation-for="OfferPrice" class="text-danger" style="font-size: 12px;"></span>
             </div>
             <div class="form-group">
-                <input type="number" min="0" placeholder="Enter Name" class="common-input" />
+                <input type="file" name="imageFile" class="common-input" style="width: 100%; background: white;" />
             </div>
-            <div class="form-group">
-                <input type="file" style="background: white; width: 100%;" placeholder="Enter Your Image" class="common-input" />
-            </div>
+
             <div class="form-group common-submit-wrapper">
                 <button type="submit" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">CREATE DATA</button>
                 <a href="@Url.Action("AllOffer", "Admin")" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">ALL OFFER</a>
@@ -33,5 +38,13 @@
 </div>
 
 <!-- create offer end -->
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
 
 
