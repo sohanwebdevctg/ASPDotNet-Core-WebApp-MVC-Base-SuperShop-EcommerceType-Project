@@ -26,5 +26,7 @@ namespace SuperShop.Data
 
         public DbSet<Banner> Banners { get; set; }
 
+        public DbSet<Offer> Offers { get; set; }
+
     }
 }
