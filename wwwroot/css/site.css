@@ -2845,8 +2845,10 @@ header nav {
     /* user profile start */
 
     .userprofile-section {
+        width: 100%;
         height: 100vh;
         display: flex;
+        justify-content: center;
         align-items: center;
     }
 
@@ -2854,6 +2856,7 @@ header nav {
         display: flex;
         flex-direction: row;
         gap: 10px;
+        justify-content: center;
         align-items: center;
         background-color: var(--navbar-background);
     }
@@ -3849,8 +3852,10 @@ header nav {
     /* user profile start */
 
     .userprofile-section {
+        width: 100%;
         height: 100vh;
         display: flex;
+        justify-content: center;
         align-items: center;
     }
 
@@ -3858,6 +3863,7 @@ header nav {
         display: flex;
         flex-direction: row;
         gap: 10px;
+        justify-content: center;
         align-items: center;
         background-color: var(--navbar-background);
     }
@@ -4852,12 +4858,15 @@ header nav {
     /* user profile start */
 
     .userprofile-section {
+        width: 100%;
         height: 100vh;
         display: flex;
         align-items: center;
+        justify-content: center;
     }
 
     .userprofile-wrapper {
+        width: 100%;
         display: flex;
         flex-direction: row;
         gap: 10px;
