@@ -911,7 +911,6 @@ header nav {
     text-align: center;
     padding: 8px 0;
     width: 100%;
-    background: var(--button-color);
     color: #fff !important;
     font-size: 12px;
     text-decoration: none;
@@ -1917,7 +1916,6 @@ header nav {
             text-align: center;
             padding: 8px 6px;
             width: 100%;
-            background: var(--button-color);
             color: #fff !important;
             font-size: 10px;
             text-decoration: none;
@@ -2923,7 +2921,6 @@ header nav {
         text-align: center;
         padding: 10px 6px;
         width: 100%;
-        background: var(--button-color);
         color: #fff !important;
         font-size: 12px;
         text-decoration: none;
@@ -3930,7 +3927,6 @@ header nav {
         text-align: center;
         padding: 10px 6px;
         width: 100%;
-        background: var(--button-color);
         color: #fff !important;
         font-size: 15px;
         text-decoration: none;
@@ -4936,7 +4932,6 @@ header nav {
         text-align: center;
         padding: 10px 6px;
         width: 100%;
-        background: var(--button-color);
         color: #fff !important;
         font-size: 15px;
         text-decoration: none;
