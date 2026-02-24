@@ -18,7 +18,9 @@
                 <div class="userprofile-role">Role: @(Model.Role?.RoleName != null ? Model.Role?.RoleName : "No Data")</div>
                 <p class="userprofile-desc">Email: @(Model.UserEmail != null ? Model.UserEmail : "No Data")</p>
                 <p class="userprofile-desc">Gender: @(Model.Gender?.GenderName != null ? Model.Gender?.GenderName : "No Data")</p>
-                <p class="userprofile-desc">Address: @(Model.UserAddress != null ? Model.UserAddress : "No Data"), @(Model.City?.CityName != null ? Model.City?.CityName : "No City"), @(Model.Country?.CountryName != null ? Model.Country?.CountryName : "No Country")</p>
+                <p class="userprofile-desc">Address: @(Model.UserAddress != null ? Model.UserAddress : "No Data"), 
+                    @(Model.City?.CityName != null ? Model.City?.CityName : "No City"), 
+                    @(Model.Country?.CountryName != null ? Model.Country?.CountryName : "No Country")</p>
                 <div class="userprofile-actions">
                     <a class="buttons" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%); ">Edit</a>
                     <a class="buttons" href="@Url.Action("Index", "Customer")" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%); ">Back</a>
