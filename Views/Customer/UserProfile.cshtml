@@ -9,7 +9,7 @@
     <div class="userprofile-section">
         <div class="userprofile-wrapper">
             <div class="userprofile-img">
-                <img src="~/images/user_img/no-user.png" alt="user Name">
+                <img src="@Url.Content(Model.UserImage != null ? "~/images/user_img/"+Model.UserImage : "~/images/user_img/no-user.png")" alt="user Name">
             </div>
 
             <div class="userprofile-content">
