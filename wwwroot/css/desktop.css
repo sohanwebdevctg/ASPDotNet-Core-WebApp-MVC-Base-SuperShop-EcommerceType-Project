@@ -613,6 +613,7 @@ header nav {
     /* admin & user profile start */
 
     .adminprofile-section, .userprofile-section {
+        width: 100%;
         height: 80vh;
         display: flex;
         align-items: center;
@@ -621,6 +622,7 @@ header nav {
     }
 
     .adminprofile-wrapper, .userprofile-wrapper {
+        width: 100%;
         display: flex;
         flex-direction: row;
         gap: 10px;
@@ -993,6 +995,7 @@ header nav {
     /* admin & user profile start */
 
     .adminprofile-section, .userprofile-section {
+        width: 100%;
         height: 90vh;
         display: flex;
         justify-content: center;
@@ -1001,6 +1004,7 @@ header nav {
     }
 
     .adminprofile-wrapper, .userprofile-wrapper {
+        width: 100%;
         display: flex;
         flex-direction: row;
         gap: 10px;
@@ -1372,6 +1376,7 @@ header nav {
 
     .adminprofile-section, .userprofile-section {
         width: 100%;
+        width: 100%;
         height: 100vh;
         display: flex;
         justify-content: center;
@@ -1380,6 +1385,7 @@ header nav {
     }
 
     .adminprofile-wrapper, .userprofile-wrapper {
+        width: 100%;
         display: flex;
         flex-direction: row;
         gap: 10px;
@@ -1751,13 +1757,15 @@ header nav {
     /* admin & user profile start */
 
     .adminprofile-section, .userprofile-section {
-        height: 95vh;
+        width: 100%;
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
     .adminprofile-wrapper, .userprofile-wrapper {
+        width: 100%;
         display: flex;
         flex-direction: row;
         gap: 10px;
