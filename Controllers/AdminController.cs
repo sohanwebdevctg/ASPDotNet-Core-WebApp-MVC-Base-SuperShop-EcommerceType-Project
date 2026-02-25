@@ -868,9 +868,47 @@ namespace SuperShop.Controllers
         }
 
         // user profile
-        public IActionResult UserProfile()
+        public IActionResult UserProfile(int id)
         {
-            return View();
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // logIn Admin
+            var loggedInAdmin = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (loggedInAdmin == null || loggedInAdmin.UserStatus != "active" || loggedInAdmin.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // target user check
+            var targetUser = _context.Users
+                .Include(r => r.Role)
+                .Include(g => g.Gender)
+                .Include(c => c.City)
+                .Include(c => c.Country)
+                .FirstOrDefault(x => x.UserId == id);
+
+            if(targetUser == null)
+            {
+                return NotFound();
+            }
+
+            return View(targetUser);
         }
 
         // create-gender-form

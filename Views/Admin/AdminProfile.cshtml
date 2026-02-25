@@ -10,7 +10,7 @@
     <div class="adminprofile-section">
         <div class="adminprofile-wrapper">
             <div class="adminprofile-img">
-                <img src="@Url.Content(Model.UserImage != null ? "~/images/user_img/"+Model.UserImage : "~/images/user_img/no-user.png")" alt="admin Name">
+                <img src="@Url.Content(Model.UserImage != null ? "~/images/user_img/"+Model.UserImage : "~/images/user_img/no-user.png")" alt="admin Name" asp-append-version=true>
             </div>
 
             <div class="adminprofile-content">
@@ -25,7 +25,7 @@
                     @(Model.Country?.CountryName != null ? Model.Country?.CountryName : "No Country")
                 </p>
                 <div class="adminprofile-actions">
-                    <a href="@Url.Action("UpdateUser", "Admin")" class="buttons" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">Edit</a>
+                    <a href="@Url.Action("UpdateUser", "Admin", new {id = Model.UserId})" class="buttons" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">Edit</a>
                     <a href="@Url.Action("Index", "Admin")" class="buttons" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Back</a>
                 </div>
             </div>
