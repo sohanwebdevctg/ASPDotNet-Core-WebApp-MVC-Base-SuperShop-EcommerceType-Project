@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<SuperShop.Models.User>;
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
@@ -7,7 +7,7 @@
 <!-- all user start -->
 <div class="table-content-area">
     <div class="myContainer">
-        <h3 class="table-title">Total : 2</h3>
+        <h3 class="table-title">Total : @Model.Count()</h3>
 
         <div class="table-wrapper">
             <div class="table-container">
@@ -17,45 +17,32 @@
                             <th>#</th>
                             <th>Img</th>
                             <th>Name</th>
-                            <th>Price</th>
-                            <th>Qty</th>
-                            <th>Total</th>
-                            <th>Total</th>
-                            <th>Total</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Gender</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><img src="~/images/offer_img/offerimg1.png" class="table-img"></td>
-                            <td>Wireless Headphone</td>
-                            <td>$150</td>
-                            <td>2</td>
-                            <td>$300</td>
-                            <td>$300</td>
-                            <td>$300</td>
-                            <td class="btn-wrapper">
-                                <a href="@Url.Action("UserProfile", "Admin")" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Details</a>
-                                <a href="@Url.Action("UpdateUser", "Admin")" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">Edit</a>
-                                <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td><img src="~/images/offer_img/offerimg1.png" class="table-img"></td>
-                            <td>Wireless Headphone</td>
-                            <td>$150</td>
-                            <td>2</td>
-                            <td>$300</td>
-                            <td>$300</td>
-                            <td>$300</td>
-                            <td class="btn-wrapper">
-                                <a href="@Url.Action("UserProfile", "Admin")" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Details</a>
-                                <a href="@Url.Action("UpdateUser", "Admin")" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">Edit</a>
-                                <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</a>
-                            </td>
-                        </tr>
+                            @{ int serialNo = 1; }
+                            @foreach (var data in Model)
+                            {
+                                <tr>
+                                    <td>@(serialNo++)</td>
+                                    <td><img src="@Url.Content(data.UserImage != null ? "~/images/user_img/"+data.UserImage : "~/images/user_img/no-user.png")" class="table-img" asp-append-version=true></td>
+                                    <td>@data.UserName</td>
+                                    <td>@data.UserEmail</td>
+                                    <td>@data.Role?.RoleName</td>
+                                    <td>@(data.Gender?.GenderName != null ? @data.Gender?.GenderName : "No Data")</td>
+                                    <td>@data.UserStatus</td>
+                                    <td class="btn-wrapper">
+                                        <a href="@Url.Action("UserProfile", "Admin", new {id = data.UserId})" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Details</a>
+                                        <a href="@Url.Action("UpdateUser", "Admin", new {id = data.UserId})" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">Edit</a>
+                                        <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</a>
+                                    </td>
+                                </tr>
+                            }
                     </tbody>
                 </table>
             </div>
