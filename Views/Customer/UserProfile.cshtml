@@ -22,7 +22,7 @@
                     @(Model.City?.CityName != null ? Model.City?.CityName : "No City"), 
                     @(Model.Country?.CountryName != null ? Model.Country?.CountryName : "No Country")</p>
                 <div class="userprofile-actions">
-                    <a class="buttons" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%); ">Edit</a>
+                    <a class="buttons" href="@Url.Action("UpdateUser", "Customer", new {id = Model.UserId})" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%); ">Edit</a>
                     <a class="buttons" href="@Url.Action("Index", "Customer")" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%); ">Back</a>
                 </div>
             </div>

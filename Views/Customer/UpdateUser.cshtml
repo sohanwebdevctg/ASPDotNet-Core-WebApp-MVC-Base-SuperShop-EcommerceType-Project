@@ -1,0 +1,78 @@
+﻿@model SuperShop.ViewModels.UserEditVM;
+@{
+    ViewData["Title"] = "UpdateUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- update user start -->
+
+<div class="myContainer">
+    <div class="common-form-wrapper">
+        <form asp-controller="Customer" asp-action="UpdateUser" method="post" enctype="multipart/form-data" class="master-form">
+            <div>
+                <h2 class="form-title">Update User</h2>
+            </div>
+            <input type="hidden" asp-for="UserData.UserId" />
+            <input type="hidden" asp-for="UserData.UserImage" />
+            <input type="hidden" asp-for="UserData.UserStatus" />
+            <input type="hidden" asp-for="UserData.RoleId" />
+            <div class="form-group">
+                <input type="text" asp-for="UserData.UserName" placeholder="Update Name" class="common-input" />
+            </div>
+            <div class="form-group">
+                <input type="email" asp-for="UserData.UserEmail" placeholder="Update Email" class="common-input" />
+            </div>
+            <div class="form-group">
+                <input type="text" asp-for="UserData.UserPassword" placeholder="Update Password" class="common-input" />
+            </div>
+
+            <div class="form-group">
+                <input type="number" asp-for="UserData.UserAge" min="18" max="90" placeholder="Update Age" class="common-input" />
+            </div>
+            <!-- select gender -->
+            <div class="form-group">
+                <select asp-for="UserData.GenderId" asp-items="Model.GenderList" class="common-input">
+                    <option value="" disabled selected>Select Gender</option>
+                </select>
+            </div>
+            <!-- select city -->
+            <div class="form-group">
+                <select asp-for="UserData.CityId" asp-items="Model.CityList" class="common-input">
+                    <option value="" disabled selected>Select City</option>
+                </select>
+            </div>
+            <!-- select country -->
+            <div class="form-group">
+                <select asp-for="UserData.CountryId" asp-items="Model.CountryList" class="common-input">
+                    <option disabled selected>Select Country</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <div class="image-preview-container">
+                    <img src="@Url.Content(Model.UserData.UserImage != null ? "~/images/user_img/"+Model.UserData.UserImage : "~/images/user_img/no-user.png")" asp-append-version=true alt="Preview" class="form-img-preview" />
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="file" name="imageFile" placeholder="Update Age" class="common-input" style="background: white; width: 100%;" />
+            </div>
+
+            <div class="form-group">
+                <textarea asp-for="UserData.UserAddress" placeholder="Enter Description" class="common-input text-area-input"></textarea>
+            </div>
+
+            <div class="form-group common-submit-wrapper">
+                <button type="submit" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">SUBMIT DATA</button>
+                <a href="@Url.Action("Index", "Admin")" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">BACK</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
+    <!-- update user end -->
+

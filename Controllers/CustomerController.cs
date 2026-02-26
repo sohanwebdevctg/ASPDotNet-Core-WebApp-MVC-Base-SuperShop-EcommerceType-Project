@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SuperShop.Data;
 using SuperShop.Models;
+using SuperShop.ViewModels;
 
 namespace SuperShop.Controllers
 {
@@ -57,6 +59,49 @@ namespace SuperShop.Controllers
             }
 
             return View(dbUser);
+        }
+
+        // update-user
+        [HttpGet]
+        public IActionResult UpdateUser(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 2 || sessionUserId != id)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.AsNoTracking().FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // show viewmodel
+            var viewModel = new UserEditVM
+            {
+                UserData = dbUser,
+                GenderList = _context.Genders.Select(g => new SelectListItem { Value = g.GenderId.ToString(), Text = g.GenderName }),
+                CityList = _context.Cities.Select(g => new SelectListItem { Value = g.CityId.ToString(), Text = g.CityName }),
+                CountryList = _context.Countries.Select(g => new SelectListItem { Value = g.CountryId.ToString(), Text = g.CountryName }),
+                RoleList = _context.Roles.Select(g => new SelectListItem { Value = g.RoleId.ToString(), Text = g.RoleName })
+
+            };
+
+            return View(viewModel);
         }
 
         //allproducts
