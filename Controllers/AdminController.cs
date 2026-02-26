@@ -185,7 +185,6 @@ namespace SuperShop.Controllers
                 _context.Users.Update(userModel.UserData);
                 _context.SaveChanges();
 
-                TempData["Success"] = "User Updated Successfully!";
                 return RedirectToAction("Index", "Admin");
 
 

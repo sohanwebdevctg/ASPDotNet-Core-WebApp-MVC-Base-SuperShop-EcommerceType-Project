@@ -104,6 +104,109 @@ namespace SuperShop.Controllers
             return View(viewModel);
         }
 
+        // update-user
+        [HttpPost]
+        public IActionResult UpdateUser(UserEditVM userModel, IFormFile? imageFile)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 2)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.AsNoTracking().FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // check user id validation
+            if (userModel.UserData.UserId != sessionUserId)
+            {
+                TempData["Error"] = "Unauthorized Access!";
+                return RedirectToAction("UserProfile", "Customer");
+            }
+
+            // user data validation
+            if (ModelState.IsValid)
+            {
+
+                // check user validation
+                var existingUser = _context.Users.AsNoTracking().FirstOrDefault(x => x.UserId == userModel.UserData.UserId);
+
+                if (existingUser == null)
+                {
+                    TempData["Error"] = "User Not Found";
+                    return RedirectToAction("UserProfile", "Customer");
+                }
+
+                // create folder path
+                string folder = Path.Combine(_env.WebRootPath, "images", "user_img");
+
+                // delete previous image
+                if (imageFile != null)
+                {
+                    
+                    if (!string.IsNullOrEmpty(existingUser.UserImage) && existingUser.UserImage != "no-user.png")
+                    {
+                        string oldFilePath = Path.Combine(folder, existingUser.UserImage);
+                        if (System.IO.File.Exists(oldFilePath))
+                        {
+                            System.IO.File.Delete(oldFilePath);
+                        }
+                    }
+
+                    // save new image
+                    string fileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+                    string filePath = Path.Combine(folder, fileName);
+
+                    using (var fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.CopyTo(fs);
+                    }
+                    userModel.UserData.UserImage = fileName;
+                }
+                else
+                {
+                    // set previous image
+                    userModel.UserData.UserImage = existingUser.UserImage;
+                }
+
+                
+                userModel.UserData.UserStatus = existingUser.UserStatus;
+                userModel.UserData.RoleId = existingUser.RoleId;
+
+                // update database
+                _context.Users.Update(userModel.UserData);
+                _context.SaveChanges();
+
+                return RedirectToAction("UserProfile", "Customer");
+
+            }
+
+            // return viewmodel
+            userModel.GenderList = _context.Genders.Select(g => new SelectListItem { Value = g.GenderId.ToString(), Text = g.GenderName });
+            userModel.CityList = _context.Cities.Select(c => new SelectListItem { Value = c.CityId.ToString(), Text = c.CityName });
+            userModel.CountryList = _context.Countries.Select(c => new SelectListItem { Value = c.CountryId.ToString(), Text = c.CountryName });
+            userModel.RoleList = _context.Roles.Select(r => new SelectListItem { Value = r.RoleId.ToString(), Text = r.RoleName });
+
+
+            return View(userModel);
+        }
+
         //allproducts
         public IActionResult AllProducts()
         {
