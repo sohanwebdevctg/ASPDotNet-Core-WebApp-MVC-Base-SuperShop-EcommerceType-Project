@@ -1978,13 +1978,166 @@ namespace SuperShop.Controllers
         // create-category
         public IActionResult CreateCategory()
         {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
             return View();
+        }
+
+        // create-category
+        [HttpPost]
+        public IActionResult CreateCategory(Category category)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // data submit validation check
+            if (ModelState.IsValid)
+            {
+                _context.Categoreis.Add(category);
+                _context.SaveChanges();
+                TempData["Success"] = "Category Created Successfully!";
+                return RedirectToAction("AllCategory", "Admin");
+            }
+
+            return View(category);
         }
 
         // all-category-table
         public IActionResult AllCategory()
         {
-            return View();
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // show category data
+            var categories = _context.Categoreis.Include(p => p.Products).ToList();
+
+            // check banner data
+            if (categories.Count == 0)
+            {
+                ViewBag.message = "No Category Data Found!";
+            }
+
+            return View(categories);
+        }
+
+        // delete-category
+        [HttpPost]
+        public IActionResult DeleteCategory(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // check category product
+            var category = _context.Categoreis.Include(p => p.Products).FirstOrDefault(x => x.CategoryId == id);
+
+            if(category == null)
+            {
+                TempData["Error"] = "Category Not Found!";
+                return RedirectToAction("AllCategory", "Admin");
+            }
+
+            // check category used
+            if(category.Products != null && category.Products.Any())
+            {
+                TempData["Error"] = "Cannot delete! This category contains products.";
+                return RedirectToAction("AllCategory", "Admin");
+            }
+
+            // remove the category
+            _context.Categoreis.Remove(category);
+            _context.SaveChanges();
+
+            TempData["Success"] = "Category Deleted Successfully!";
+            return RedirectToAction("AllCategory", "Admin");
+
         }
 
         // create-product

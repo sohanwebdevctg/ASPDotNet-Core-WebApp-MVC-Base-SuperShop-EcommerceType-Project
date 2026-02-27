@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<SuperShop.Models.Category>;
 @{
     ViewData["Title"] = "AllCategory";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
@@ -7,7 +7,19 @@
 <!-- all category start -->
 <div class="table-content-area">
     <div class="myContainer">
-        <h3 class="table-title">Total : 2</h3>
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert" style="color: green; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Success"]
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert" style="color: red; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Error"]
+            </div>
+        }
+        <h3 class="table-title">Total : @Model.Count()</h3>
         <div class="table-wrapper">
             <div class="table-container">
                 <table class="table-content">
@@ -20,24 +32,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Toys</td>
-                            <td>2</td>
-                            <td class="btn-wrapper">
-                                <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Edit</a>
-                                <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Sports</td>
-                            <td>2</td>
-                            <td class="btn-wrapper">
-                                <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Edit</a>
-                                <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</a>
-                            </td>
-                        </tr>
+                        @if (Model.Count() > 0)
+                        {
+                            int serialNo = 1;
+                            @foreach (var data in Model)
+                            {
+                                <tr>
+                                    <td>@(serialNo++)</td>
+                                    <td>@data.CategoryName</td>
+                                    <td>@(data.Products?.Count ?? 0)</td>
+                                    <td class="btn-wrapper">
+                                        <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Edit</a>
+                                        <form asp-controller="Admin" asp-action="DeleteCategory" method="post">
+                                            <input type="hidden" name="id" value="@data.CategoryId" />
+                                            <button type="submit" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</button>
+                                        </form>
+                                        
+                                    </td>
+                                </tr>
+                            }
+                            
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" class="text-danger text-center">@ViewBag.message</td>
+                            </tr>
+                        }
+                        
                     </tbody>
                 </table>
             </div>
