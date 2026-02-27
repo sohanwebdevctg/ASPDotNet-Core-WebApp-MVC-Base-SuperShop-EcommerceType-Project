@@ -1,4 +1,4 @@
-﻿
+﻿@model SuperShop.ViewModels.ProductVM;
 @{
     ViewData["Title"] = "CreateProduct";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
@@ -8,30 +8,28 @@
 
 <div class="myContainer">
     <div class="common-form-wrapper">
-        <form class="master-form">
+        <form asp-controller="Admin" asp-action="CreateProduct" method="post" enctype="multipart/form-data" class="master-form">
             <div>
                 <h2 class="form-title">Create Product</h2>
             </div>
             <div class="form-group">
-                <input type="text" placeholder="Enter Product Name" class="common-input" />
+                <input type="text" asp-for="ProductData.ProductName" placeholder="Enter Product Name" class="common-input" />
             </div>
             <div class="form-group">
-                <input type="number" step="0.01" placeholder="Enter Product Price" class="common-input" />
+                <input type="number" asp-for="ProductData.ProductPrice" step="0.01" placeholder="Enter Product Price" class="common-input" />
             </div>
             <div class="form-group">
-                <input type="number" step="0.01" placeholder="Enter Product Limit" class="common-input" />
+                <input type="number" asp-for="ProductData.ProductLimit" placeholder="Enter Product Limit" class="common-input" />
             </div>
             <div class="form-group">
-                <input type="file" placeholder="Enter Product Image" class="common-input" style="background: white; width: 100%;" />
+                <input type="file" name="imageFile" placeholder="Enter Product Image" class="common-input" style="background: white; width: 100%;" />
             </div>
             <div class="form-group">
-                <textarea placeholder="Enter Product Description" class="common-input text-area-input"></textarea>
+                <textarea asp-for="ProductData.ProductDescription" placeholder="Enter Product Description" class="common-input text-area-input"></textarea>
             </div>
             <div class="form-group">
-                <select class="common-input">
+                <select asp-for="ProductData.CategoryId" asp-items="Model.CategoryList" class="common-input">
                     <option value="" disabled selected>Select Option</option>
-                    <option value="a">Option A</option>
-                    <option value="b">Option B</option>
                 </select>
             </div>
 
@@ -43,4 +41,9 @@
     </div>
 </div>
 <!-- create product end -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
 
