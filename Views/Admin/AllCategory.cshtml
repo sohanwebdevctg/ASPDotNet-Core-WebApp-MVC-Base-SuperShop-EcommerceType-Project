@@ -42,7 +42,7 @@
                                     <td>@data.CategoryName</td>
                                     <td>@(data.Products?.Count ?? 0)</td>
                                     <td class="btn-wrapper">
-                                        <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Edit</a>
+                                        <a href="@Url.Action("EditCategory", "Admin", new { id = data.CategoryId})" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Edit</a>
                                         <form asp-controller="Admin" asp-action="DeleteCategory" method="post">
                                             <input type="hidden" name="id" value="@data.CategoryId" />
                                             <button type="submit" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</button>

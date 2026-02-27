@@ -2086,6 +2086,93 @@ namespace SuperShop.Controllers
             return View(categories);
         }
 
+        // edit-category
+        [HttpGet]
+        public IActionResult EditCategory(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // find category
+            var category = _context.Categoreis.FirstOrDefault(x => x.CategoryId == id);
+
+            // return error
+            if (category == null)
+            {
+                TempData["Error"] = "Category Not Found!";
+                return RedirectToAction("AllCategory", "Admin");
+            }
+
+            return View(category);
+
+        }
+
+        // update-category
+        [HttpPost]
+        public IActionResult UpdateCategory(Category category)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // validation and update
+            if (ModelState.IsValid)
+            {
+                _context.Categoreis.Update(category);
+                _context.SaveChanges();
+
+                TempData["Success"] = "Category Updated Successfully!";
+                return RedirectToAction("AllCategory", "Admin");
+            }
+
+            return View(category);
+
+
+        }
+
         // delete-category
         [HttpPost]
         public IActionResult DeleteCategory(int id)
