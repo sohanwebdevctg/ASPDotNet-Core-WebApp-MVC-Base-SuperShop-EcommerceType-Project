@@ -12,13 +12,18 @@ namespace SuperShop.Models
         [Required(ErrorMessage = "Product Name is required")]
         public string ProductName { get; set; }
 
-        [Required]
-        [Column(TypeName = "decimal(18,2)")]
+        [Required(ErrorMessage = "Product Price is required")]
+        [Range(0, 100000, ErrorMessage = "Price Must Be Between 0 To 100,000")]
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public decimal ProductPrice { get; set; }
 
+        [Range(0, 5000, ErrorMessage = "Stock cannot be negative")]
         public int ProductLimit { get; set; }
 
         public string? ProductImage { get; set; }
+
+        [StringLength(500, ErrorMessage = "Only 500 Character Support!")]
+        public string? ProductDescription {get; set; }
 
         // Foreign key & Natigation Properties (Relation)
 
