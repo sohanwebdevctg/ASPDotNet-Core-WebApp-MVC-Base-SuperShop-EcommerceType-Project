@@ -28,5 +28,9 @@ namespace SuperShop.Data
 
         public DbSet<Offer> Offers { get; set; }
 
+        public DbSet<Category> Categoreis { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
     }
 }
