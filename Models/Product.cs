@@ -10,7 +10,7 @@ namespace SuperShop.Models
         public int ProductId { get; set; }
 
         [Required(ErrorMessage = "Product Name is required")]
-        public string ProductName { get; set; }
+        public string? ProductName { get; set; }
 
         [Required(ErrorMessage = "Product Price is required")]
         [Range(0, 100000, ErrorMessage = "Price Must Be Between 0 To 100,000")]

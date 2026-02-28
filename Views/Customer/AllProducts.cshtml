@@ -1,11 +1,8 @@
-﻿
+﻿@model IEnumerable<SuperShop.Models.Product>;
 @{
     ViewData["Title"] = "AllProducts";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-
 
 <!--  allProducts section start -->
 
@@ -23,93 +20,43 @@
             </form>
     </div>
 
-    <!-- search section start -->
+    <!-- search section end -->
 
-    <!-- product start -->
+    
 
     <div class="product-grid" id="product-container">
-        @*@foreach (var data in Model.Products)
+
+        <!-- product start -->
+        @foreach (var data in Model)
         {
-        <div class="product-card">
-        <div class="product-img-container">
-        <img src="@Url.Content("~/product_image/"+data.ProductImage)" alt="Product">
-        </div>
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="~/images/product_img/@data.ProductImage" alt="@data.ProductName">
+                </div>
 
-        <div class="product-body">
-        <h5 class="product-title">@data.ProductName</h5>
-        <p class="product-price">Price: @data.ProductPrice</p>
-        <p class="product-desc">@data.ProductDescription</p>
+                <div class="product-body">
+                    <h5 class="product-title">@data.ProductName</h5>
+                    <p class="product-price">Price: $@data.ProductPrice.ToString("F2")</p>
+                    <p class="product-desc">
+                        <strong>ProductLimit :</strong>
+                        @(data.ProductLimit < 0 ? 0 : data.ProductLimit)
+                    </p>
+                    <p class="product-desc">
+                        @(data.ProductDescription?.Length > 30 ? data.ProductDescription.Substring(0, 30) + "..." : data.ProductDescription)
+                    </p>
 
-        <div class="card-footer">
-        <button class="cart-btn" onclick="location.href='@Url.Action("ProductDetails", "Customer", new{id=data.ProductId})'">
-        View Details
-        </button>
-        </div>
-        </div>
-        </div>
-        }*@
-        <div class="product-card">
-            <div class="product-img-container">
-                <img src="~/images/offer_img/offerimg1.png" alt="Product">
+                    <div>
+                        <a href="@Url.Action("ProductDetails", "Customer", new { id = data.ProductId })" class="cart-btn">
+                            View Details
+                        </a>
+                    </div>
+                </div>
             </div>
-
-            <div class="product-body">
-                <h5 class="product-title">Product Name</h5>
-                <p class="product-price">Price: ProductPrice</p>
-                <p class="product-desc">ProductDescription</p>
-                <a href="@Url.Action("ProductDetails", "Customer")" class="cart-btn">View Details</a>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-container">
-                <img src="~/images/offer_img/offerimg3.png" alt="Product">
-            </div>
-
-            <div class="product-body">
-                <h5 class="product-title">Product Name</h5>
-                <p class="product-price">Price: ProductPrice</p>
-                <p class="product-desc">ProductDescription</p>
-                <a href="@Url.Action("ProductDetails", "Customer")" class="cart-btn">View Details</a>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-container">
-                <img src="~/images/offer_img/offerimg3.png" alt="Product">
-            </div>
-
-            <div class="product-body">
-                <h5 class="product-title">Product Name</h5>
-                <p class="product-price">Price: ProductPrice</p>
-                <p class="product-desc">ProductDescription</p>
-                <a href="@Url.Action("ProductDetails", "Customer")" class="cart-btn">View Details</a>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-container">
-                <img src="~/images/offer_img/offerimg3.png" alt="Product">
-            </div>
-
-            <div class="product-body">
-                <h5 class="product-title">Product Name</h5>
-                <p class="product-price">Price: ProductPrice</p>
-                <p class="product-desc">ProductDescription</p>
-                <a href="@Url.Action("ProductDetails", "Customer")" class="cart-btn">View Details</a>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-container">
-                <img src="~/images/offer_img/offerimg3.png" alt="Product">
-            </div>
-
-            <div class="product-body">
-                <h5 class="product-title">Product Name</h5>
-                <p class="product-price">Price: ProductPrice</p>
-                <p class="product-desc">ProductDescription</p>
-                <a href="@Url.Action("ProductDetails", "Customer")" class="cart-btn">View Details</a>
-            </div>
-        </div>
+        }
+        
+    <!-- product end -->
     </div>
-    <!-- product start -->
+
 </div>
 
 <!-- allProducts section end -->

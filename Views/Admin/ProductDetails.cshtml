@@ -15,13 +15,12 @@
             <div class="userprofile-content">
                 <h4 class="userprofile-title">Product Details</h4>
                 <h3 class="userprofiel-name">@(Model.ProductName != null ? Model.ProductName : "No Data")</h3>
-                <div class="userprofile-role">Role: @(Model.Category?.CategoryName != null ? Model.Category?.CategoryName : "No Data")</div>
-                <p class="userprofile-desc">Price: <strong>$@Model.ProductPrice.ToString("F2")</strong></p>
-                <p class="userprofile-desc">Stock Limit: @Model.ProductLimit</p>
+                <div class="userprofile-role">Category: @(Model.Category?.CategoryName != null ? Model.Category?.CategoryName : "No Data")</div>
+                <p class="userprofile-desc"><strong>Price: </strong>$@Model.ProductPrice.ToString("F2")</p>
+                <p class="userprofile-desc"><strong>Stock Limit: </strong>@Model.ProductLimit</p>
 
                 <p class="userprofile-desc" style="margin-top: 10px;">
-                    <strong>Description:</strong><br />
-                    @Model.ProductDescription
+                    <strong>Description: </strong>@Model.ProductDescription
                 </p>
                 <div class="userprofile-actions">
                     <a href="@Url.Action("EditProduct", "Admin", new {id = Model.ProductId})" class="buttons" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">Edit</a>

@@ -30,7 +30,7 @@ namespace SuperShop.Controllers
                              .ToList(),
 
                 // Latest 8 products
-                Products = _context.Products.OrderByDescending(p => p.ProductId).Take(8).ToList(),
+                Products = _context.Products.OrderByDescending(p => p.ProductId).Take(12).ToList(),
 
                 // 3 banners (1 main, 2 side)
                 Banners = _context.Banners.Take(3).ToList(),
@@ -40,6 +40,42 @@ namespace SuperShop.Controllers
             };
 
             return View(viewModel);
+        }
+
+        // partial view
+        public IActionResult GetProductsByCategory(int id)
+        {
+            var productsQuery = _context.Products.AsQueryable();
+
+            if (id > 0)
+            {
+                
+                productsQuery = productsQuery.Where(p => p.CategoryId == id);
+            }
+
+            var products = productsQuery
+                            .OrderByDescending(p => p.ProductId)
+                            .Take(12)
+                            .ToList();
+
+            return PartialView("_ProductListPartial", products);
+        }
+
+        // product-details
+        [HttpGet]
+        public IActionResult ProductDetails(int id)
+        {
+
+            // validation the product id
+            var product = _context.Products.Include(p => p.Category).FirstOrDefault(p => p.ProductId == id);
+
+            if (product == null)
+            {
+                TempData["Error"] = "Product not found!";
+                return RedirectToAction("AllProduct", "Customer");
+            }
+
+            return View(product);
         }
 
         // userporfile
@@ -227,7 +263,16 @@ namespace SuperShop.Controllers
         //allproducts
         public IActionResult AllProducts()
         {
-            return View();
+
+            // allproducts
+            var allProducts = _context.Products.OrderByDescending(p => p.ProductId).ToList();
+
+            if(allProducts.Count == 0)
+            {
+                TempData["Error"] = "No Product Cart Here";
+            };
+
+            return View(allProducts);
         }
 
         //productdetails

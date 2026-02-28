@@ -31,18 +31,3 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// category button function
-$(document).ready(function () {
-    $(".cat-filter").click(function () {
-        var catId = $(this).data("id");
-
-        $.ajax({
-            url: "/Home/GetProductsByCategory",
-            type: "GET",
-            data: { id: catId },
-            success: function (data) {
-                $("#product-container").html(data);
-            }
-        });
-    });
-});

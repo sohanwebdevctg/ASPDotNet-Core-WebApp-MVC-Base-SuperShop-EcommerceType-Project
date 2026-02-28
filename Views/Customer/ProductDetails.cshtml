@@ -1,4 +1,4 @@
-﻿
+﻿@model SuperShop.Models.Product;
 @{
     ViewData["Title"] = "ProductDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,25 +7,25 @@
 
 <!-- product details start -->
 <div class="myContainer">
-    <div class="product-details-section">
-        <div class="details-wrapper">
-            <div class="details-img">
-                <img src="~/images/offer_img/offerimg1.png" alt="Product Name">
+    <div class="userprofile-section">
+        <div class="userprofile-wrapper">
+            <div class="userprofile-img">
+                <img src="@Url.Content(Model.ProductImage != null ? "~/images/product_img/"+Model.ProductImage : "~/images/product_img/no-user.png")" alt="User Name" asp-append-version=true>
             </div>
 
-            <div class="details-content">
-                <h4 class="details-title">Product Details</h4>
-                <h3 class="product-name">Premium Wireless Headphone</h3>
-                <div class="details-price">Price: $299.00</div>
-                <p class="details-desc">
-                    This is a high-quality premium product designed for the best user experience.
-                    It features modern technology, sleek design, and durable materials that ensure
-                    long-lasting performance and satisfaction.
-                </p>
+            <div class="userprofile-content">
+                <h4 class="userprofile-title">Product Details</h4>
+                <h3 class="userprofiel-name">@(Model.ProductName != null ? Model.ProductName : "No Data")</h3>
+                <div class="userprofile-role">Category: @(Model.Category?.CategoryName != null ? Model.Category?.CategoryName : "No Data")</div>
+                <p class="userprofile-desc"><strong>Price: </strong>$@Model.ProductPrice.ToString("F2")</p>
+                <p class="userprofile-desc"><strong>Stock Limit: </strong>@Model.ProductLimit</p>
 
-                <div class="details-actions">
-                    <a class="buttons">Buy Now</a>
-                    <a class="buttons" href="@Url.Action("AllProducts", "Customer")">Back</a>
+                <p class="userprofile-desc" style="margin-top: 10px;">
+                    <strong>Description: </strong> @Model.ProductDescription
+                </p>
+                <div class="userprofile-actions">
+                    <a href="@Url.Action("BuyProduct", "Customer", new {id = Model.ProductId})" class="buttons" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">Buy Now</a>
+                    <a href="@Url.Action("AllProduct", "Customer")" class="buttons" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Back</a>
                 </div>
             </div>
         </div>
