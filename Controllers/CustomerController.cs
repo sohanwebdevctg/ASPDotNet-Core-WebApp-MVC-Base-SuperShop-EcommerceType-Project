@@ -19,10 +19,27 @@ namespace SuperShop.Controllers
             _env = env;
         }
 
-
+        // show banner, category, product, offer
         public IActionResult Index()
         {
-            return View();
+            var viewModel = new HomeVM
+            {
+                // Only categories that have at least 1 product
+                Categories = _context.Categoreis
+                             .Where(c => _context.Products.Any(p => p.CategoryId == c.CategoryId))
+                             .ToList(),
+
+                // Latest 8 products
+                Products = _context.Products.OrderByDescending(p => p.ProductId).Take(8).ToList(),
+
+                // 3 banners (1 main, 2 side)
+                Banners = _context.Banners.Take(3).ToList(),
+
+                // 3 offer cards
+                Offers = _context.Offers.Take(3).ToList()
+            };
+
+            return View(viewModel);
         }
 
         // userporfile

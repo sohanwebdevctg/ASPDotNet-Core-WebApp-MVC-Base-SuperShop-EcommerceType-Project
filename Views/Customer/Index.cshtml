@@ -1,4 +1,4 @@
-﻿
+﻿@model SuperShop.ViewModels.HomeVM
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,30 +8,44 @@
 
 <div class="myContainer">
     <div class="banner-grid">
-        <div class="main-banner" style="background-image: url('/images/banner/mainbanner.png');">
-            <div class="banner-content">
-                <p>PRE-ORDER NOW</p>
-                <h1>SPACESITY 2</h1>
-                <button class="banner-btn">PRE-ORDER NOW &rarr;</button>
-            </div>
-        </div>
+        @if (Model.Banners != null && Model.Banners.Any())
+        {
+            var banners = Model.Banners.ToList();
 
-        <div class="side-banners">
-            <div class="top-banner" style="background-image: url('/images/banner/topbanner.png');">
-                <div class="banner-content small">
-                    <p>WEEKEND OFFER</p>
-                    <h2>VIVAMUS</h2>
-                    <button class="banner-btn">BUY NOW &rarr;</button>
+            <div class="main-banner" style="background-image: url('/images/banner_img/@banners[0].BannerImage');">
+                <div class="banner-content">
+                    <p>@banners[0].BannerType</p>
+                    <h1>@banners[0].BannerName</h1>
+                    <button class="banner-btn">SHOP NOW &rarr;</button>
                 </div>
             </div>
-            <div class="bottom-banner" style="background-image: url('/images/banner/bottombanner.png');">
-                <div class="banner-content small">
-                    <p>DONEC NEC 35% OFF</p>
-                    <h2>PRODUCT NAME</h2>
-                    <button class="banner-btn">BUY NOW &rarr;</button>
-                </div>
+
+            <div class="side-banners">
+                @if (banners.Count > 1)
+                {
+                    <div class="top-banner" style="background-image: url('/images/banner_img/@banners[1].BannerImage');">
+                        <div class="banner-content small">
+                            <p>@banners[1].BannerType</p>
+                            <h2>@banners[1].BannerName</h2>
+                            <button class="banner-btn">BUY NOW &rarr;</button>
+                        </div>
+                    </div>
+                }
+                @if (banners.Count > 2)
+                {
+                    <div class="bottom-banner" style="background-image: url('/images/banner_img/@banners[2].BannerImage');">
+                        <div class="banner-content small">
+                            <p>@banners[2].BannerType</p>
+                            <h2>@banners[2].BannerName</h2>
+                            <button class="banner-btn">BUY NOW &rarr;</button>
+                        </div>
+                    </div>
+                }
+                
             </div>
-        </div>
+
+        }
+        
     </div>
 </div>
 
@@ -143,38 +157,20 @@
 <!-- offer section start -->
 <div class="myContainer">
     <div class="offer-grid">
-        <div class="offer-card" style="background-image: url('/images/offer_img/offerimg1.png');">
-            <div class="offer-overlay">
-                <div class="card-content">
-                    <p>WEEKEND OFFER</p>
-                    <h2>FIREBALL</h2>
-                    <h3>SAVE $19.99</h3>
-                    <button class="offer-btn">BUY NOW &rarr;</button>
+        @foreach (var offer in Model.Offers)
+        {
+            <div class="offer-card" style="background-image: url('/images/offer_img/@offer.OfferImage');">
+                <div class="offer-overlay">
+                    <div class="card-content">
+                        <p>@offer.OfferType</p>
+                        <h2>@offer.OfferName</h2>
+                        <h3>SAVE $@offer.OfferPrice.ToString("F2")</h3>
+                        <button class="offer-btn">BUY NOW &rarr;</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="offer-card" style="background-image: url('/images/offer_img/offerimg2.png');">
-            <div class="offer-overlay">
-                <div class="card-content">
-                    <p>AMAZING DEAL</p>
-                    <h2>XBOX ONE</h2>
-                    <h3>SAVE $50</h3>
-                    <button class="offer-btn">BUY NOW &rarr;</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="offer-card" style="background-image: url('/images/offer_img/offerimg3.png');">
-            <div class="offer-overlay">
-                <div class="card-content">
-                    <p>SAVE ON AN</p>
-                    <h2>GALAXY WAR</h2>
-                    <h3>SAVE $30</h3>
-                    <button class="offer-btn">BUY NOW &rarr;</button>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>
 <!-- offer section end -->
