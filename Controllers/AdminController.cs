@@ -2344,7 +2344,6 @@ namespace SuperShop.Controllers
 
         }
 
-
         // all-product-table
         public IActionResult AllProduct()
         {
@@ -2383,6 +2382,140 @@ namespace SuperShop.Controllers
             }
 
             return View(allproducts);
+        }
+
+        // edit-product
+        [HttpGet]
+        public IActionResult EditProduct(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // match product id
+            var product = _context.Products.FirstOrDefault(p => p.ProductId == id);
+
+            if (product == null)
+            {
+                TempData["Error"] = "Product not found!";
+                return RedirectToAction("AllProduct");
+            }
+
+            // retur the previous value
+            var viewModel = new ProductVM
+            {
+                ProductData = product,
+                CategoryList = _context.Categoreis.Select(c => new SelectListItem
+                {
+                    Value = c.CategoryId.ToString(),
+                    Text = c.CategoryName
+                })
+            };
+
+            return View(viewModel);
+
+        }
+
+        // update-product
+        [HttpPost]
+        public IActionResult UpdateProduct(ProductVM productmodel, IFormFile? imageFile)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // validation image
+            if (ModelState.IsValid)
+            {
+                // handeling new image
+                if (imageFile != null)
+                {
+                    string folder = Path.Combine(_env.WebRootPath, "images", "product_img");
+
+                    // create new image name
+                    string fileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+                    string filePath = Path.Combine(folder, fileName);
+
+                    // delete previous image
+                    if (!string.IsNullOrEmpty(productmodel.ProductData.ProductImage))
+                    {
+                        string oldFilePath = Path.Combine(folder, productmodel.ProductData.ProductImage);
+                        if (System.IO.File.Exists(oldFilePath))
+                        {
+                            System.IO.File.Delete(oldFilePath);
+                        }
+                    }
+
+                    // save new image
+                    using (var fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.CopyTo(fs);
+                    }
+
+                    // set new image name
+                    productmodel.ProductData.ProductImage = fileName;
+                }
+                
+
+                // update database
+                _context.Products.Update(productmodel.ProductData);
+                _context.SaveChanges();
+
+                TempData["Success"] = "Product Updated Successfully!";
+                return RedirectToAction("AllProduct", "Admin");
+            }
+
+            // return category data
+            productmodel.CategoryList = _context.Categoreis.Select(c => new SelectListItem
+            {
+                Value = c.CategoryId.ToString(),
+                Text = c.CategoryName
+            });
+
+            return View(productmodel);
+
         }
 
     }

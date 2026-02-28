@@ -49,7 +49,7 @@
                                     <td><img asp-append-version=true src="@Url.Content(data.ProductImage != null ? "~/images/product_img/"+data.ProductImage : "~/images/product_img/no_image.png")" class="table-img"></td>
                                     <td>@data.ProductName</td>
                                     <td>$@data.ProductPrice.ToString("F2")</td>
-                                    <td>@data.ProductLimit.ToString("F2")</td>
+                                    <td>@data.ProductLimit.ToString("0")</td>
                                     <td>
                                         @if (data.ProductDescription != null && data.ProductDescription.Length > 15)
                                         {
@@ -65,8 +65,8 @@
                                     <td>@data.Category?.CategoryName</td>
                                     <td>0</td>
                                     <td class="btn-wrapper">
-                                        <a href="@Url.Action("UserProfile", "Admin")" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Details</a>
-                                        <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">Edit</a>
+                                        <a href="@Url.Action("ProductDetails", "Admin", new {id = data.ProductId})" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Details</a>
+                                        <a href="@Url.Action("EditProduct", "Admin", new {id = data.ProductId})" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">Edit</a>
                                         <a href="#" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</a>
                                     </td>
                                 </tr>
