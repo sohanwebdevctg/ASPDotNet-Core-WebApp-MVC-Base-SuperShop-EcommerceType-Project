@@ -14,23 +14,33 @@
             </div>
             <div class="form-group">
                 <input type="text" asp-for="ProductData.ProductName" placeholder="Enter Product Name" class="common-input" />
+                <span asp-validation-for="ProductData.ProductName" class="text-danger" style="font-size: 12px;"></span>
             </div>
             <div class="form-group">
                 <input type="number" asp-for="ProductData.ProductPrice" step="0.01" placeholder="Enter Product Price" class="common-input" />
+                <span asp-validation-for="ProductData.ProductPrice" class="text-danger" style="font-size: 12px;"></span>
+
             </div>
             <div class="form-group">
                 <input type="number" asp-for="ProductData.ProductLimit" placeholder="Enter Product Limit" class="common-input" />
+                <span asp-validation-for="ProductData.ProductLimit" class="text-danger" style="font-size: 12px;"></span>
+
             </div>
             <div class="form-group">
                 <input type="file" name="imageFile" placeholder="Enter Product Image" class="common-input" style="background: white; width: 100%;" />
             </div>
             <div class="form-group">
+                
                 <textarea asp-for="ProductData.ProductDescription" placeholder="Enter Product Description" class="common-input text-area-input"></textarea>
+                <span asp-validation-for="ProductData.ProductDescription" class="text-danger" style="font-size: 12px;"></span>
+
             </div>
             <div class="form-group">
                 <select asp-for="ProductData.CategoryId" asp-items="Model.CategoryList" class="common-input">
                     <option value="" disabled selected>Select Option</option>
                 </select>
+                <span asp-validation-for="ProductData.CategoryId" class="text-danger" style="font-size: 12px;"></span>
+
             </div>
 
             <div class="form-group common-submit-wrapper">

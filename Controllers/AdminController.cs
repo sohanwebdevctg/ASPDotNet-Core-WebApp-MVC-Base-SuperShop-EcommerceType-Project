@@ -2267,10 +2267,122 @@ namespace SuperShop.Controllers
             return View(viewModel);
         }
 
+        // create-product
+        [HttpPost]
+        public IActionResult CreateProduct(ProductVM productmodel, IFormFile? imageFile)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // product validation check
+            if (ModelState.IsValid)
+            {
+                // image validation check
+                if (imageFile != null)
+                {
+                    // create folder path
+                    string folder = Path.Combine(_env.WebRootPath, "images", "product_img");
+
+                    // check folder
+                    if (!Directory.Exists(folder))
+                    {
+                        Directory.CreateDirectory(folder);
+                    }
+
+                    // file create
+                    string fileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+                    string filePath = Path.Combine(folder, fileName);
+
+                    // save file
+                    using (var fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.CopyTo(fs);
+                    }
+
+                    // save the image
+                    productmodel.ProductData.ProductImage = fileName;
+                }
+
+                // save the data
+                _context.Products.Add(productmodel.ProductData);
+                _context.SaveChanges();
+
+                TempData["Success"] = "Product Created Successfully!";
+                return RedirectToAction("AllProduct", "Admin");
+            }
+
+            // return category
+            productmodel.CategoryList = _context.Categoreis.Select(c => new SelectListItem
+            {
+                Value = c.CategoryId.ToString(),
+                Text = c.CategoryName
+            });
+
+            return View(productmodel);
+
+        }
+
+
         // all-product-table
         public IActionResult AllProduct()
         {
-            return View();
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // get all product data
+            var allproducts = _context.Products.Include(p => p.Category).ToList();
+
+            // check product data
+            if (allproducts.Count == 0)
+            {
+                ViewBag.message = "No Product Data Found!";
+            }
+
+            return View(allproducts);
         }
 
     }
