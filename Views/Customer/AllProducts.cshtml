@@ -10,15 +10,23 @@
 
     <!-- search section start -->
     <div class="search-section">
-            <form asp-controller="Customer" asp-action="AllProducts" method="get" class="search-form">
-                <div class="input-group">
+        <form asp-controller="Customer" asp-action="AllProducts" method="get" class="search-form" style="display: flex; gap: 10px; align-items: center;">
+
+            <div class="input-group">
                 <input type="text" name="searchName" value="@ViewBag.CurrentName" placeholder="Search Your Product" class="search-input" />
-                </div>
-                <div class="input-group">
-                <input type="number" name="searchPrice" value="@ViewBag.CurrentPrice" placeholder="Search Your Price" class="search-input" />
-                </div>
-                <button type="submit" style="display:none"></button>
-            </form>
+            </div>
+            <div class="input-group">
+                <input type="number" name="searchPrice" value="@ViewBag.CurrentPrice" placeholder="Search Your Max Price" class="search-input" />
+            </div>
+            <button type="submit" style="display: none;"></button>
+            @if (!string.IsNullOrEmpty(ViewBag.CurrentName) || ViewBag.CurrentPrice != null)
+            {
+                <a href="@Url.Action("AllProducts", "Customer")" class="common-submit-btn"
+               style="text-decoration: none; padding: 10px 20px; border-radius: 5px; color: white; background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">
+                    See All Data
+                </a>
+            }
+        </form>
     </div>
 
     <!-- search section end -->
@@ -27,6 +35,7 @@
         <div class="alert alert-warning text-center">
             @ViewBag.Message
         </div>
+        
     }
     
 

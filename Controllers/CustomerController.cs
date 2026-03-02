@@ -261,19 +261,20 @@ namespace SuperShop.Controllers
         }
 
         //allproducts
+        [HttpGet]
         public IActionResult AllProducts(string searchName, decimal? searchPrice)
         {
             // all product data load
             var productsQuery = _context.Products.AsQueryable();
 
-            // serach the product name
+            // search product name
             if (!string.IsNullOrWhiteSpace(searchName))
             {
                 productsQuery = productsQuery.Where(p => p.ProductName.Contains(searchName));
                 ViewBag.CurrentName = searchName;
             }
 
-            // search the price
+            // search product price
             if (searchPrice.HasValue)
             {
                 productsQuery = productsQuery.Where(p => p.ProductPrice <= searchPrice.Value);
