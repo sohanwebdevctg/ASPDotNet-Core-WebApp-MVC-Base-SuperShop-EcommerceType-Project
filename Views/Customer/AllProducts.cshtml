@@ -10,18 +10,24 @@
 
     <!-- search section start -->
     <div class="search-section">
-            <form class="search-form">
+            <form asp-controller="Customer" asp-action="AllProducts" method="get" class="search-form">
                 <div class="input-group">
-                    <input type="text" placeholder="Search Your Category" class="search-input" />
+                <input type="text" name="searchName" value="@ViewBag.CurrentName" placeholder="Search Your Product" class="search-input" />
                 </div>
                 <div class="input-group">
-                    <input type="text" placeholder="Search Your Product" class="search-input" />
+                <input type="number" name="searchPrice" value="@ViewBag.CurrentPrice" placeholder="Search Your Price" class="search-input" />
                 </div>
+                <button type="submit" style="display:none"></button>
             </form>
     </div>
 
     <!-- search section end -->
-
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-warning text-center">
+            @ViewBag.Message
+        </div>
+    }
     
 
     <div class="product-grid" id="product-container">

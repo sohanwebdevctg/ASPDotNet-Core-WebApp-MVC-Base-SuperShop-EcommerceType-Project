@@ -261,18 +261,35 @@ namespace SuperShop.Controllers
         }
 
         //allproducts
-        public IActionResult AllProducts()
+        public IActionResult AllProducts(string searchName, decimal? searchPrice)
         {
+            // all product data load
+            var productsQuery = _context.Products.AsQueryable();
 
-            // allproducts
-            var allProducts = _context.Products.OrderByDescending(p => p.ProductId).ToList();
-
-            if(allProducts.Count == 0)
+            // serach the product name
+            if (!string.IsNullOrWhiteSpace(searchName))
             {
-                TempData["Error"] = "No Product Cart Here";
-            };
+                productsQuery = productsQuery.Where(p => p.ProductName.Contains(searchName));
+                ViewBag.CurrentName = searchName;
+            }
 
-            return View(allProducts);
+            // search the price
+            if (searchPrice.HasValue)
+            {
+                productsQuery = productsQuery.Where(p => p.ProductPrice <= searchPrice.Value);
+                ViewBag.CurrentPrice = searchPrice;
+            }
+
+            var results = productsQuery.OrderByDescending(p => p.ProductId).ToList();
+
+            // sending the warning message
+            if (!results.Any())
+            {
+                ViewBag.Message = "Product not found!";
+            }
+
+            // return the previous product
+            return View(results);
         }
 
         //productdetails
