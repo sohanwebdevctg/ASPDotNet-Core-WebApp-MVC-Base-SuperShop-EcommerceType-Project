@@ -23,10 +23,15 @@
                 <p class="userprofile-desc" style="margin-top: 10px;">
                     <strong>Description: </strong> @Model.ProductDescription
                 </p>
-                <div class="userprofile-actions">
-                    <a href="@Url.Action("BuyProduct", "Customer", new {id = Model.ProductId})" class="buttons" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">Buy Now</a>
-                    <a href="@Url.Action("AllProduct", "Customer")" class="buttons" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Back</a>
-                </div>
+                 <form asp-action="BuyNow" asp-controller="Customer" method="post">
+                        <input type="hidden" name="productId" value="@Model.ProductId" />
+                        <div class="userprofile-actions">
+                            <button type="submit" class="buttons" style="border:none; cursor:pointer; background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">
+                                Buy Now
+                            </button>
+                        <a href="@Url.Action("AllProducts", "Customer")" class="buttons" style="text-decoration:none; background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Back</a>
+                    </div>
+                 </form>
             </div>
         </div>
     </div>

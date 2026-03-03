@@ -293,12 +293,6 @@ namespace SuperShop.Controllers
             return View(results);
         }
 
-        //productdetails
-        public IActionResult ProductDetails()
-        {
-            return View();
-        }
-
         //about
         public IActionResult About()
         {
@@ -354,6 +348,110 @@ namespace SuperShop.Controllers
         public IActionResult Blog()
         {
             return View();
+        }
+
+        // buy-now
+        [HttpPost]
+        public IActionResult BuyNow(int id)
+        {
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 2)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.AsNoTracking().FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // order validation
+            var product = _context.Products.Find(id);
+            if (product == null || product.ProductLimit <= 0)
+            {
+                TempData["Error"] = "Sorry, this product is out of stock!";
+                return RedirectToAction("AllProducts");
+            }
+
+            // see user order panding
+            var existingOrder = _context.Orders.FirstOrDefault(o => o.UserId == sessionUserId);
+
+            if (existingOrder == null)
+            {
+                // Create new order master
+                var newOrder = new Order
+                {
+                    UserId = sessionUserId,
+                    UserName = dbUser.UserName,
+                    UserEmail = dbUser.UserEmail,
+                    UserImage = dbUser.UserImage,
+                    OrderDate = DateTime.Now,
+                    TotalAmount = product.ProductPrice
+                };
+                _context.Orders.Add(newOrder);
+                _context.SaveChanges();
+
+                // product details save
+                var detail = new OrderDetails
+                {
+                    OrderId = newOrder.OrderId,
+                    ProductId = product.ProductId,
+                    ProductName = product.ProductName,
+                    ProductImage = product.ProductImage,
+                    ProductPrice = product.ProductPrice,
+                    Quantity = 1
+                };
+                _context.OrderDetails.Add(detail);
+            }
+            else
+            {
+                // যদি অর্ডার আগে থেকেই থাকে, চেক করা ওই প্রোডাক্ট কার্টে আছে কি না
+                var existingDetail = _context.OrderDetails
+                    .FirstOrDefault(d => d.OrderId == existingOrder.OrderId && d.ProductId == id);
+
+                if (existingDetail != null)
+                {
+                    existingDetail.Quantity += 1; // কোয়ান্টিটি বাড়ানো
+                }
+                else
+                {
+                    var detail = new OrderDetails
+                    {
+                        OrderId = existingOrder.OrderId,
+                        ProductId = product.ProductId,
+                        ProductName = product.ProductName,
+                        ProductImage = product.ProductImage,
+                        ProductPrice = product.ProductPrice,
+                        Quantity = 1
+                    };
+                    _context.OrderDetails.Add(detail);
+                }
+
+                
+                existingOrder.TotalAmount += product.ProductPrice;
+            }
+
+            
+            product.ProductLimit -= 1;
+
+            _context.SaveChanges();
+
+            TempData["Success"] = "সফলভাবে কার্টে যোগ হয়েছে!";
+            return RedirectToAction("UserCart");
+
         }
 
         // order-table
