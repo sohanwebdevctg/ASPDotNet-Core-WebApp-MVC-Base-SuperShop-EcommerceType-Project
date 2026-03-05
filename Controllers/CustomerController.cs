@@ -7,6 +7,7 @@ using SuperShop.ViewModels;
 
 namespace SuperShop.Controllers
 {
+    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
     public class CustomerController : Controller
     {
 
@@ -383,7 +384,7 @@ namespace SuperShop.Controllers
             if (product == null || product.ProductLimit <= 0)
             {
                 TempData["Error"] = "Sorry, this product is out of stock!";
-                return RedirectToAction("AllProducts");
+                return RedirectToAction("ProductDetails", "Customer", new { id = id });
             }
 
             // see user order panding
@@ -418,13 +419,13 @@ namespace SuperShop.Controllers
             }
             else
             {
-                // যদি অর্ডার আগে থেকেই থাকে, চেক করা ওই প্রোডাক্ট কার্টে আছে কি না
+               
                 var existingDetail = _context.OrderDetails
                     .FirstOrDefault(d => d.OrderId == existingOrder.OrderId && d.ProductId == id);
 
                 if (existingDetail != null)
                 {
-                    existingDetail.Quantity += 1; // কোয়ান্টিটি বাড়ানো
+                    existingDetail.Quantity += 1;
                 }
                 else
                 {
@@ -449,8 +450,8 @@ namespace SuperShop.Controllers
 
             _context.SaveChanges();
 
-            TempData["Success"] = "সফলভাবে কার্টে যোগ হয়েছে!";
-            return RedirectToAction("UserCart");
+            TempData["Success"] = "Product Added SuccessFully!";
+            return RedirectToAction("ProductDetails", "Customer", new { id = id });
 
         }
 

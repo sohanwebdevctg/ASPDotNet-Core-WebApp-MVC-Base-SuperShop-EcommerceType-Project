@@ -8,6 +8,7 @@ using System.Reflection;
 
 namespace SuperShop.Controllers
 {
+    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
     public class AdminController : Controller
     {
 

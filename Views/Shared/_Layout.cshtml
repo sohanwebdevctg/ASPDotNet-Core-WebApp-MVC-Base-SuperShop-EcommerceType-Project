@@ -2,7 +2,7 @@
 @inject IHttpContextAccessor HttpContextAccessor;
 @{
     <!-- Getting UserId from session -->
-    var userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId");
+    var currentSessionId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId");
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +42,8 @@
                 </ul>
                 <div class="sidebar-footer">
                     <ul class="user-actions">
-                        @if(userId != null){
+                        @if (currentSessionId != null)
+                        {
                             <li>
                                 <a href="@Url.Action("Cart","Customer")"><i class="fa-solid fa-cart-shopping cartIcon"></i></a>
                                 <a href="@Url.Action("UserProfile","Customer")"><i class="fa-solid fa-user-tie userIcon"></i></a>
@@ -74,7 +75,8 @@
                     </ul>
                 </div>
                 <div>
-                    @if(userId != null){
+                    @if (currentSessionId != null)
+                    {
                         <a href="@Url.Action("Cart","Customer")"><i class="fa-solid fa-cart-shopping carticon"></i></a>
                         <a href="@Url.Action("UserProfile","Customer")"><i class="fa-solid fa-user-tie usericon"></i></a>
                         <a class="text-white" href="@Url.Action("Index","Login")"><button class="text-white">Logout</button></a>

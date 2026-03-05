@@ -92,13 +92,17 @@ namespace SuperShop.Controllers
         }
 
         // logout-btn
+        [HttpPost]
+        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public IActionResult LogOut()
         {
-            // remove user session data
-            HttpContext.Session.Remove("UserId");
-            HttpContext.Session.Remove("UserRole");
+            // resmove the session
+            HttpContext.Session.Clear();
 
-            // redirect the user home page
+
+            Response.Cookies.Delete(".AspNetCore.Session");
+
+
             return RedirectToAction("Index", "Customer");
         }
 
