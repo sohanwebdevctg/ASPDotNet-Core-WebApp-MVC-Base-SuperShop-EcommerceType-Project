@@ -18,5 +18,6 @@ namespace SuperShop.Models
         [Required]
         public decimal TotalAmount { get; set; }
 
+        public virtual ICollection<OrderDetails>? OrderDetails { get; set; } = new List<OrderDetails>();
     }
 }

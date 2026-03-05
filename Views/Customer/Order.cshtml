@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<SuperShop.Models.Order>;
 @{
     ViewData["Title"] = "Order";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,14 +7,22 @@
 <!-- order start -->
 <div class="user-order-section">
     <div class="myContainer">
-        <h3 class="order-title">Order History : 2</h3>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h3 class="order-title" style="margin: 0;">Order History : @Model.Sum(o => o.OrderDetails.Count())</h3>
+
+            @if (Model.Any())
+            {
+                <a href="@Url.Action("Payment", "Customer")" class="btn" style="background: green; color:white; padding: 6px 12px; text-decoration:none; border-radius:5px; font-weight: bold;">Pay Now</a>
+            }
+        </div>
         <div class="table-container">
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Order Date</th>
                         <th scope="col">Img</th>
-                        <th scope="col">Name</th>
+                        <th scope="col">Product Name</th>
                         <th scope="col">Price</th>
                         <th scope="col">Qty</th>
                         <th scope="col">Total</th>
@@ -22,15 +30,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><img src="~/images/offer_img/offerimg1.png" class="order-img"></td>
-                        <td>Wireless Headphone</td>
-                        <td>$150</td>
-                        <td>2</td>
-                        <td>$300</td>
-                        <td><a class="edit-btn">Edit</a></td>
-                    </tr>
+                    @if (Model != null && Model.Any())
+                    {
+                        int serialNo = 1;
+                        @foreach (var order in Model)
+                        {
+                            @foreach (var item in order.OrderDetails)
+                            {
+                                <tr>
+                                    <td>@(serialNo++)</td>
+                                    <td>@order.OrderDate.ToString("dd MMM yyyy")</td>
+                                    <td>
+                                        <img src="~/images/product_img/@item.ProductImage" class="order-img" style="width:50px; height:50px; object-fit:cover;">
+                                    </td>
+                                    <td>@item.ProductName</td>
+                                    <td>$@item.ProductPrice.ToString("F2")</td>
+                                    <td>@item.Quantity</td>
+                                    <td>$@((item.ProductPrice * item.Quantity).ToString("F2"))</td>
+                                    <td>
+                                        <a class="edit-btn" style="background: red; color:white; padding: 5px 10px; margin-left:5px; cursor:pointer; border-radius:5px; font-size:12px;">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8" class="text-danger text-center">You have no orders yet!</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
