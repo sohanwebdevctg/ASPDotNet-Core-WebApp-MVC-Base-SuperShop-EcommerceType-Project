@@ -8,7 +8,7 @@ using SuperShop.ViewModels;
 
 namespace SuperShop.Controllers
 {
-    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+    
     public class CustomerController : Controller
     {
 

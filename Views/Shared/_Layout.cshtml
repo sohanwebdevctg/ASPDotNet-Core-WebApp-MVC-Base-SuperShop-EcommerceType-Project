@@ -3,6 +3,7 @@
 @{
     <!-- Getting UserId from session -->
     var currentSessionId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId");
+    var currentSessionRole = HttpContextAccessor.HttpContext.Session.GetInt32("UserRole");
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -42,13 +43,19 @@
                 </ul>
                 <div class="sidebar-footer">
                     <ul class="user-actions">
-                        @if (currentSessionId != null)
+                        @if (currentSessionId != null && currentSessionRole == 2)
                         {
                             <li>
                                 <a href="@Url.Action("Order","Customer")"><i class="fa-solid fa-cart-shopping cartIcon"></i></a>
                                 <a href="@Url.Action("UserProfile","Customer")"><i class="fa-solid fa-user-tie userIcon"></i></a>
                             </li>
-                            <li><button class="auth-btn"><a class="text-white" href="@Url.Action("LogOut","Login")">Logout</a></button></li>
+                            <li>
+                                <form asp-controller="Login" asp-action="LogOut" method="post" style="display:inline;">
+                                    <button class="auth-btn" type="submit" class="text-white">
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
                         }else{
                             <li><button class="auth-btn"><a class="text-white" href="@Url.Action("Index","Login")">Login</a></button></li>
                         }
@@ -75,11 +82,14 @@
                     </ul>
                 </div>
                 <div>
-                    @if (currentSessionId != null)
+                    @if (currentSessionId != null && currentSessionRole == 2)
                     {
                         <a href="@Url.Action("Order","Customer")"><i class="fa-solid fa-cart-shopping carticon"></i></a>
                         <a href="@Url.Action("UserProfile","Customer")"><i class="fa-solid fa-user-tie usericon"></i></a>
-                        <a class="text-white" href="@Url.Action("Index","Login")"><button class="text-white">Logout</button></a>
+                        
+                    <form asp-controller="Login" asp-action="LogOut" method="post" style="display:inline;">
+                            <button type="submit" class="text-white">Logout</button>
+                        </form>
                     }else{
                         <a href="@Url.Action("Index","Login")"><button class="text-white">Login</button></a>
                     }
