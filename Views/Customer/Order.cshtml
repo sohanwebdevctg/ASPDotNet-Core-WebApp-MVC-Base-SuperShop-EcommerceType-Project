@@ -7,6 +7,12 @@
 <!-- order start -->
 <div class="user-order-section">
     <div class="myContainer">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert" style="color: green; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Success"]
+            </div>
+        }
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
             <h3 class="order-title" style="margin: 0;">Order History : @Model.Sum(o => o.OrderDetails.Count())</h3>
 
@@ -48,7 +54,10 @@
                                     <td>@item.Quantity</td>
                                     <td>$@((item.ProductPrice * item.Quantity).ToString("F2"))</td>
                                     <td>
-                                        <a class="edit-btn" style="background: red; color:white; padding: 5px 10px; margin-left:5px; cursor:pointer; border-radius:5px; font-size:12px;">Delete</a>
+                                        <form asp-controller="Customer" asp-action="DeleteOrderItem" method="post">
+                                            <input type="hidden" name="id" value="@item.OrderDetailId">
+                                            <button type="submit" class="edit-btn" style="background: red; color:white; padding: 5px 10px; margin-left:5px; cursor:pointer; border-radius:5px; font-size:12px;">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             }
