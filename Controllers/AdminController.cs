@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace SuperShop.Controllers
 {
-    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+    
     public class AdminController : Controller
     {
 
@@ -2591,8 +2591,183 @@ namespace SuperShop.Controllers
 
             // show all orders
             var allOrders = _context.Orders.OrderByDescending(o => o.OrderDate).ToList();
-
             return View(allOrders);
+        }
+
+        // delete-order
+        [HttpPost]
+        public IActionResult DeleteOrder(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            var order = _context.Orders.Include(o => o.OrderDetails).FirstOrDefault(o => o.OrderId == id);
+
+            if (order != null)
+            {
+                // update the limit
+                foreach (var item in order.OrderDetails)
+                {
+                    var product = _context.Products.FirstOrDefault(p => p.ProductId == item.ProductId);
+                    if (product != null)
+                    {
+                        product.ProductLimit += item.Quantity;
+                        _context.Products.Update(product);
+                    }
+                }
+
+                // delete order
+                _context.OrderDetails.RemoveRange(order.OrderDetails);
+                _context.Orders.Remove(order);
+
+                _context.SaveChanges();
+                TempData["Success"] = "Order has been deleted successfully!";
+            }
+            else
+            {
+                TempData["Error"] = "Order not found!";
+            }
+
+            return RedirectToAction("ManageOrders", "Admin");
+        }
+
+        // order-details
+        [HttpGet]
+        public IActionResult OrderDetails(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // get single user order data
+            var order = _context.Orders.Include(o => o.OrderDetails).FirstOrDefault(o => o.OrderId == id);
+
+            if (order == null)
+            {
+                TempData["Error"] = "Order not found!";
+                return RedirectToAction("ManageOrders", "Admin");
+            }
+
+            return View(order);
+
+        }
+
+        // delete-order-details
+        [HttpPost]
+        public IActionResult DeleteOrderDetails(int id)
+        {
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // find the order
+            var orderDetail = _context.OrderDetails.FirstOrDefault(x => x.OrderDetailId == id);
+
+            if (orderDetail != null)
+            {
+                int mainOrderId = orderDetail.OrderId;
+
+                
+                var product = _context.Products.FirstOrDefault(p => p.ProductId == orderDetail.ProductId);
+                if (product != null)
+                {
+                    product.ProductLimit += orderDetail.Quantity;
+                    _context.Products.Update(product);
+                }
+
+                // update-order
+                var mainOrder = _context.Orders.FirstOrDefault(o => o.OrderId == mainOrderId);
+                if (mainOrder != null)
+                {
+                    mainOrder.TotalAmount -= (orderDetail.ProductPrice * orderDetail.Quantity);
+                    _context.Orders.Update(mainOrder);
+                }
+
+                // remove the order
+                _context.OrderDetails.Remove(orderDetail);
+                _context.SaveChanges();
+
+               
+                var remainingItems = _context.OrderDetails.Any(x => x.OrderId == mainOrderId);
+                if (!remainingItems && mainOrder != null)
+                {
+                    _context.Orders.Remove(mainOrder);
+                    _context.SaveChanges();
+                    TempData["Success"] = "Item removed and empty order deleted.";
+                    return RedirectToAction("ManageOrders", "Admin");
+                }
+
+                TempData["Success"] = "Delete Successfully!";
+                return RedirectToAction("OrderDetails", "Admin", new { id = mainOrderId });
+            }
+
+            TempData["Error"] = "Item not found!";
+            return RedirectToAction("ManageOrders", "Admin");
+
         }
 
         // order-table
@@ -2689,7 +2864,7 @@ namespace SuperShop.Controllers
                 TempData["Success"] = "Product Delete Successfully";
             }
 
-            return RedirectToAction("Order", "Customer");
+            return RedirectToAction("Order", "Admin");
 
         }
 

@@ -53,7 +53,11 @@
                             <a href="@Url.Action("Order","Admin")"><i class="fa-solid fa-cart-shopping cartIcon"></i></a>
                             <a href="@Url.Action("AdminProfile","Admin")"><i class="fa-solid fa-user-tie userIcon"></i></a>
                         </li>
-                            <li><button class="auth-btn"><a href="@Url.Action("LogOut","Login")">Logout</a></button></li>
+                            <li>
+                                <form asp-controller="Login" asp-action="LogOut" method="post" style="display:inline;">
+                                    <button type="submit" class="text-white">Logout</button>
+                                </form>
+                            </li>
                     </ul>
                 </div>
                 }

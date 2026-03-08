@@ -1,0 +1,79 @@
+﻿@model SuperShop.Models.Order;
+@{
+    ViewData["Title"] = "OrderDetails";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<!-- order-details start -->
+
+<div class="table-content-area">
+    <div class="myContainer">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert" style="color: green; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Success"]
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert" style="color: red; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Error"]
+            </div>
+        }
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3>Order Details: #ORD-@Model.OrderId</h3>
+            <a href="@Url.Action("ManageOrders", "Admin")" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Back to List</a>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd;">
+            <p><strong>Customer Name:</strong> @Model.UserName</p>
+            <p><strong>Email:</strong> @Model.UserEmail</p>
+            <p><strong>Order Date:</strong> @Model.OrderDate.ToString("dd MMM yyyy, hh:mm tt")</p>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="table-content">
+                <thead>
+                    <tr>
+                        <th scope="col">Img</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderDetails)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/images/product_img/@item.ProductImage" style="width:50px; height:50px; object-fit:cover; border-radius:5px;">
+                            </td>
+                            <td>@item.ProductName</td>
+                            <td>$@item.ProductPrice.ToString("F2")</td>
+                            <td>@item.Quantity</td>
+                            <td>$@((item.ProductPrice * item.Quantity).ToString("F2"))</td>
+                            <td>
+                                <form asp-controller="Admin" asp-action="DeleteOrderDetails" method="post">
+                                    <input type="hidden" name="id" value="@item.OrderDetailId">
+                                    <button type="submit" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</button>
+                                </form>
+                            </td>
+                            
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr style="font-weight: bold; background: #eee;">
+                        <td colspan="5" style="text-align: right; padding: 10px;">Grand Total:</td>
+                        <td style="padding: 10px;">$@Model.TotalAmount.ToString("F2")</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- order-details end -->
+

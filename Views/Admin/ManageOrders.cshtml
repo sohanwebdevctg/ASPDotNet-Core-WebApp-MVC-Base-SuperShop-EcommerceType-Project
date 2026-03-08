@@ -1,8 +1,68 @@
-﻿
+﻿@model IEnumerable<SuperShop.Models.Order>
 @{
     ViewData["Title"] = "ManageOrders";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h1>ManageOrders</h1>
-
+<!-- manage-order start -->
+<div class="table-content-area">
+    <div class="myContainer">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert" style="color: green; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Success"]
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert" style="color: red; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Error"]
+            </div>
+        }
+        <h3 class="table-title">Total : @Model.Count()</h3>
+        <div class="table-wrapper">
+            <table class="table-content">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Order Date</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Customer Email</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        int serialNo = 1;
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@(serialNo++)</td>
+                                <td>@order.OrderDate.ToString("dd MMM yyyy")</td>
+                                <td>@order.UserName</td>
+                                <td>@order.UserEmail</td>
+                                <td>$@order.TotalAmount.ToString("F2")</td>
+                                <td style="display: flex; gap: 5px;">
+                                    <a href="@Url.Action("OrderDetails", "Admin", new { id = order.OrderId })" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">Details</a>
+                                    <form asp-controller="Admin" asp-action="DeleteOrder" method="post">
+                                        <input type="hidden" name="id" value="@order.OrderId">
+                                        <button type="submit" class="table-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #dc3545 100%);">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" class="text-danger text-center">No orders found!</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- manage-order end -->
