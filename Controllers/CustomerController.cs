@@ -398,9 +398,9 @@ namespace SuperShop.Controllers
                 var newOrder = new Order
                 {
                     UserId = sessionUserId,
-                    UserName = dbUser.UserName,
+                    UserName = dbUser.UserName ?? "Unknown User",
                     UserEmail = dbUser.UserEmail,
-                    UserImage = dbUser.UserImage,
+                    UserImage = dbUser.UserImage ?? "no-user.png",
                     OrderDate = DateTime.Now,
                     TotalAmount = product.ProductPrice
                 };
