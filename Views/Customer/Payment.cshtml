@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- payment start -->
+
+<div class="myContainer">
+    <div class="common-form-wrapper">
+        <form asp-controller="Customer" asp-action="" method="post" class="master-form">
+            <input type="hidden" />
+            <input type="hidden" />
+            <input type="hidden" />
+            <div>
+                <h2 class="form-title">Payment</h2>
+            </div>
+            <div class="form-group">
+                <p><b>User Name : </b>Anis</p>
+            </div>
+            <div class="form-group">
+                <p><b>User Email : </b>anis@gmail.com</p>
+            </div>
+            <!-- Payment type -->
+            <div class="form-group">
+                <select class="common-input">
+                    <option disabled selected>Payment Type</option>
+                    <option value="mobile">Mobile</option>
+                    <option value="banking">Banking</option>
+                    <option value="card">Card</option>
+                </select>
+            </div>
+            <!-- Bank Name -->
+            <div class="form-group">
+                <select class="common-input">
+                    <option disabled selected>Bank Name</option>
+                    <option value="Bangladesh Bank">Bangladesh Bank</option>
+                    <option value="Agrani Bank">Agrani Bank</option>
+                    <option value="Sonali Bank">Sonali Bank</option>
+                    <option value="BASIC Bank">BASIC Bank</option>
+                    <option value="Janata Bank">Janata Bank</option>
+                    <option value="Rupali Bank">Rupali Bank</option>
+                    <option value="BD Krishi Bank">BD Krishi Bank</option>
+                    <option value="IFIC Bank">IFIC Bank</option>
+                    <option value="Grameen Bank">Grameen Bank</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <p><b>Totla Amount : </b>$100.00</p>
+            </div>
+            <div class="form-group common-submit-wrapper">
+                <button type="submit" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">SUBMIT DATA</button>
+                <a href="@Url.Action("Index", "Customer")" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">BACK</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
+    <!-- payment end -->
+

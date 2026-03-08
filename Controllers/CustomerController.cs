@@ -557,7 +557,11 @@ namespace SuperShop.Controllers
 
         }
 
-
+        // payment
+        public IActionResult Payment()
+        {
+            return View();
+        }
 
 
 
