@@ -1,0 +1,61 @@
+﻿@model SuperShop.Models.Order;
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<!-- payment start -->
+
+<div class="myContainer">
+    <div class="common-form-wrapper">
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert" style="color: red; font-weight: bold; margin-bottom: 10px;">
+                @TempData["Error"]
+            </div>
+        }
+        <form asp-controller="Admin" asp-action="ProcessPayment" method="post" class="master-form">
+            <input type="hidden" name="UserId" value="@Model.UserId" />
+            <input type="hidden" name="TotalAmount" value="@Model.TotalAmount" />
+            <input type="hidden" name="UserName" value="@Model.UserName" />
+            <input type="hidden" name="UserEmail" value="@Model.UserEmail" />
+            <div>
+                <h2 class="form-title">Payment</h2>
+            </div>
+            <div class="form-group">
+                <p><b>User Name : </b>@Model.UserName</p>
+            </div>
+            <div class="form-group">
+                <p><b>User Email : </b>@Model.UserEmail</p>
+            </div>
+            <div class="form-group">
+                <p><b>Totla Amount : </b>$@Model.TotalAmount.ToString("F2")</p>
+            </div>
+            <!-- Payment type -->
+            <div class="form-group">
+                <select class="common-input" name="PaymentType" required>
+                    <option value="" disabled selected>Select Payment Type</option>
+                    <option value="Mobile Banking">Mobile Banking</option>
+                    <option value="Card Banking">Card Banking</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="AccountNumber" placeholder="Enter Account/Card Number" class="common-input" />
+            </div>
+            <div class="form-group common-submit-wrapper">
+                <button type="submit" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">SUBMIT DATA</button>
+                <a href="@Url.Action("Order", "Admin")" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">BACK</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
+    <!-- payment end -->
+
