@@ -36,5 +36,7 @@ namespace SuperShop.Data
 
         public DbSet<OrderDetails> OrderDetails { get; set; }
 
+        public DbSet<Payment> Payments { get; set; }
+
     }
 }
