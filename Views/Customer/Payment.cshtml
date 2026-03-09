@@ -1,4 +1,4 @@
-﻿
+﻿@model SuperShop.Models.Order;
 @{
     ViewData["Title"] = "Payment";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,49 +8,38 @@
 
 <div class="myContainer">
     <div class="common-form-wrapper">
-        <form asp-controller="Customer" asp-action="" method="post" class="master-form">
-            <input type="hidden" />
-            <input type="hidden" />
-            <input type="hidden" />
+        <form asp-controller="Customer" asp-action="ProcessPayment" method="post" class="master-form">
+            <input type="hidden" name="UserId" value="@Model.UserId" />
+            <input type="hidden" name="TotalAmount" value="@Model.TotalAmount" />
+            <input type="hidden" name="UserName" value="@Model.UserName" />
+            <input type="hidden" name="UserEmail" value="@Model.UserEmail" />
             <div>
                 <h2 class="form-title">Payment</h2>
             </div>
             <div class="form-group">
-                <p><b>User Name : </b>Anis</p>
+                <p><b>User Name : </b>@Model.UserName</p>
             </div>
             <div class="form-group">
-                <p><b>User Email : </b>anis@gmail.com</p>
+                <p><b>User Email : </b>@Model.UserEmail</p>
+            </div>
+            <div class="form-group">
+                <p><b>Totla Amount : </b>$@Model.TotalAmount.ToString("F2")</p>
             </div>
             <!-- Payment type -->
             <div class="form-group">
-                <select class="common-input">
-                    <option disabled selected>Payment Type</option>
-                    <option value="mobile">Mobile</option>
-                    <option value="banking">Banking</option>
-                    <option value="card">Card</option>
+                <select class="common-input" name="PaymentType" required>
+                    <option value="" disabled selected>Select Payment Type</option>
+                    <option value="Mobile Banking">Mobile Banking</option>
+                    <option value="Card Banking">Card Banking</option>
                 </select>
             </div>
-            <!-- Bank Name -->
+
             <div class="form-group">
-                <select class="common-input">
-                    <option disabled selected>Bank Name</option>
-                    <option value="Bangladesh Bank">Bangladesh Bank</option>
-                    <option value="Agrani Bank">Agrani Bank</option>
-                    <option value="Sonali Bank">Sonali Bank</option>
-                    <option value="BASIC Bank">BASIC Bank</option>
-                    <option value="Janata Bank">Janata Bank</option>
-                    <option value="Rupali Bank">Rupali Bank</option>
-                    <option value="BD Krishi Bank">BD Krishi Bank</option>
-                    <option value="IFIC Bank">IFIC Bank</option>
-                    <option value="Grameen Bank">Grameen Bank</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <p><b>Totla Amount : </b>$100.00</p>
+                <input type="text" name="AccountNumber" placeholder="Enter Account/Card Number" class="common-input" />
             </div>
             <div class="form-group common-submit-wrapper">
                 <button type="submit" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #ED4264 100%);">SUBMIT DATA</button>
-                <a href="@Url.Action("Index", "Customer")" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">BACK</a>
+                <a href="@Url.Action("Order", "Customer")" class="common-submit-btn" style="background: linear-gradient(135deg, #FFEDBC 0%, #28a745 100%);">BACK</a>
             </div>
         </form>
     </div>

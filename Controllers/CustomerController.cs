@@ -558,9 +558,53 @@ namespace SuperShop.Controllers
         }
 
         // payment
+        [HttpGet]
         public IActionResult Payment()
         {
-            return View();
+
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 2)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // get all pending data
+            var userOrders = _context.Orders.Where(o => o.UserId == sessionUserId).ToList();
+
+            if (!userOrders.Any())
+            {
+                TempData["Error"] = "No orders found to pay!";
+                return RedirectToAction("Order", "Customer");
+            }
+
+            // create payment object to show payment form
+            var paymentData = new Order
+            {
+                UserId = dbUser.UserId,
+                UserName = dbUser.UserName,
+                UserEmail = dbUser.UserEmail,
+                TotalAmount = userOrders.Sum(o => o.TotalAmount)
+            };
+
+            return View(paymentData);
         }
 
 
