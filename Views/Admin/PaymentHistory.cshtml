@@ -1,0 +1,67 @@
+﻿@model IEnumerable<SuperShop.Models.Payment>
+@{
+    ViewData["Title"] = "PaymentHistory";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<!-- payment-history start -->
+<div class="table-content-area">
+    <div class="myContainer">
+
+        
+        <h3 class="table-title">Total : @Model.Count()</h3>
+        <div class="table-wrapper">
+            <div class="table-container">
+
+                <table class="table-content">
+                    <thead>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>User Name</th>
+                    <th>User Email</th>
+                    <th>Payment Type</th>
+                    <th>Account Number</th>
+                    <th>Total Amount</th>
+                    </thead>
+                    <tbody>
+
+                        @if (Model != null && Model.Any())
+                        {
+                            int serialNo = 1;
+                            @foreach (var data in Model)
+                            {
+                                <tr>
+                                    <td>@(serialNo++)</td>
+                                    <td>@data.PaymentDate.ToString("dd MMM yyyy")</td>
+                                    <td>@data.UserName</td>
+                                    <td>@data.UserEmail</td>
+                                    <td><span class="badge" style="background:gray; color: black; padding:3px 8px; border-radius:4px;">@data.PaymentType</span></td>
+                                    <td>@data.AccountNumber</td>
+                                    <td style="font-weight:bold; color:green;">$@data.TotalAmount.ToString("F2")</td>
+                                </tr>
+                            }
+
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-danger text-center">@ViewBag.message</td>
+                            </tr>
+                        }
+                        @if (Model.Any())
+                        {
+                        <tfoot>
+                            <tr style="background: #f9f9f9; font-weight: bold;">
+                                <td colspan="6" style="text-align: right;">Total Collection:</td>
+                                <td style="color: #ED4264;">$@Model.Sum(x => x.TotalAmount).ToString("F2")</td>
+                            </tr>
+                        </tfoot>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- all banner end -->
+

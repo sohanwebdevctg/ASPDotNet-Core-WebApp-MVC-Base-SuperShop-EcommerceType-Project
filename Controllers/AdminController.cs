@@ -2974,7 +2974,45 @@ namespace SuperShop.Controllers
             return RedirectToAction("Payment", "Admin");
         }
 
+        // payment-history
+        public IActionResult PaymentHistory()
+        {
 
+            // get user data in session
+            var sessionUserId = HttpContext.Session.GetInt32("UserId");
+            var sessionUserRole = HttpContext.Session.GetInt32("UserRole");
+
+            // validation check session data
+            if (sessionUserId == null || sessionUserRole != 1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            // database check
+            var dbUser = _context.Users.FirstOrDefault(x => x.UserId == sessionUserId);
+
+            //validation check database data
+            if (dbUser == null || dbUser.UserStatus != "active" || dbUser.RoleId != sessionUserRole)
+            {
+                // remove session data
+                HttpContext.Session.Remove("UserId");
+                HttpContext.Session.Remove("UserRole");
+
+                // redirect to the user login page
+                return RedirectToAction("Index", "Login");
+            }
+
+            // get all payment history data
+            var payments = _context.Payments.OrderByDescending(p => p.PaymentDate).ToList();
+
+            if(payments.Count == 0)
+            {
+                ViewBag.message = "No Data Here!";
+            }
+
+            return View(payments);
+
+        }
 
 
 
